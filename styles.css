@@ -541,6 +541,19 @@ main {
   border-bottom-style: solid;
 }
 
+.alt-path-button {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px dotted var(--accent);
+  padding-bottom: 1px;
+  font-family: 'Special Elite', monospace;
+  letter-spacing: 0.18em;
+}
+.alt-path-button:hover {
+  filter: brightness(1.15);
+  border-bottom-style: solid;
+}
+
 .declassify-hint {
   color: var(--ink-muted);
   opacity: 0.4;
