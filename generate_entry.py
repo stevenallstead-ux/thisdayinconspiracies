@@ -39,7 +39,7 @@ except ImportError:
     pass
 
 ROOT = Path(__file__).resolve().parent
-DATA_PATH = ROOT / "data.json"
+DATA_PATH = ROOT / "data" / "data.json"
 
 WIKI_ENDPOINT = "https://en.wikipedia.org/api/rest_v1/feed/onthisday/events/{mm}/{dd}"
 USER_AGENT = "ThisDayInConspiracies/0.1 (https://github.com/yourname/thisday)"

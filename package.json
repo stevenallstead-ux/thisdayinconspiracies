@@ -1,0 +1,20 @@
+{
+  "name": "thisdayinconspiracies",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Static daily archive of conspiracies and unexplained events. Rabbit-hole engine.",
+  "type": "module",
+  "scripts": {
+    "test": "vitest",
+    "test:e2e": "playwright test",
+    "test:all": "npm run test -- --run && npm run test:e2e",
+    "serve": "python -m http.server 8000",
+    "vendor:fuse": "node scripts/vendor_fuse.mjs"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.48.0",
+    "fuse.js": "^7.0.0",
+    "jsdom": "^25.0.0",
+    "vitest": "^1.6.0"
+  }
+}
