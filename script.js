@@ -62,7 +62,7 @@ function renderEmptyState() {
 }
 
 async function loadData() {
-  const res = await fetch('data.json');
+  const res = await fetch('data/data.json');
   if (!res.ok) throw new Error('Failed to load archive.');
   return res.json();
 }
