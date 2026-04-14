@@ -1,0 +1,2646 @@
+[
+  {
+    "id": "dwight-eisenhower",
+    "type": "person",
+    "name": "Dwight D. Eisenhower",
+    "aliases": [
+      "Eisenhower",
+      "Ike"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "gus-grissom",
+    "type": "person",
+    "name": "Gus Grissom",
+    "aliases": [
+      "Virgil Grissom"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "ed-white",
+    "type": "person",
+    "name": "Ed White",
+    "aliases": [
+      "Edward White II"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "roger-chaffee",
+    "type": "person",
+    "name": "Roger Chaffee",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "fife-symington",
+    "type": "person",
+    "name": "Fife Symington",
+    "aliases": [
+      "Governor Symington"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "robert-kenneth-wilson",
+    "type": "person",
+    "name": "Robert Kenneth Wilson",
+    "aliases": [
+      "the surgeon"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "steven-greer",
+    "type": "person",
+    "name": "Steven Greer",
+    "aliases": [
+      "Dr. Greer"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "richard-nixon",
+    "type": "person",
+    "name": "Richard Nixon",
+    "aliases": [
+      "Nixon"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "amelia-earhart",
+    "type": "person",
+    "name": "Amelia Earhart",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "fred-noonan",
+    "type": "person",
+    "name": "Fred Noonan",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "neil-armstrong",
+    "type": "person",
+    "name": "Neil Armstrong",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "buzz-aldrin",
+    "type": "person",
+    "name": "Buzz Aldrin",
+    "aliases": [
+      "Edwin Aldrin"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "stanley-kubrick",
+    "type": "person",
+    "name": "Stanley Kubrick",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "marilyn-monroe",
+    "type": "person",
+    "name": "Marilyn Monroe",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "jfk",
+    "type": "person",
+    "name": "John F. Kennedy",
+    "aliases": [
+      "JFK",
+      "Kennedy",
+      "President Kennedy"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "rfk",
+    "type": "person",
+    "name": "Robert F. Kennedy",
+    "aliases": [
+      "RFK",
+      "Bobby Kennedy"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "jfk-jr",
+    "type": "person",
+    "name": "John F. Kennedy Jr.",
+    "aliases": [
+      "JFK Jr.",
+      "John Kennedy Jr."
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "jeffrey-epstein",
+    "type": "person",
+    "name": "Jeffrey Epstein",
+    "aliases": [
+      "Epstein"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "princess-diana",
+    "type": "person",
+    "name": "Princess Diana",
+    "aliases": [
+      "Diana Spencer",
+      "Diana, Princess of Wales"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "lee-harvey-oswald",
+    "type": "person",
+    "name": "Lee Harvey Oswald",
+    "aliases": [
+      "Oswald"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "mlk",
+    "type": "person",
+    "name": "Martin Luther King Jr.",
+    "aliases": [
+      "MLK",
+      "King"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "james-earl-ray",
+    "type": "person",
+    "name": "James Earl Ray",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "sirhan-sirhan",
+    "type": "person",
+    "name": "Sirhan Sirhan",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "thane-eugene-cesar",
+    "type": "person",
+    "name": "Thane Eugene Cesar",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "orson-welles",
+    "type": "person",
+    "name": "Orson Welles",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "hg-wells",
+    "type": "person",
+    "name": "H.G. Wells",
+    "aliases": [
+      "H. G. Wells"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "charles-halt",
+    "type": "person",
+    "name": "Charles Halt",
+    "aliases": [
+      "Lt. Col. Halt"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "grigori-rasputin",
+    "type": "person",
+    "name": "Grigori Rasputin",
+    "aliases": [
+      "Rasputin"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "james-bedford",
+    "type": "person",
+    "name": "James Bedford",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "al-capone",
+    "type": "person",
+    "name": "Al Capone",
+    "aliases": [
+      "Capone"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "fdr",
+    "type": "person",
+    "name": "Franklin D. Roosevelt",
+    "aliases": [
+      "FDR",
+      "Roosevelt"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "betty-hill",
+    "type": "person",
+    "name": "Betty Hill",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "barney-hill",
+    "type": "person",
+    "name": "Barney Hill",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "roger-patterson",
+    "type": "person",
+    "name": "Roger Patterson",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "bob-gimlin",
+    "type": "person",
+    "name": "Bob Gimlin",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "travis-walton",
+    "type": "person",
+    "name": "Travis Walton",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "christa-mcauliffe",
+    "type": "person",
+    "name": "Christa McAuliffe",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "ilan-ramon",
+    "type": "person",
+    "name": "Ilan Ramon",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "pope-benedict-xvi",
+    "type": "person",
+    "name": "Pope Benedict XVI",
+    "aliases": [
+      "Benedict XVI",
+      "Joseph Ratzinger"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "mahatma-gandhi",
+    "type": "person",
+    "name": "Mahatma Gandhi",
+    "aliases": [
+      "Gandhi"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "nathuram-godse",
+    "type": "person",
+    "name": "Nathuram Godse",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "olof-palme",
+    "type": "person",
+    "name": "Olof Palme",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "julius-caesar",
+    "type": "person",
+    "name": "Julius Caesar",
+    "aliases": [
+      "Caesar"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "marc-antony",
+    "type": "person",
+    "name": "Marc Antony",
+    "aliases": [
+      "Mark Antony"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "augustus",
+    "type": "person",
+    "name": "Augustus",
+    "aliases": [
+      "Octavian",
+      "Caesar Augustus"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "marshall-applewhite",
+    "type": "person",
+    "name": "Marshall Applewhite",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "ronald-reagan",
+    "type": "person",
+    "name": "Ronald Reagan",
+    "aliases": [
+      "Reagan"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "john-hinckley-jr",
+    "type": "person",
+    "name": "John Hinckley Jr.",
+    "aliases": [
+      "Hinckley"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "george-h-w-bush",
+    "type": "person",
+    "name": "George H. W. Bush",
+    "aliases": [
+      "Bush Sr.",
+      "GHW Bush"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "jesse-james",
+    "type": "person",
+    "name": "Jesse James",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "robert-ford",
+    "type": "person",
+    "name": "Robert Ford",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "j-p-morgan",
+    "type": "person",
+    "name": "J.P. Morgan",
+    "aliases": [
+      "John Pierpont Morgan"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "adolf-hitler",
+    "type": "person",
+    "name": "Adolf Hitler",
+    "aliases": [
+      "Hitler"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "adam-weishaupt",
+    "type": "person",
+    "name": "Adam Weishaupt",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "osama-bin-laden",
+    "type": "person",
+    "name": "Osama bin Laden",
+    "aliases": [
+      "bin Laden"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "anwar-sadat",
+    "type": "person",
+    "name": "Anwar Sadat",
+    "aliases": [
+      "Sadat"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "menachem-begin",
+    "type": "person",
+    "name": "Menachem Begin",
+    "aliases": [
+      "Begin"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "jimmy-carter",
+    "type": "person",
+    "name": "Jimmy Carter",
+    "aliases": [
+      "Carter",
+      "President Carter"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "stanislav-petrov",
+    "type": "person",
+    "name": "Stanislav Petrov",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "vasili-arkhipov",
+    "type": "person",
+    "name": "Vasili Arkhipov",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "barack-obama",
+    "type": "person",
+    "name": "Barack Obama",
+    "aliases": [
+      "Obama"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "larry-mcdonald",
+    "type": "person",
+    "name": "Larry McDonald",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "charles-manson",
+    "type": "person",
+    "name": "Charles Manson",
+    "aliases": [
+      "Manson"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "sharon-tate",
+    "type": "person",
+    "name": "Sharon Tate",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "elvis-presley",
+    "type": "person",
+    "name": "Elvis Presley",
+    "aliases": [
+      "Elvis",
+      "The King"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "tom-parker",
+    "type": "person",
+    "name": "Tom Parker",
+    "aliases": [
+      "Colonel Tom Parker"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "michael-jackson",
+    "type": "person",
+    "name": "Michael Jackson",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "conrad-murray",
+    "type": "person",
+    "name": "Conrad Murray",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "tupac-shakur",
+    "type": "person",
+    "name": "Tupac Shakur",
+    "aliases": [
+      "Tupac",
+      "2Pac"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "suge-knight",
+    "type": "person",
+    "name": "Suge Knight",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "donald-trump",
+    "type": "person",
+    "name": "Donald Trump",
+    "aliases": [
+      "Trump"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "hillary-clinton",
+    "type": "person",
+    "name": "Hillary Clinton",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "kenneth-arnold",
+    "type": "person",
+    "name": "Kenneth Arnold",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "harold-dahl",
+    "type": "person",
+    "name": "Harold Dahl",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "fred-crisman",
+    "type": "person",
+    "name": "Fred Crisman",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "nicholas-ii",
+    "type": "person",
+    "name": "Tsar Nicholas II",
+    "aliases": [
+      "Nicholas II"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "anastasia-romanov",
+    "type": "person",
+    "name": "Anastasia Romanov",
+    "aliases": [
+      "Anastasia",
+      "Anna Anderson"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "lenin",
+    "type": "person",
+    "name": "Vladimir Lenin",
+    "aliases": [
+      "Lenin"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "warren-anderson",
+    "type": "person",
+    "name": "Warren Anderson",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "timothy-mcveigh",
+    "type": "person",
+    "name": "Timothy McVeigh",
+    "aliases": [
+      "McVeigh"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "george-washington",
+    "type": "person",
+    "name": "George Washington",
+    "aliases": [
+      "Washington"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "mikhail-gorbachev",
+    "type": "person",
+    "name": "Mikhail Gorbachev",
+    "aliases": [
+      "Gorbachev"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "klaus-fuchs",
+    "type": "person",
+    "name": "Klaus Fuchs",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "david-johnston",
+    "type": "person",
+    "name": "David Johnston",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "emad-salem",
+    "type": "person",
+    "name": "Emad Salem",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "carl-allen",
+    "type": "person",
+    "name": "Carl Allen",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "d-b-cooper",
+    "type": "person",
+    "name": "D.B. Cooper",
+    "aliases": [
+      "Dan Cooper"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "robert-rackstraw",
+    "type": "person",
+    "name": "Robert Rackstraw",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "cia",
+    "type": "org",
+    "name": "Central Intelligence Agency",
+    "aliases": [
+      "CIA",
+      "The Agency",
+      "Central Intelligence"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "fbi",
+    "type": "org",
+    "name": "Federal Bureau of Investigation",
+    "aliases": [
+      "FBI",
+      "The Bureau"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "mi6",
+    "type": "org",
+    "name": "MI6",
+    "aliases": [
+      "Secret Intelligence Service",
+      "SIS",
+      "British MI6"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "kgb",
+    "type": "org",
+    "name": "KGB",
+    "aliases": [
+      "Soviet intelligence"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "mossad",
+    "type": "org",
+    "name": "Mossad",
+    "aliases": [
+      "Israeli intelligence"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "isi",
+    "type": "org",
+    "name": "ISI (Pakistan)",
+    "aliases": [
+      "Inter-Services Intelligence",
+      "Pakistani ISI"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "nasa",
+    "type": "org",
+    "name": "NASA",
+    "aliases": [
+      "National Aeronautics and Space Administration"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "us-military",
+    "type": "org",
+    "name": "U.S. Military",
+    "aliases": [
+      "United States military",
+      "US Armed Forces"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "us-army",
+    "type": "org",
+    "name": "U.S. Army",
+    "aliases": [
+      "United States Army"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "us-navy",
+    "type": "org",
+    "name": "U.S. Navy",
+    "aliases": [
+      "United States Navy"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "us-air-force",
+    "type": "org",
+    "name": "U.S. Air Force",
+    "aliases": [
+      "USAF",
+      "United States Air Force"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "royal-canadian-navy",
+    "type": "org",
+    "name": "Royal Canadian Navy",
+    "aliases": [
+      "RCN"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "belgian-air-force",
+    "type": "org",
+    "name": "Belgian Air Force",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "us-government",
+    "type": "org",
+    "name": "U.S. Government",
+    "aliases": [
+      "United States government",
+      "federal government"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "pentagon",
+    "type": "org",
+    "name": "The Pentagon",
+    "aliases": [
+      "Department of Defense",
+      "DoD"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "soviet-union",
+    "type": "org",
+    "name": "Soviet Union",
+    "aliases": [
+      "USSR",
+      "the Soviets"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "soviet-military",
+    "type": "org",
+    "name": "Soviet Military",
+    "aliases": [
+      "Red Army",
+      "Soviet armed forces"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "soviet-navy",
+    "type": "org",
+    "name": "Soviet Navy",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "nazi-regime",
+    "type": "org",
+    "name": "Nazi Regime",
+    "aliases": [
+      "Third Reich",
+      "Nazi Germany"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "branch-davidians",
+    "type": "org",
+    "name": "Branch Davidians",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "peoples-temple",
+    "type": "org",
+    "name": "Peoples Temple",
+    "aliases": [
+      "Jim Jones cult"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "heavens-gate",
+    "type": "org",
+    "name": "Heaven's Gate",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "aum-shinrikyo",
+    "type": "org",
+    "name": "Aum Shinrikyo",
+    "aliases": [
+      "Aum cult"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "manson-family",
+    "type": "org",
+    "name": "Manson Family",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "mafia",
+    "type": "org",
+    "name": "Mafia",
+    "aliases": [
+      "Cosa Nostra",
+      "mob"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "warren-commission",
+    "type": "org",
+    "name": "Warren Commission",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "atf",
+    "type": "org",
+    "name": "ATF",
+    "aliases": [
+      "Bureau of Alcohol, Tobacco, Firearms and Explosives"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "black-september",
+    "type": "org",
+    "name": "Black September",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "pkk",
+    "type": "org",
+    "name": "PKK",
+    "aliases": [
+      "Kurdistan Workers' Party"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "ira",
+    "type": "org",
+    "name": "IRA",
+    "aliases": [
+      "Irish Republican Army"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "bavarian-illuminati",
+    "type": "org",
+    "name": "Bavarian Illuminati",
+    "aliases": [
+      "Illuminati",
+      "Order of the Illuminati"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "union-carbide",
+    "type": "org",
+    "name": "Union Carbide",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "tepco",
+    "type": "org",
+    "name": "TEPCO",
+    "aliases": [
+      "Tokyo Electric Power Company"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "alcor",
+    "type": "org",
+    "name": "Alcor Life Extension Foundation",
+    "aliases": [
+      "Alcor"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "royal-family-uk",
+    "type": "org",
+    "name": "British Royal Family",
+    "aliases": [
+      "Royal Family",
+      "House of Windsor"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "vatican",
+    "type": "org",
+    "name": "The Vatican",
+    "aliases": [
+      "Roman Curia",
+      "Catholic Church"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "dnc",
+    "type": "org",
+    "name": "Democratic National Committee",
+    "aliases": [
+      "DNC"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "national-press-club",
+    "type": "org",
+    "name": "National Press Club",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "oh-national-guard",
+    "type": "org",
+    "name": "Ohio National Guard",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "delta-force",
+    "type": "org",
+    "name": "Delta Force",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "us-army-rangers",
+    "type": "org",
+    "name": "U.S. Army Rangers",
+    "aliases": [
+      "Rangers"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "navy-seals",
+    "type": "org",
+    "name": "U.S. Navy SEALs",
+    "aliases": [
+      "SEALs",
+      "Navy SEALs"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "7th-cavalry",
+    "type": "org",
+    "name": "U.S. 7th Cavalry",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "ural-mountains",
+    "type": "place",
+    "name": "Ural Mountains",
+    "aliases": [
+      "Urals"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "los-angeles",
+    "type": "place",
+    "name": "Los Angeles",
+    "aliases": [
+      "LA"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "phoenix-arizona",
+    "type": "place",
+    "name": "Phoenix, Arizona",
+    "aliases": [
+      "Phoenix"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "loch-ness",
+    "type": "place",
+    "name": "Loch Ness",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "chernobyl",
+    "type": "place",
+    "name": "Chernobyl",
+    "aliases": [
+      "Chornobyl"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "lakehurst-new-jersey",
+    "type": "place",
+    "name": "Lakehurst, New Jersey",
+    "aliases": [
+      "Lakehurst NJ"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "roswell-nm",
+    "type": "place",
+    "name": "Roswell, New Mexico",
+    "aliases": [
+      "Roswell"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "dealey-plaza",
+    "type": "place",
+    "name": "Dealey Plaza",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "dallas",
+    "type": "place",
+    "name": "Dallas, Texas",
+    "aliases": [
+      "Dallas"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "memphis",
+    "type": "place",
+    "name": "Memphis, Tennessee",
+    "aliases": [
+      "Memphis"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "bermuda-triangle",
+    "type": "place",
+    "name": "Bermuda Triangle",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "kecksburg-pa",
+    "type": "place",
+    "name": "Kecksburg, Pennsylvania",
+    "aliases": [
+      "Kecksburg"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "rendlesham-forest",
+    "type": "place",
+    "name": "Rendlesham Forest",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "point-pleasant-wv",
+    "type": "place",
+    "name": "Point Pleasant, West Virginia",
+    "aliases": [
+      "Point Pleasant"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "tunguska",
+    "type": "place",
+    "name": "Tunguska",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "washington-dc",
+    "type": "place",
+    "name": "Washington, D.C.",
+    "aliases": [
+      "D.C.",
+      "Washington"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "moscow",
+    "type": "place",
+    "name": "Moscow",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "berlin",
+    "type": "place",
+    "name": "Berlin",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "pearl-harbor",
+    "type": "place",
+    "name": "Pearl Harbor",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "new-mexico-desert",
+    "type": "place",
+    "name": "New Mexico Desert",
+    "aliases": [
+      "Jornada del Muerto"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "hiroshima",
+    "type": "place",
+    "name": "Hiroshima",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "marshall-islands",
+    "type": "place",
+    "name": "Marshall Islands",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "novaya-zemlya",
+    "type": "place",
+    "name": "Novaya Zemlya",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "cuba",
+    "type": "place",
+    "name": "Cuba",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "nova-scotia",
+    "type": "place",
+    "name": "Nova Scotia",
+    "aliases": [
+      "Shag Harbour area"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "shag-harbour",
+    "type": "place",
+    "name": "Shag Harbour",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "kentucky",
+    "type": "place",
+    "name": "Kentucky",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "kelly-hopkinsville",
+    "type": "place",
+    "name": "Kelly-Hopkinsville, Kentucky",
+    "aliases": [
+      "Hopkinsville"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "paris",
+    "type": "place",
+    "name": "Paris",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "new-york-city",
+    "type": "place",
+    "name": "New York City",
+    "aliases": [
+      "NYC",
+      "Manhattan"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "empire-state-building",
+    "type": "place",
+    "name": "Empire State Building",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "world-trade-center",
+    "type": "place",
+    "name": "World Trade Center",
+    "aliases": [
+      "WTC",
+      "Twin Towers"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "capitol-building",
+    "type": "place",
+    "name": "U.S. Capitol Building",
+    "aliases": [
+      "The Capitol",
+      "Capitol Hill"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "siberia",
+    "type": "place",
+    "name": "Siberia",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "bluff-creek",
+    "type": "place",
+    "name": "Bluff Creek, California",
+    "aliases": [
+      "Bluff Creek"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "san-diego",
+    "type": "place",
+    "name": "San Diego",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "las-vegas",
+    "type": "place",
+    "name": "Las Vegas",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "mount-rainier",
+    "type": "place",
+    "name": "Mount Rainier",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "puget-sound",
+    "type": "place",
+    "name": "Puget Sound",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "yekaterinburg",
+    "type": "place",
+    "name": "Yekaterinburg",
+    "aliases": [
+      "Ekaterinburg"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "halifax",
+    "type": "place",
+    "name": "Halifax, Nova Scotia",
+    "aliases": [
+      "Halifax"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "abbottabad",
+    "type": "place",
+    "name": "Abbottabad, Pakistan",
+    "aliases": [
+      "Abbottabad"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "camp-david",
+    "type": "place",
+    "name": "Camp David",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "munich",
+    "type": "place",
+    "name": "Munich",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "bhopal",
+    "type": "place",
+    "name": "Bhopal, India",
+    "aliases": [
+      "Bhopal"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "waco",
+    "type": "place",
+    "name": "Waco, Texas",
+    "aliases": [
+      "Waco"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "oklahoma-city",
+    "type": "place",
+    "name": "Oklahoma City",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "brazil",
+    "type": "place",
+    "name": "Brazil",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "varginha",
+    "type": "place",
+    "name": "Varginha, Brazil",
+    "aliases": [
+      "Varginha"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "stockholm",
+    "type": "place",
+    "name": "Stockholm",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "martha-s-vineyard",
+    "type": "place",
+    "name": "Martha's Vineyard",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "tokyo",
+    "type": "place",
+    "name": "Tokyo",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "kent-state",
+    "type": "place",
+    "name": "Kent State University",
+    "aliases": [
+      "Kent State"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "mount-st-helens",
+    "type": "place",
+    "name": "Mount St. Helens",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "fukushima",
+    "type": "place",
+    "name": "Fukushima",
+    "aliases": [
+      "Fukushima Daiichi"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "rome",
+    "type": "place",
+    "name": "Rome (Ancient)",
+    "aliases": [
+      "Roman Senate",
+      "Ancient Rome"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "boston",
+    "type": "place",
+    "name": "Boston",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "wounded-knee",
+    "type": "place",
+    "name": "Wounded Knee, South Dakota",
+    "aliases": [
+      "Wounded Knee Creek"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "graceland",
+    "type": "place",
+    "name": "Graceland",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "mogadishu",
+    "type": "place",
+    "name": "Mogadishu, Somalia",
+    "aliases": [
+      "Mogadishu"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "ingolstadt",
+    "type": "place",
+    "name": "Ingolstadt",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "lake-superior",
+    "type": "place",
+    "name": "Lake Superior",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "mount-vernon",
+    "type": "place",
+    "name": "Mount Vernon",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "great-plains",
+    "type": "place",
+    "name": "Great Plains",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "lorraine-motel",
+    "type": "place",
+    "name": "Lorraine Motel",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "ambassador-hotel",
+    "type": "place",
+    "name": "Ambassador Hotel",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "wannsee",
+    "type": "place",
+    "name": "Wannsee (Berlin)",
+    "aliases": [
+      "Wannsee Villa"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "mkultra",
+    "type": "program",
+    "name": "MKUltra",
+    "aliases": [
+      "Project MKUltra",
+      "MK-Ultra",
+      "mind control program"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "operation-paperclip",
+    "type": "program",
+    "name": "Operation Paperclip",
+    "aliases": [
+      "Paperclip"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "project-mogul",
+    "type": "program",
+    "name": "Project Mogul",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "aatip",
+    "type": "program",
+    "name": "AATIP",
+    "aliases": [
+      "Advanced Aerospace Threat Identification Program",
+      "Pentagon UFO Program"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "apollo-program",
+    "type": "program",
+    "name": "Apollo Program",
+    "aliases": [
+      "NASA Apollo"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "apollo-11",
+    "type": "program",
+    "name": "Apollo 11",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "apollo-13",
+    "type": "program",
+    "name": "Apollo 13",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "manhattan-project",
+    "type": "program",
+    "name": "Manhattan Project",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "operation-wrath-of-god",
+    "type": "program",
+    "name": "Operation Wrath of God",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "bay-of-pigs",
+    "type": "program",
+    "name": "Bay of Pigs",
+    "aliases": [
+      "Bay of Pigs invasion"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "voyager-program",
+    "type": "program",
+    "name": "Voyager Program",
+    "aliases": [
+      "NASA Voyager"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "cointelpro",
+    "type": "program",
+    "name": "COINTELPRO",
+    "aliases": [
+      "FBI COINTELPRO"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "hindenburg",
+    "type": "event",
+    "name": "Hindenburg (LZ 129)",
+    "aliases": [
+      "LZ 129",
+      "Hindenburg airship"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "ss-edmund-fitzgerald",
+    "type": "event",
+    "name": "SS Edmund Fitzgerald",
+    "aliases": [
+      "Edmund Fitzgerald"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "uss-eldridge",
+    "type": "event",
+    "name": "USS Eldridge",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "uss-liberty",
+    "type": "event",
+    "name": "USS Liberty",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "uss-vincennes",
+    "type": "event",
+    "name": "USS Vincennes",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "titanic",
+    "type": "event",
+    "name": "RMS Titanic",
+    "aliases": [
+      "Titanic"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "mh370",
+    "type": "event",
+    "name": "Malaysia Airlines Flight MH370",
+    "aliases": [
+      "MH370",
+      "Flight 370"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "kal007",
+    "type": "event",
+    "name": "Korean Air Lines Flight 007",
+    "aliases": [
+      "KAL 007",
+      "KAL007"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "iran-air-655",
+    "type": "event",
+    "name": "Iran Air Flight 655",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "flight-19",
+    "type": "event",
+    "name": "Flight 19",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "flight-305",
+    "type": "event",
+    "name": "Northwest Orient Flight 305",
+    "aliases": [
+      "Flight 305"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "challenger",
+    "type": "event",
+    "name": "Space Shuttle Challenger",
+    "aliases": [
+      "Challenger"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "columbia-shuttle",
+    "type": "event",
+    "name": "Space Shuttle Columbia",
+    "aliases": [
+      "Columbia"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "voyager-1",
+    "type": "event",
+    "name": "Voyager 1",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "nessie",
+    "type": "event",
+    "name": "Loch Ness Monster",
+    "aliases": [
+      "Nessie"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "bigfoot",
+    "type": "event",
+    "name": "Bigfoot / Sasquatch",
+    "aliases": [
+      "Sasquatch",
+      "Bigfoot"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "mothman",
+    "type": "event",
+    "name": "Mothman",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "yeti",
+    "type": "event",
+    "name": "Yeti",
+    "aliases": [
+      "Abominable Snowman"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "chupacabra",
+    "type": "event",
+    "name": "Chupacabra",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "silver-bridge",
+    "type": "event",
+    "name": "Silver Bridge",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "hale-bopp",
+    "type": "event",
+    "name": "Comet Hale-Bopp",
+    "aliases": [
+      "Hale-Bopp"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "reichstag",
+    "type": "event",
+    "name": "Reichstag Building",
+    "aliases": [
+      "Reichstag"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "tsar-bomba",
+    "type": "event",
+    "name": "Tsar Bomba",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "castle-bravo",
+    "type": "event",
+    "name": "Castle Bravo",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "trinity-test",
+    "type": "event",
+    "name": "Trinity (nuclear test)",
+    "aliases": [
+      "Trinity test"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "isabella-stewart-gardner-museum",
+    "type": "event",
+    "name": "Isabella Stewart Gardner Museum",
+    "aliases": [
+      "Gardner Museum"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "alfred-p-murrah-building",
+    "type": "event",
+    "name": "Alfred P. Murrah Federal Building",
+    "aliases": [
+      "Murrah Building"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "b-25-bomber",
+    "type": "event",
+    "name": "B-25 Mitchell (bomber)",
+    "aliases": [
+      "B-25"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "military-industrial-complex",
+    "type": "topic",
+    "name": "Military-Industrial Complex",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "shadow-government",
+    "type": "topic",
+    "name": "Shadow Government",
+    "aliases": [
+      "deep state"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "spacecraft-fire",
+    "type": "topic",
+    "name": "Spacecraft Fire",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "radiation",
+    "type": "topic",
+    "name": "Radiation Exposure",
+    "aliases": [
+      "radioactive"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "nuclear-testing",
+    "type": "topic",
+    "name": "Nuclear Weapons Testing",
+    "aliases": [
+      "atomic testing"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "nuclear-disaster",
+    "type": "topic",
+    "name": "Nuclear Disaster",
+    "aliases": [
+      "reactor meltdown"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "weather-balloon-cover-story",
+    "type": "topic",
+    "name": "Weather Balloon Cover Story",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "anti-aircraft",
+    "type": "topic",
+    "name": "Anti-Aircraft Fire",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "aviation-disappearance",
+    "type": "topic",
+    "name": "Aviation Disappearance",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "aviation-disaster",
+    "type": "topic",
+    "name": "Aviation Disaster",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "classified-cargo",
+    "type": "topic",
+    "name": "Classified Cargo",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "mass-ufo-sighting",
+    "type": "topic",
+    "name": "Mass UFO Sighting",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "v-shaped-craft",
+    "type": "topic",
+    "name": "V-Shaped Craft",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "triangular-craft",
+    "type": "topic",
+    "name": "Triangular Craft",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "lunar-mission",
+    "type": "topic",
+    "name": "Lunar Mission",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "cryptid-hoax",
+    "type": "topic",
+    "name": "Cryptid Hoax",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "photographic-evidence",
+    "type": "topic",
+    "name": "Photographic Evidence",
+    "aliases": [
+      "photograph analysis"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "cover-up",
+    "type": "topic",
+    "name": "Cover-up",
+    "aliases": [
+      "coverup"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "airship",
+    "type": "topic",
+    "name": "Airship",
+    "aliases": [
+      "dirigible",
+      "zeppelin"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "whistleblower",
+    "type": "topic",
+    "name": "Whistleblower Testimony",
+    "aliases": [
+      "whistleblowing"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "disinformation-psyop",
+    "type": "topic",
+    "name": "Disinformation Psyop",
+    "aliases": [
+      "psyop"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "deep-throat",
+    "type": "topic",
+    "name": "Deep Throat (Watergate source)",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "missing-18-minutes",
+    "type": "topic",
+    "name": "Missing 18 Minutes (Nixon tapes)",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "airburst-explosion",
+    "type": "topic",
+    "name": "Airburst Explosion",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "crashed-ufo-retrieval",
+    "type": "topic",
+    "name": "Crashed UFO Retrieval",
+    "aliases": [
+      "craft recovery"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "assassination",
+    "type": "topic",
+    "name": "Assassination",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "political-assassination",
+    "type": "topic",
+    "name": "Political Assassination",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "celebrity-death",
+    "type": "topic",
+    "name": "Celebrity Death",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "kennedy-curse",
+    "type": "topic",
+    "name": "Kennedy Family Deaths",
+    "aliases": [
+      "Kennedy curse"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "faked-death",
+    "type": "topic",
+    "name": "Faked Death (staged death)",
+    "aliases": [
+      "staged death"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "body-double",
+    "type": "topic",
+    "name": "Body Double",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "alien-abduction",
+    "type": "topic",
+    "name": "Alien Abduction",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "first-contact-claim",
+    "type": "topic",
+    "name": "First Contact / Close Encounter",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "glowing-red-eyes",
+    "type": "topic",
+    "name": "Glowing Red Eyes (cryptid)",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "harbinger-of-disaster",
+    "type": "topic",
+    "name": "Harbinger of Disaster",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "cult-mass-death",
+    "type": "topic",
+    "name": "Cult Mass Death",
+    "aliases": [
+      "mass suicide",
+      "cult suicide"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "second-shooter",
+    "type": "topic",
+    "name": "Second Shooter Theory",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "false-flag",
+    "type": "topic",
+    "name": "False Flag",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "advance-knowledge",
+    "type": "topic",
+    "name": "Advance Knowledge / Stand Down",
+    "aliases": [
+      "stand down order"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "controlled-demolition",
+    "type": "topic",
+    "name": "Controlled Demolition",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "power-grid-failure",
+    "type": "topic",
+    "name": "Power Grid Failure",
+    "aliases": [
+      "blackout"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "nuclear-near-miss",
+    "type": "topic",
+    "name": "Nuclear Near-Miss",
+    "aliases": [
+      "nuclear close call"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "classified-aerospace",
+    "type": "topic",
+    "name": "Classified Aerospace Program",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "lighthouse-explanation",
+    "type": "topic",
+    "name": "Lighthouse / Mundane Explanation",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "teleportation",
+    "type": "topic",
+    "name": "Teleportation / Invisibility",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "polygraph-testimony",
+    "type": "topic",
+    "name": "Polygraph-Verified Testimony",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "cult-suicide",
+    "type": "topic",
+    "name": "Cult Suicide",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "emp",
+    "type": "topic",
+    "name": "Electromagnetic Pulse (EMP)",
+    "aliases": [
+      "EMP weapon"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "apocalyptic-prediction",
+    "type": "topic",
+    "name": "Apocalyptic Prediction",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "provocateur-theory",
+    "type": "topic",
+    "name": "Provocateur / Fed Infiltration",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "final-solution",
+    "type": "topic",
+    "name": "Final Solution (Holocaust)",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "o-ring-failure",
+    "type": "topic",
+    "name": "O-Ring Failure",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "foam-strike",
+    "type": "topic",
+    "name": "Foam Strike (Columbia)",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "pope-abdication",
+    "type": "topic",
+    "name": "Papal Abdication",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "internment",
+    "type": "topic",
+    "name": "Internment / Forced Relocation",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "truck-bombing",
+    "type": "topic",
+    "name": "Truck Bombing",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "drive-by-shooting",
+    "type": "topic",
+    "name": "Drive-By Shooting",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "propofol-overdose",
+    "type": "topic",
+    "name": "Propofol Overdose",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "barbiturate-overdose",
+    "type": "topic",
+    "name": "Barbiturate Overdose",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "suicide-ruled",
+    "type": "topic",
+    "name": "Officially Ruled Suicide",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "sabotage",
+    "type": "topic",
+    "name": "Sabotage (alleged)",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "spy-ring",
+    "type": "topic",
+    "name": "Espionage / Spy Ring",
+    "aliases": [
+      "espionage"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "birther-conspiracy",
+    "type": "topic",
+    "name": "Birther Conspiracy",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "golden-record",
+    "type": "topic",
+    "name": "Voyager Golden Record",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "interdimensional-entity",
+    "type": "topic",
+    "name": "Interdimensional Entity",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "ghost-dance",
+    "type": "topic",
+    "name": "Ghost Dance Movement",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "cryonics",
+    "type": "topic",
+    "name": "Cryonics / Cryopreservation",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "bloodletting",
+    "type": "topic",
+    "name": "Bloodletting Medicine",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "bermuda-triangle-anomaly",
+    "type": "topic",
+    "name": "Bermuda Triangle Anomaly",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "nazi-escape",
+    "type": "topic",
+    "name": "Nazi Escape Theories (ratlines)",
+    "aliases": [
+      "ratlines"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "dna-forensic",
+    "type": "topic",
+    "name": "DNA Forensic Evidence",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "civil-rights-movement",
+    "type": "topic",
+    "name": "Civil Rights Movement",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "disclosure-movement",
+    "type": "topic",
+    "name": "UFO Disclosure Movement",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "occultism",
+    "type": "topic",
+    "name": "Occultism / Ritual",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "mind-control",
+    "type": "topic",
+    "name": "Mind Control",
+    "aliases": [
+      "hypnosis conspiracy"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "great-depression-era-crime",
+    "type": "topic",
+    "name": "Prohibition-Era Organized Crime",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "hijacking",
+    "type": "topic",
+    "name": "Aircraft Hijacking",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "submarine-incident",
+    "type": "topic",
+    "name": "Submarine Incident",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "soviet-collapse",
+    "type": "topic",
+    "name": "Soviet Collapse",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "art-heist",
+    "type": "topic",
+    "name": "Art Heist",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "pentagon-videos",
+    "type": "topic",
+    "name": "Pentagon UFO Videos",
+    "aliases": [
+      "Navy UAP videos"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "mayan-calendar",
+    "type": "topic",
+    "name": "Mayan Long Count Calendar",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "watergate",
+    "type": "topic",
+    "name": "Watergate Scandal",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "holocaust",
+    "type": "topic",
+    "name": "Holocaust",
+    "aliases": [
+      "Shoah"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "balkanization",
+    "type": "topic",
+    "name": "Peace Accord (Middle East)",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "prophecy-visions",
+    "type": "topic",
+    "name": "Prophecy / Visions",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "surveillance-balloon",
+    "type": "topic",
+    "name": "Surveillance Balloon",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "black-hawk",
+    "type": "topic",
+    "name": "Black Hawk Helicopter",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "civilian-aircraft-shootdown",
+    "type": "topic",
+    "name": "Civilian Aircraft Shootdown",
+    "aliases": [],
+    "quarantined": false
+  }
+]
