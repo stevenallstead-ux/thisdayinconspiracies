@@ -3,22 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>This Day in Conspiracies</title>
-<meta name="description" content="A daily archive of conspiracies, unexplained events, UFO sightings, and paranormal incidents that happened on this day in history.">
-<link rel="stylesheet" href="styles.css">
+<title>This Day in Conspiracies — Connect the Files</title>
+<meta name="description" content="Connect any two events, entities, or cover-ups from the conspiracy archive. Every file connects to others. The chain is the product.">
+<link rel="stylesheet" href="/styles.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=IM+Fell+English:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-
-<!-- Google AdSense — replace ca-pub-XXXXXXXXXXXXXXXX with your real publisher ID after approval, then uncomment -->
-<!--
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX"
-        crossorigin="anonymous"></script>
--->
 </head>
-<body>
+<body class="connect-page">
 
 <header class="site-header">
+  <a href="/today/" class="todays-file-link" aria-label="Today's daily entry">Today's File &rarr;</a>
   <div class="classified-stamp">DECLASSIFIED</div>
   <h1 class="site-title">This Day in Conspiracies</h1>
   <p class="site-subtitle">Unexplained events · UFO sightings · Political cover-ups · Cryptid encounters</p>
@@ -26,36 +21,53 @@
     <span class="date-label">FILE DATE:</span>
     <span id="current-date"></span>
   </div>
+  <p class="archive-updated" id="archive-updated">ARCHIVE LAST UPDATED &mdash;</p>
 </header>
 
 <main>
-  <section id="today-section">
-    <h2 class="section-heading">On This Day</h2>
-    <div id="today-events" class="events-grid"></div>
-  </section>
+  <section class="connect-tool">
+    <h2 class="section-heading">Connect the Files</h2>
 
-  <!-- Ad slot: between today and monthly archive. Uncomment after AdSense approval. -->
-  <!--
-  <div class="ad-slot">
-    <ins class="adsbygoogle"
-         style="display:block"
-         data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
-         data-ad-slot="YOUR_SLOT_ID"
-         data-ad-format="auto"
-         data-full-width-responsive="true"></ins>
-    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-  </div>
-  -->
+    <div class="connect-form">
+      <label class="connect-label" for="from-input">FROM</label>
+      <div class="connect-field">
+        <input
+          id="from-input"
+          type="text"
+          class="connect-input"
+          autocomplete="off"
+          spellcheck="false"
+          placeholder="JFK ASSASSINATION"
+          disabled
+        >
+        <div id="from-dropdown" class="ac-dropdown" aria-hidden="true" role="listbox"></div>
+      </div>
 
-  <section id="month-section">
-    <h2 class="section-heading">This Month In Conspiracies</h2>
-    <div id="month-events" class="events-list"></div>
-  </section>
+      <label class="connect-label" for="to-input">TO</label>
+      <div class="connect-field">
+        <input
+          id="to-input"
+          type="text"
+          class="connect-input"
+          autocomplete="off"
+          spellcheck="false"
+          placeholder="MKULTRA"
+          disabled
+        >
+        <div id="to-dropdown" class="ac-dropdown" aria-hidden="true" role="listbox"></div>
+      </div>
 
-  <section class="about-section">
-    <h2 class="section-heading">About The Archive</h2>
-    <p>A daily-updated record of humanity's strangest unresolved incidents &mdash; drawn from declassified documents, eyewitness accounts, and the long memory of the internet.</p>
-    <p class="muted">Entries are curated for historical and educational interest. Theories are presented as theories, not facts.</p>
+      <button id="find-button" class="connect-cta" type="button" disabled>
+        <span class="cta-label">INITIALIZING...</span>
+      </button>
+    </div>
+
+    <div id="result-region" class="result-region">
+      <div class="empty-state">
+        <p>TYPE TWO SUBJECTS.</p>
+        <p>WE WILL ASSEMBLE THE FILE.</p>
+      </div>
+    </div>
   </section>
 </main>
 
@@ -63,6 +75,14 @@
   <p>&copy; <span id="year"></span> This Day in Conspiracies &middot; The files are never fully closed.</p>
 </footer>
 
-<script src="script.js"></script>
+<script type="module" src="/js/connect.js"></script>
+<script>
+  (function () {
+    var d = new Date();
+    var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    document.getElementById('current-date').textContent = (months[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear()).toUpperCase();
+    document.getElementById('year').textContent = d.getFullYear();
+  })();
+</script>
 </body>
 </html>

@@ -293,6 +293,353 @@ main {
   border-top: 1px solid var(--border);
 }
 
+/* ---------- Connect-Any-Two homepage ---------- */
+.connect-page .site-header {
+  position: relative;
+}
+
+.todays-file-link {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  font-family: 'Special Elite', monospace;
+  font-size: 0.85rem;
+  letter-spacing: 0.15em;
+  color: var(--gold);
+  text-decoration: none;
+  text-transform: uppercase;
+  border-bottom: 1px dotted var(--gold);
+  padding-bottom: 1px;
+}
+.todays-file-link:hover {
+  filter: brightness(1.2);
+  border-bottom-style: solid;
+}
+
+.archive-updated {
+  font-family: 'Special Elite', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  color: var(--ink-muted);
+  text-transform: uppercase;
+  margin-top: 0.6rem;
+}
+
+/* ---- Connect tool ---- */
+.connect-tool {
+  margin-bottom: 4rem;
+}
+
+.connect-form {
+  display: grid;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.connect-label {
+  font-family: 'Special Elite', monospace;
+  font-size: 0.8rem;
+  letter-spacing: 0.25em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-top: 0.5rem;
+}
+
+.connect-field {
+  position: relative;
+}
+
+.connect-input {
+  width: 100%;
+  background: var(--bg-paper);
+  border: 1px solid var(--border);
+  color: var(--ink);
+  font-family: 'Special Elite', monospace;
+  font-size: 1.05rem;
+  letter-spacing: 0.1em;
+  padding: 0.85rem 1rem;
+  outline: none;
+  border-radius: 2px;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.connect-input::placeholder {
+  color: var(--ink-muted);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+}
+.connect-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent);
+}
+.connect-input:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.connect-cta {
+  background: var(--accent);
+  color: var(--bg);
+  font-family: 'Special Elite', monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  padding: 1rem 2.5rem;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  margin-top: 0.75rem;
+  justify-self: start;
+  transition: filter 0.15s;
+}
+.connect-cta:hover:not(:disabled) {
+  filter: brightness(1.1);
+}
+.connect-cta:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* ---- Autocomplete dropdown ---- */
+.ac-dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  max-height: 320px;
+  overflow-y: auto;
+  z-index: 50;
+  display: none;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+}
+.ac-dropdown.open {
+  display: block;
+}
+
+.ac-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.65rem 1rem;
+  border-bottom: 1px dashed var(--border);
+  cursor: pointer;
+  transition: background 0.1s;
+}
+.ac-row:last-child {
+  border-bottom: none;
+}
+.ac-row:hover {
+  background: rgba(201, 74, 42, 0.08);
+}
+
+.ac-row-main {
+  display: flex;
+  align-items: baseline;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+  min-width: 0;
+}
+
+.ac-label {
+  color: var(--ink);
+  font-size: 1rem;
+}
+
+.ac-meta {
+  color: var(--ink-muted);
+  font-family: 'Special Elite', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.ac-tag {
+  font-family: 'Special Elite', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  flex-shrink: 0;
+}
+.ac-tag-file { color: var(--gold); }
+.ac-tag-entity { color: var(--accent); }
+
+.ac-empty {
+  color: var(--ink-muted);
+  font-style: italic;
+  cursor: default;
+}
+.ac-empty:hover { background: transparent; }
+
+/* ---- Result region + chain rendering ---- */
+.result-region {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+.result-region .empty-state {
+  font-family: 'Special Elite', monospace;
+  font-size: 0.95rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+
+.chain-divider {
+  font-family: 'Special Elite', monospace;
+  font-size: 0.95rem;
+  letter-spacing: 0.25em;
+  color: var(--accent);
+  text-transform: uppercase;
+  text-align: center;
+  border-bottom: 1px dashed var(--accent-soft);
+  padding-bottom: 0.5rem;
+  margin: 0.5rem auto;
+  max-width: 70%;
+}
+
+.chain-note {
+  font-family: 'Special Elite', monospace;
+  font-size: 0.95rem;
+  letter-spacing: 0.2em;
+  color: var(--gold);
+  text-transform: uppercase;
+  text-align: center;
+}
+.self-loop-note {
+  border: 1px dashed var(--gold);
+  padding: 1rem 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.chain-footer-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'Special Elite', monospace;
+  font-size: 0.85rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  border-top: 1px dashed var(--border);
+  padding-top: 1.25rem;
+  margin-top: 0.5rem;
+  color: var(--ink-muted);
+}
+
+.trace-another {
+  color: var(--gold);
+  text-decoration: none;
+  border-bottom: 1px dotted var(--gold);
+  padding-bottom: 1px;
+}
+.trace-another:hover {
+  filter: brightness(1.2);
+  border-bottom-style: solid;
+}
+
+.declassify-hint {
+  color: var(--ink-muted);
+  opacity: 0.4;
+  font-style: italic;
+}
+
+/* ---- Error states ---- */
+.error-state {
+  border: 1px dashed var(--accent);
+  background: rgba(201, 74, 42, 0.04);
+}
+.error-title {
+  color: var(--accent);
+  font-family: 'Special Elite', monospace;
+  font-size: 1rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+.error-body {
+  color: var(--ink-muted);
+  font-style: italic;
+  font-size: 0.95rem;
+}
+.error-link {
+  margin-top: 1rem;
+  font-family: 'Special Elite', monospace;
+  font-size: 0.85rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+.error-link a {
+  color: var(--gold);
+  text-decoration: none;
+  border-bottom: 1px dotted var(--gold);
+  padding-bottom: 1px;
+}
+.error-link a:hover {
+  filter: brightness(1.2);
+}
+
+/* ---- Related Files footer (used by /today/ + thread pages, NOT chain results) ---- */
+.related-files {
+  border-top: 1px dashed var(--border);
+  padding-top: 1rem;
+  margin-top: 1rem;
+}
+.related-files-label {
+  font-family: 'Special Elite', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+.related-files ul {
+  list-style: none;
+  padding-left: 0;
+}
+.related-files li {
+  position: relative;
+  padding-left: 1.5rem;
+  font-size: 0.95rem;
+  color: var(--ink);
+  margin-bottom: 0.4rem;
+}
+.related-files li::before {
+  content: '↳';
+  position: absolute;
+  left: 0;
+  color: var(--accent-soft);
+}
+.related-files-via {
+  color: var(--ink-muted);
+  font-style: italic;
+  font-size: 0.85rem;
+  margin-left: 0.5rem;
+}
+
+/* ---- /today/ page back-link ---- */
+.back-to-connect {
+  position: absolute;
+  top: 1.5rem;
+  left: 1.5rem;
+  font-family: 'Special Elite', monospace;
+  font-size: 0.85rem;
+  letter-spacing: 0.15em;
+  color: var(--gold);
+  text-decoration: none;
+  text-transform: uppercase;
+  border-bottom: 1px dotted var(--gold);
+  padding-bottom: 1px;
+}
+.back-to-connect:hover {
+  filter: brightness(1.2);
+  border-bottom-style: solid;
+}
+
 /* ---------- Responsive ---------- */
 @media (min-width: 700px) {
   .events-grid {
@@ -310,5 +657,32 @@ main {
   .month-event-category {
     grid-column: 2;
     margin-top: 0.2rem;
+  }
+  .todays-file-link,
+  .back-to-connect {
+    position: static;
+    display: block;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  .connect-input {
+    font-size: 1rem;
+    padding: 0.75rem 0.85rem;
+  }
+  .connect-cta {
+    width: 100%;
+    padding: 1rem;
+    letter-spacing: 0.2em;
+    font-size: 0.9rem;
+  }
+  .chain-divider {
+    max-width: 100%;
+    font-size: 0.85rem;
+    letter-spacing: 0.18em;
+  }
+  .chain-footer-row {
+    flex-direction: column;
+    gap: 0.75rem;
+    text-align: center;
   }
 }
