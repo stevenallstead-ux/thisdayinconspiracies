@@ -10,7 +10,13 @@
 //
 // Public API:
 //   createGraph(adjacency) -> Graph
-//     .shortestPath(fromId, toId) -> { events: [id,...], edges: [{from,to,via_entity_ids},...], cost } | null
+//     .shortestPath(fromId, toId) -> { events, edges, cost } | null
+//         (alias for shortestPaths(...).paths[0] — backward-compatible single-path call)
+//     .shortestPaths(fromId, toId, opts?) -> { paths: [{events,edges,cost},...], optimalCost } | null
+//         opts.tolerance (default 0.15) — accept paths with cost <= optimalCost * (1 + tolerance)
+//         opts.maxPaths  (default 8)    — cap enumerated alternatives
+//         Returns paths sorted by (cost asc, hops asc, lex-min pathKey).
+//     .pickPath(paths, seed=0) -> single path | null  — paths[seed % paths.length]
 //     .neighbors(id, limit=3) -> [{id, weight, via_entity_ids}, ...]  // 1-hop sort by weight asc
 //     .has(id) -> boolean
 //     .addVirtualNode(id, targets) -> void  // entity-level Connect support (Stage 4)
@@ -165,6 +171,106 @@ export function createGraph(adjacency) {
     return { events, edges, cost: best.get(toId).cost };
   }
 
+  // K-shortest paths via cost-bounded DFS enumeration.
+  // After Dijkstra finds the optimal cost C*, walk every simple path from
+  // fromId to toId whose total cost is <= C* * (1 + tolerance). Cap at
+  // maxPaths to bound runtime — at our scale (avg degree ~5-6, diameter
+  // ~6) this is sub-millisecond. For a small static corpus, this is far
+  // simpler than Yen's algorithm and produces the same result.
+  function shortestPaths(fromId, toId, opts = {}) {
+    if (typeof fromId !== 'string' || typeof toId !== 'string') {
+      throw new TypeError('shortestPaths: endpoint ids must be strings');
+    }
+    if (!has(fromId)) throw new Error(`shortestPaths: unknown endpoint ${fromId}`);
+    if (!has(toId)) throw new Error(`shortestPaths: unknown endpoint ${toId}`);
+
+    const tolerance = typeof opts.tolerance === 'number' ? opts.tolerance : 0.15;
+    const maxPaths = typeof opts.maxPaths === 'number' ? opts.maxPaths : 8;
+
+    // Self-loop (A === B) is always a single-path 0-cost result.
+    if (fromId === toId) {
+      const onlyPath = { events: [fromId], edges: [], cost: 0 };
+      return { paths: [onlyPath], optimalCost: 0 };
+    }
+
+    const optimal = shortestPath(fromId, toId);
+    if (!optimal) return null;
+
+    const optimalCost = optimal.cost;
+    // Cost ceiling. Add 1e-9 epsilon for floating-point safety on equal-cost ties.
+    const costCeiling = optimalCost * (1 + tolerance) + 1e-9;
+
+    const found = [optimal]; // optimal always included
+    const optimalKey = optimal.events.join('|');
+
+    // DFS state: stack of { id, cost, hops, events, edges, visited }
+    // visited is a Set checked + mutated during DFS to enforce simple paths.
+    const visited = new Set([fromId]);
+    const eventsStack = [fromId];
+    const edgesStack = [];
+
+    function dfs(currentId, currentCost) {
+      if (found.length >= maxPaths) return;
+
+      // Prune: remaining cost must be >= 0, so if currentCost > ceiling, drop.
+      if (currentCost > costCeiling) return;
+
+      if (currentId === toId) {
+        const key = eventsStack.join('|');
+        // Skip the optimal path — already in `found`.
+        if (key !== optimalKey) {
+          found.push({
+            events: [...eventsStack],
+            edges: [...edgesStack],
+            cost: currentCost,
+          });
+        }
+        return;
+      }
+
+      for (const edge of adj[currentId] || []) {
+        const w = edge.weight;
+        if (typeof w !== 'number' || !Number.isFinite(w)) continue;
+        if (visited.has(edge.to)) continue;
+        const nextCost = currentCost + w;
+        if (nextCost > costCeiling) continue;
+
+        visited.add(edge.to);
+        eventsStack.push(edge.to);
+        edgesStack.push({
+          from: currentId,
+          to: edge.to,
+          via_entity_ids: edge.via_entity_ids || [],
+        });
+
+        dfs(edge.to, nextCost);
+
+        edgesStack.pop();
+        eventsStack.pop();
+        visited.delete(edge.to);
+      }
+    }
+
+    dfs(fromId, 0);
+
+    // Sort by (cost asc, hops asc, lex-min pathKey).
+    found.sort((a, b) => {
+      if (a.cost !== b.cost) return a.cost - b.cost;
+      if (a.events.length !== b.events.length) return a.events.length - b.events.length;
+      const ak = a.events.join('|');
+      const bk = b.events.join('|');
+      return ak < bk ? -1 : ak > bk ? 1 : 0;
+    });
+
+    return { paths: found.slice(0, maxPaths), optimalCost };
+  }
+
+  function pickPath(paths, seed = 0) {
+    if (!Array.isArray(paths) || paths.length === 0) return null;
+    const idx = ((seed % paths.length) + paths.length) % paths.length;
+    return paths[idx];
+  }
+
   function neighbors(id, limit = 3) {
     if (!has(id)) throw new Error(`neighbors: unknown id ${id}`);
     const list = (adj[id] || []).slice();
@@ -201,5 +307,5 @@ export function createGraph(adjacency) {
     }
   }
 
-  return { shortestPath, neighbors, has, addVirtualNode, removeVirtualNode };
+  return { shortestPath, shortestPaths, pickPath, neighbors, has, addVirtualNode, removeVirtualNode };
 }
