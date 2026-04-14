@@ -471,7 +471,7 @@ TAG_MAP: dict[str, list[str]] = {
         "travis-walton", "phoenix-arizona", "alien-abduction", "polygraph-testimony", "first-contact-claim"
     ],
     "1966-first-mothman-sighting-in-point-pleasant": [
-        "point-pleasant-wv", "mothman", "glowing-red-eyes", "silver-bridge", "harbinger-of-disaster", "interdimensional-entity"
+        "point-pleasant-wv", "mothman", "glowing-red-eyes", "silver-bridge", "harbinger-of-disaster", "interdimensional-entity", "cryptid-hoax"
     ],
     "1978-jonestown-massacre": [
         "peoples-temple", "cia", "mkultra", "cult-mass-death", "cult-suicide", "mind-control"
@@ -498,7 +498,7 @@ TAG_MAP: dict[str, list[str]] = {
         "grigori-rasputin", "mi6", "occultism", "political-assassination"
     ],
     "1967-james-bedford-becomes-first-human-cryonically-preserved": [
-        "james-bedford", "alcor", "cryonics"
+        "james-bedford", "alcor", "cryonics", "shadow-government"
     ],
     "1929-the-st-valentine-s-day-massacre": [
         "al-capone", "mafia", "great-depression-era-crime", "political-assassination"
@@ -549,7 +549,7 @@ TAG_MAP: dict[str, list[str]] = {
         "columbia-shuttle", "nasa", "ilan-ramon", "foam-strike", "cover-up"
     ],
     "2013-pope-benedict-xvi-abdicates": [
-        "pope-benedict-xvi", "vatican", "pope-abdication"
+        "pope-benedict-xvi", "vatican", "pope-abdication", "cover-up"
     ],
     "1942-executive-order-9066-signed": [
         "fdr", "us-government", "fbi", "internment"
@@ -657,7 +657,7 @@ TAG_MAP: dict[str, list[str]] = {
         "tupac-shakur", "suge-knight", "las-vegas", "celebrity-death", "drive-by-shooting", "faked-death"
     ],
     "1978-the-camp-david-accords": [
-        "anwar-sadat", "menachem-begin", "jimmy-carter", "camp-david", "balkanization"
+        "anwar-sadat", "menachem-begin", "jimmy-carter", "camp-david", "balkanization", "political-assassination"
     ],
     "1983-stanislav-petrov-prevents-nuclear-war": [
         "stanislav-petrov", "soviet-military", "nuclear-near-miss"
