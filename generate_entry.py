@@ -25,6 +25,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import re
 import sys
 import urllib.request
 from datetime import datetime, timezone
@@ -40,6 +41,13 @@ except ImportError:
 
 ROOT = Path(__file__).resolve().parent
 DATA_PATH = ROOT / "data" / "data.json"
+ENTITIES_PATH = ROOT / "data" / "entities.json"
+ID_COLLISION_LOG = ROOT / "id_collisions.log"
+NEW_ENTITIES_LOG = ROOT / "new_entities.log"
+
+# Make scripts/ importable for _slug.slugify
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
 
 WIKI_ENDPOINT = "https://en.wikipedia.org/api/rest_v1/feed/onthisday/events/{mm}/{dd}"
 USER_AGENT = "ThisDayInConspiracies/0.1 (https://github.com/yourname/thisday)"
@@ -90,6 +98,34 @@ def parse_target_date(arg: str | None) -> tuple[int, int]:
     return now.month, now.day
 
 
+_INJECTION_PATTERNS = [
+    re.compile(r"ignore previous", re.I),
+    re.compile(r"system:", re.I),
+    re.compile(r"assistant:", re.I),
+    re.compile(r"</?instructions?>", re.I),
+    re.compile(r"</?system>", re.I),
+    re.compile(r"\[INST\]", re.I),
+]
+
+
+def sanitize_for_prompt(text: str, max_len: int = 500) -> str:
+    """OV-2 defense: strip prompt-injection-friendly content from external
+    text (Wikipedia extract) before it reaches the LLM. Removes:
+      - unicode control chars
+      - markdown links [label](url)
+      - common injection phrase patterns
+    Then collapses whitespace and clamps to max_len chars.
+    """
+    if not isinstance(text, str) or not text:
+        return ""
+    text = re.sub(r"[\x00-\x1f\x7f]", " ", text)
+    text = re.sub(r"\[[^\]]*\]\([^)]*\)", "", text)
+    for pat in _INJECTION_PATTERNS:
+        text = pat.sub("", text)
+    text = re.sub(r"\s+", " ", text).strip()
+    return text[:max_len]
+
+
 def fetch_wikipedia_events(month: int, day: int) -> list[dict]:
     url = WIKI_ENDPOINT.format(mm=f"{month:02d}", dd=f"{day:02d}")
     req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
@@ -104,9 +140,9 @@ def fetch_wikipedia_events(month: int, day: int) -> list[dict]:
         top = pages[0] if pages else {}
         events.append({
             "year": year,
-            "text": text,
+            "text": sanitize_for_prompt(text, max_len=300),
             "title": top.get("normalizedtitle") or top.get("title") or "",
-            "extract": top.get("extract", ""),
+            "extract": sanitize_for_prompt(top.get("extract", ""), max_len=500),
             "url": (top.get("content_urls", {}).get("desktop") or {}).get("page", ""),
         })
     return events
@@ -199,6 +235,147 @@ def generate(system: str, user: str) -> dict:
     return json.loads(text)
 
 
+# ── OV-1: collision-safe ID assignment ────────────────────────────────────
+def assign_id(entry: dict, existing_ids: set[str]) -> tuple[str, bool]:
+    """Returns (id, was_collision). Suffixes -2, -3, ... on collision and
+    logs to id_collisions.log. Same algorithm as scripts/add_ids.py."""
+    from scripts._slug import slugify
+    base = f"{entry['year']}-{slugify(entry['title'], fallback_year=entry['year'])}"
+    candidate = base
+    n = 2
+    collision = False
+    while candidate in existing_ids:
+        candidate = f"{base}-{n}"
+        n += 1
+        collision = True
+    if collision:
+        ts = datetime.now(timezone.utc).isoformat(timespec="seconds")
+        with ID_COLLISION_LOG.open("a", encoding="utf-8") as f:
+            f.write(
+                f"{ts}\tcollision\tyear={entry['year']}\t"
+                f"title={entry['title']}\tassigned_id={candidate}\n"
+            )
+    return candidate, collision
+
+
+def update_last_ingest(data: dict) -> None:
+    """OV-5: honest liveness signal. Always reflects the moment of last
+    successful append, regardless of CF Pages mtime fiddling."""
+    data["last_ingest_at"] = datetime.now(timezone.utc).strftime(
+        "%Y-%m-%dT%H:%M:%SZ"
+    )
+
+
+# ── Stage 1 task 9 + OV-7: entity auto-tag with quarantine ────────────────
+ENTITY_TAG_SYSTEM_PROMPT = """You are an entity tagger for a conspiracy archive.
+Given one new event and the registry of known entities (id → display name),
+return the entity IDs that this event references AND propose any new entities
+worth adding.
+
+Hard rules:
+- Mention only entity IDs that exist in the registry below.
+- Be conservative with new_entities — propose only when the event clearly
+  references a person/org/place/program/topic that is not in the registry.
+- Each new entity needs type ∈ {person, org, place, program, event, topic},
+  a display name, and 0+ aliases.
+
+Output strict JSON, nothing else:
+{
+  "mentions": ["entity_id_a", "entity_id_b"],
+  "new_entities": [
+    {"type": "person", "name": "Display Name", "aliases": ["alias1"]}
+  ]
+}
+"""
+
+
+def load_entities() -> list[dict]:
+    if not ENTITIES_PATH.exists():
+        return []
+    with ENTITIES_PATH.open("r", encoding="utf-8") as f:
+        return json.load(f)
+
+
+def save_entities(entities: list[dict]) -> None:
+    with ENTITIES_PATH.open("w", encoding="utf-8") as f:
+        json.dump(entities, f, indent=2, ensure_ascii=False)
+        f.write("\n")
+
+
+def auto_tag_entities(entry: dict, entities: list[dict]) -> dict:
+    """Return parsed LLM response: {mentions, new_entities}."""
+    live_entities = [e for e in entities if not e.get("quarantined")]
+    summary_lines = [f"  {e['id']}: {e['name']}" for e in live_entities]
+    user = (
+        f"NEW EVENT:\n"
+        f"Title: {entry['title']}\n"
+        f"Year: {entry['year']}\n"
+        f"Category: {entry['category']}\n"
+        f"Summary: {entry['summary']}\n\n"
+        f"KNOWN ENTITY REGISTRY ({len(live_entities)} entries):\n"
+        + "\n".join(summary_lines)
+        + "\n\nReturn JSON with mentions (existing entity IDs) and new_entities."
+    )
+    return generate(ENTITY_TAG_SYSTEM_PROMPT, user)
+
+
+def apply_entity_tags(
+    entry: dict,
+    entities: list[dict],
+    llm_response: dict,
+) -> tuple[list[str], list[str]]:
+    """
+    Apply LLM tagging response to entry + entities registry. Returns
+    (added_mentions, new_entity_ids_added).
+
+    OV-7: new entities land with quarantined=true. They become live only
+    when ≥2 distinct events reference them (handled in derive_edges.py).
+    """
+    from scripts._slug import slugify
+
+    existing_ids = {e["id"] for e in entities}
+    mentions = [m for m in (llm_response.get("mentions") or []) if m in existing_ids]
+    entry["entities"] = list(mentions)  # don't alias — new entities append to entry only
+
+    added_ids: list[str] = []
+    for new_e in (llm_response.get("new_entities") or []):
+        try:
+            etype = new_e["type"]
+            name = new_e["name"]
+        except (KeyError, TypeError):
+            continue
+        if etype not in {"person", "org", "place", "program", "event", "topic"}:
+            continue
+        new_id = slugify(name)
+        if not new_id:
+            continue
+        # Avoid clobbering existing entity ids
+        original = new_id
+        n = 2
+        while new_id in existing_ids:
+            new_id = f"{original}-{n}"
+            n += 1
+        entities.append({
+            "id": new_id,
+            "type": etype,
+            "name": name,
+            "aliases": list(new_e.get("aliases") or []),
+            "quarantined": True,
+        })
+        existing_ids.add(new_id)
+        added_ids.append(new_id)
+        if new_id not in entry["entities"]:
+            entry["entities"].append(new_id)
+
+    if added_ids:
+        ts = datetime.now(timezone.utc).isoformat(timespec="seconds")
+        with NEW_ENTITIES_LOG.open("a", encoding="utf-8") as f:
+            for nid in added_ids:
+                f.write(f"{ts}\tnew_entity_quarantined\tid={nid}\tfrom_event={entry['id']}\n")
+
+    return mentions, added_ids
+
+
 def validate_entry(entry: dict, month: int, day: int) -> tuple[bool, str]:
     if entry.get("skip"):
         return False, f"LLM skipped: {entry.get('reason', 'no reason given')}"
@@ -252,15 +429,43 @@ def main() -> int:
         print(json.dumps(entry, indent=2, ensure_ascii=False))
         return 2
 
+    # OV-1: assign a stable, collision-safe ID before append.
+    existing_ids = {e["id"] for e in data["events"] if "id" in e}
+    entry_id, was_collision = assign_id(entry, existing_ids)
+    entry["id"] = entry_id
+    if was_collision:
+        print(f"[!] ID collision: assigned {entry_id} (logged to {ID_COLLISION_LOG.name})")
+
+    # Reorder so id is first in the entry dict (matches add_ids.py output).
+    entry = {"id": entry_id, **{k: v for k, v in entry.items() if k != "id"}}
+
     print("[+] Generated entry:")
     print(json.dumps(entry, indent=2, ensure_ascii=False))
+
+    # Stage 1 task 9 + OV-7: entity auto-tag with quarantine.
+    entities = load_entities()
+    if entities:
+        try:
+            tag_response = auto_tag_entities(entry, entities)
+            mentions, new_ids = apply_entity_tags(entry, entities, tag_response)
+            print(f"[+] Auto-tagged: {len(mentions)} mentions, "
+                  f"{len(new_ids)} new entities (quarantined)")
+        except Exception as exc:
+            print(f"[!] Entity auto-tag failed: {exc}", file=sys.stderr)
+            entry["entities"] = []
+    else:
+        print("[!] entities.json not found — skipping auto-tag.")
+        entry["entities"] = []
 
     if args.dry_run:
         print("[*] Dry run — not writing.")
         return 0
 
     data["events"].append(entry)
+    update_last_ingest(data)  # OV-5
     save_data(data)
+    if entities:
+        save_entities(entities)
     print(f"[+] Appended to data.json. Total entries: {len(data['events'])}")
     return 0
 
