@@ -4,6 +4,12 @@ All notable changes to This Day in Conspiracies. Format follows [Keep a Changelo
 
 ## [Unreleased]
 
+### Added (Connect-the-Files Expansion — K-shortest paths + corpus)
+- **K-shortest paths in `js/graph.js`** — new `shortestPaths(from, to, opts)` API enumerates every simple path within ε of optimal cost (defaults: tolerance 0.15, maxPaths 8). Cost-bounded DFS, sub-millisecond at corpus scale. `pickPath(paths, seed)` selects deterministically. `shortestPath` becomes a thin wrapper for backward compatibility.
+- **Corpus expansion: +35 events, +153 entities** (`scripts/expand_corpus_phase1.py`) targeting 5 under-represented domains: deep history pre-1900 (Knights Templar through Harding), music industry deaths (Buddy Holly through Avicii), finance/banking (Jekyll Island through FTX), tech industry secrecy (Apple founding through CrowdStrike outage), medical/pharmaceutical (Tuskegee through COVID origin), plus the foundational 1947 NSA / CIA Act. Graph: 138 events / 480 entities / 288 edges, 138/138 connected.
+- **TRACE A DIFFERENT PATH re-roll button** in chain footer — when alternates exist, shows the count and advances `?seed=N` on click. URL stays the canonical pointer to a specific chain — same URL → same chain across visitors.
+- 11 new tests: 8 K-shortest unit cases + 3 alt-path E2E specs. **Totals: 55 Python + 32 JS unit + 11 E2E = 98 green** (was 84).
+
 ### Added (Phase C — Connect-Any-Two homepage)
 - `js/graph.js` — Dijkstra + binary min-heap on the prebuilt edges graph. Tie-break: cost → hops → lex-min path. Self-loop returns length-0. NaN/Infinity throws a named error. `addVirtualNode`/`removeVirtualNode` for Stage 4 entity-level Connect.
 - `js/shared.js` — extracted helpers (`escapeHtml`, `pad`, `formatFullDate`, `renderEventCard` with optional Related Files footer per Issue 2B).
