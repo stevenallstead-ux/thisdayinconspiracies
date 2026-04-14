@@ -60,15 +60,33 @@ jobs:
             python scripts/build_autocomplete.py
           fi
 
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps chromium
+
+      - name: E2E tests
+        env:
+          CI: 'true'
+        run: |
+          if ls tests/e2e/*.e2e.js 2>/dev/null | head -1 > /dev/null; then
+            npx playwright test
+          else
+            echo "No E2E specs yet, skipping."
+          fi
+
+      - name: Upload Playwright report on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 7
+
       - name: Stage static site
         run: |
           mkdir -p _site
           # Core static assets (always present after Stage 1)
           cp index.html _site/ 2>/dev/null || true
           cp styles.css _site/ 2>/dev/null || true
-          # script.js still lives at root pre-Phase-C; gets removed
-          # when js/today.js + js/connect.js split lands.
-          cp script.js _site/ 2>/dev/null || true
           [ -d js ] && cp -r js _site/ || true
           [ -d data ] && cp -r data _site/ || true
           [ -d dist ] && cp -r dist _site/ || true
