@@ -216,7 +216,11 @@ function renderDropdownRow(item) {
   const meta = item.kind === 'event'
     ? `<span class="ac-meta">${escapeHtml(String(item.year))} &middot; ${escapeHtml(item.category)}</span>`
     : '';
-  const tagClass = item.kind === 'event' ? 'ac-tag-file' : 'ac-tag-entity';
+  const tagClass = item.kind === 'event'
+    ? 'ac-tag-file'
+    : item.kind === 'withheld'
+      ? 'ac-tag-withheld'
+      : 'ac-tag-entity';
   return `
     <div class="ac-row" role="option" data-id="${escapeHtml(item.id)}" data-kind="${escapeHtml(item.kind)}">
       <div class="ac-row-main">
