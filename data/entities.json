@@ -2642,5 +2642,1164 @@
     "name": "Civilian Aircraft Shootdown",
     "aliases": [],
     "quarantined": false
+  },
+  {
+    "id": "philip-iv-of-france",
+    "type": "person",
+    "name": "King Philip IV of France",
+    "aliases": [
+      "Philip the Fair"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "pope-clement-v",
+    "type": "person",
+    "name": "Pope Clement V",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "wolfgang-amadeus-mozart",
+    "type": "person",
+    "name": "Wolfgang Amadeus Mozart",
+    "aliases": [
+      "Mozart"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "antonio-salieri",
+    "type": "person",
+    "name": "Antonio Salieri",
+    "aliases": [
+      "Salieri"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "abraham-lincoln",
+    "type": "person",
+    "name": "Abraham Lincoln",
+    "aliases": [
+      "Lincoln"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "john-wilkes-booth",
+    "type": "person",
+    "name": "John Wilkes Booth",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "james-a-garfield",
+    "type": "person",
+    "name": "James A. Garfield",
+    "aliases": [
+      "Garfield"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "charles-guiteau",
+    "type": "person",
+    "name": "Charles Guiteau",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "jack-the-ripper",
+    "type": "person",
+    "name": "Jack the Ripper",
+    "aliases": [
+      "the Ripper"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "mary-ann-nichols",
+    "type": "person",
+    "name": "Mary Ann Nichols",
+    "aliases": [
+      "Polly Nichols"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "william-randolph-hearst",
+    "type": "person",
+    "name": "William Randolph Hearst",
+    "aliases": [
+      "Hearst"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "warren-g-harding",
+    "type": "person",
+    "name": "Warren G. Harding",
+    "aliases": [
+      "Harding"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "florence-harding",
+    "type": "person",
+    "name": "Florence Harding",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "buddy-holly",
+    "type": "person",
+    "name": "Buddy Holly",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "ritchie-valens",
+    "type": "person",
+    "name": "Ritchie Valens",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "big-bopper",
+    "type": "person",
+    "name": "The Big Bopper",
+    "aliases": [
+      "J.P. Richardson"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "brian-jones",
+    "type": "person",
+    "name": "Brian Jones",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "jim-morrison",
+    "type": "person",
+    "name": "Jim Morrison",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "john-lennon",
+    "type": "person",
+    "name": "John Lennon",
+    "aliases": [
+      "Lennon"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "mark-david-chapman",
+    "type": "person",
+    "name": "Mark David Chapman",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "yoko-ono",
+    "type": "person",
+    "name": "Yoko Ono",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "kurt-cobain",
+    "type": "person",
+    "name": "Kurt Cobain",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "courtney-love",
+    "type": "person",
+    "name": "Courtney Love",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "tom-grant",
+    "type": "person",
+    "name": "Tom Grant",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "notorious-big",
+    "type": "person",
+    "name": "The Notorious B.I.G.",
+    "aliases": [
+      "Biggie Smalls"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "christopher-wallace",
+    "type": "person",
+    "name": "Christopher Wallace",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "tim-bergling",
+    "type": "person",
+    "name": "Tim Bergling",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "avicii",
+    "type": "person",
+    "name": "Avicii",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "nelson-aldrich",
+    "type": "person",
+    "name": "Nelson Aldrich",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "paul-warburg",
+    "type": "person",
+    "name": "Paul Warburg",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "andrew-mellon",
+    "type": "person",
+    "name": "Andrew Mellon",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "john-maynard-keynes",
+    "type": "person",
+    "name": "John Maynard Keynes",
+    "aliases": [
+      "Keynes"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "harry-dexter-white",
+    "type": "person",
+    "name": "Harry Dexter White",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "donald-rumsfeld",
+    "type": "person",
+    "name": "Donald Rumsfeld",
+    "aliases": [
+      "Rumsfeld"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "dick-fuld",
+    "type": "person",
+    "name": "Dick Fuld",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "henry-paulson",
+    "type": "person",
+    "name": "Henry Paulson",
+    "aliases": [
+      "Hank Paulson"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "sam-bankman-fried",
+    "type": "person",
+    "name": "Sam Bankman-Fried",
+    "aliases": [
+      "SBF"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "steve-jobs",
+    "type": "person",
+    "name": "Steve Jobs",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "steve-wozniak",
+    "type": "person",
+    "name": "Steve Wozniak",
+    "aliases": [
+      "Woz"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "george-orwell",
+    "type": "person",
+    "name": "George Orwell",
+    "aliases": [
+      "Eric Blair"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "ridley-scott",
+    "type": "person",
+    "name": "Ridley Scott",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "edward-snowden",
+    "type": "person",
+    "name": "Edward Snowden",
+    "aliases": [
+      "Snowden"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "glenn-greenwald",
+    "type": "person",
+    "name": "Glenn Greenwald",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "christopher-wylie",
+    "type": "person",
+    "name": "Christopher Wylie",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "mark-zuckerberg",
+    "type": "person",
+    "name": "Mark Zuckerberg",
+    "aliases": [
+      "Zuck"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "elon-musk",
+    "type": "person",
+    "name": "Elon Musk",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "jack-dorsey",
+    "type": "person",
+    "name": "Jack Dorsey",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "gerald-ford",
+    "type": "person",
+    "name": "Gerald Ford",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "larry-kramer",
+    "type": "person",
+    "name": "Larry Kramer",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "david-graham",
+    "type": "person",
+    "name": "David Graham",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "anthony-fauci",
+    "type": "person",
+    "name": "Anthony Fauci",
+    "aliases": [
+      "Fauci"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "harry-truman",
+    "type": "person",
+    "name": "Harry S. Truman",
+    "aliases": [
+      "Truman"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "knights-templar",
+    "type": "org",
+    "name": "Knights Templar",
+    "aliases": [
+      "Order of the Temple"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "freemasons",
+    "type": "org",
+    "name": "Freemasons",
+    "aliases": [
+      "Masonic Order"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "rolling-stones",
+    "type": "org",
+    "name": "The Rolling Stones",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "the-doors",
+    "type": "org",
+    "name": "The Doors",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "the-beatles",
+    "type": "org",
+    "name": "The Beatles",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "nirvana",
+    "type": "org",
+    "name": "Nirvana",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "bad-boy-records",
+    "type": "org",
+    "name": "Bad Boy Records",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "federal-reserve",
+    "type": "org",
+    "name": "Federal Reserve",
+    "aliases": [
+      "the Fed"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "lehman-brothers",
+    "type": "org",
+    "name": "Lehman Brothers",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "ftx",
+    "type": "org",
+    "name": "FTX",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "alameda-research",
+    "type": "org",
+    "name": "Alameda Research",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "imf",
+    "type": "org",
+    "name": "International Monetary Fund",
+    "aliases": [
+      "IMF"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "world-bank",
+    "type": "org",
+    "name": "World Bank",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "apple-inc",
+    "type": "org",
+    "name": "Apple Inc.",
+    "aliases": [
+      "Apple"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "bp-oil",
+    "type": "org",
+    "name": "BP",
+    "aliases": [
+      "British Petroleum"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "nsa",
+    "type": "org",
+    "name": "National Security Agency",
+    "aliases": [
+      "NSA"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "cambridge-analytica",
+    "type": "org",
+    "name": "Cambridge Analytica",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "facebook",
+    "type": "org",
+    "name": "Facebook",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "meta-platforms",
+    "type": "org",
+    "name": "Meta Platforms",
+    "aliases": [
+      "Meta"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "crowdstrike",
+    "type": "org",
+    "name": "CrowdStrike",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "microsoft-windows",
+    "type": "org",
+    "name": "Microsoft Windows",
+    "aliases": [
+      "Windows"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "us-public-health-service",
+    "type": "org",
+    "name": "U.S. Public Health Service",
+    "aliases": [
+      "USPHS"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "cdc",
+    "type": "org",
+    "name": "Centers for Disease Control",
+    "aliases": [
+      "CDC"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "act-up",
+    "type": "org",
+    "name": "ACT UP",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "merck",
+    "type": "org",
+    "name": "Merck & Co.",
+    "aliases": [
+      "Merck"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "fda",
+    "type": "org",
+    "name": "Food and Drug Administration",
+    "aliases": [
+      "FDA"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "purdue-pharma",
+    "type": "org",
+    "name": "Purdue Pharma",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "sackler-family",
+    "type": "org",
+    "name": "Sackler Family",
+    "aliases": [
+      "the Sacklers"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "wuhan-institute-of-virology",
+    "type": "org",
+    "name": "Wuhan Institute of Virology",
+    "aliases": [
+      "WIV"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "eco-health-alliance",
+    "type": "org",
+    "name": "EcoHealth Alliance",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "national-security-council",
+    "type": "org",
+    "name": "National Security Council",
+    "aliases": [
+      "NSC"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "vienna",
+    "type": "place",
+    "name": "Vienna",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "ford-s-theatre",
+    "type": "place",
+    "name": "Ford's Theatre",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "whitechapel",
+    "type": "place",
+    "name": "Whitechapel, London",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "victorian-london",
+    "type": "place",
+    "name": "Victorian London",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "havana",
+    "type": "place",
+    "name": "Havana, Cuba",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "san-francisco",
+    "type": "place",
+    "name": "San Francisco",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "iowa",
+    "type": "place",
+    "name": "Iowa",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "the-dakota",
+    "type": "place",
+    "name": "The Dakota (NYC)",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "seattle",
+    "type": "place",
+    "name": "Seattle",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "oman",
+    "type": "place",
+    "name": "Oman",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "jekyll-island",
+    "type": "place",
+    "name": "Jekyll Island, Georgia",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "wall-street",
+    "type": "place",
+    "name": "Wall Street",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "bretton-woods",
+    "type": "place",
+    "name": "Bretton Woods, NH",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "cupertino",
+    "type": "place",
+    "name": "Cupertino, California",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "silicon-valley",
+    "type": "place",
+    "name": "Silicon Valley",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "gulf-of-mexico",
+    "type": "place",
+    "name": "Gulf of Mexico",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "hong-kong",
+    "type": "place",
+    "name": "Hong Kong",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "tuskegee-alabama",
+    "type": "place",
+    "name": "Tuskegee, Alabama",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "wuhan",
+    "type": "place",
+    "name": "Wuhan, China",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "fort-detrick",
+    "type": "place",
+    "name": "Fort Detrick, Maryland",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "prism-program",
+    "type": "program",
+    "name": "PRISM (NSA)",
+    "aliases": [
+      "PRISM surveillance"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "the-magic-flute",
+    "type": "event",
+    "name": "The Magic Flute (opera)",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "uss-maine",
+    "type": "event",
+    "name": "USS Maine (battleship)",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "spanish-american-war",
+    "type": "event",
+    "name": "Spanish-American War",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "teapot-dome-scandal",
+    "type": "event",
+    "name": "Teapot Dome Scandal",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "27-club",
+    "type": "event",
+    "name": "The 27 Club",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "nixon-shock",
+    "type": "event",
+    "name": "The Nixon Shock",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "pentagon-accounting-scandal",
+    "type": "event",
+    "name": "Pentagon $2.3T Accounting Scandal",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "2008-financial-crisis",
+    "type": "event",
+    "name": "2008 Financial Crisis",
+    "aliases": [
+      "GFC"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "macintosh",
+    "type": "event",
+    "name": "Macintosh (1984)",
+    "aliases": [
+      "Mac"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "1984-novel",
+    "type": "event",
+    "name": "1984 (Orwell novel)",
+    "aliases": [
+      "Nineteen Eighty-Four"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "deepwater-horizon",
+    "type": "event",
+    "name": "Deepwater Horizon oil rig",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "twitter-files",
+    "type": "event",
+    "name": "The Twitter Files",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "tuskegee-syphilis-study",
+    "type": "event",
+    "name": "Tuskegee Syphilis Study",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "swine-flu-1976",
+    "type": "event",
+    "name": "1976 Swine Flu Vaccine Program",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "mmwr",
+    "type": "event",
+    "name": "MMWR (CDC weekly report)",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "vioxx",
+    "type": "event",
+    "name": "Vioxx (rofecoxib)",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "opioid-crisis",
+    "type": "event",
+    "name": "U.S. Opioid Crisis",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "covid-19",
+    "type": "event",
+    "name": "COVID-19",
+    "aliases": [
+      "SARS-CoV-2"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "aids-epidemic",
+    "type": "event",
+    "name": "AIDS Epidemic",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "black-tuesday",
+    "type": "event",
+    "name": "Black Tuesday (1929)",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "national-security-act-1947",
+    "type": "event",
+    "name": "National Security Act of 1947",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "medieval-secret-society",
+    "type": "topic",
+    "name": "Medieval Secret Society",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "friday-the-13th",
+    "type": "topic",
+    "name": "Friday the 13th Lore",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "confederate-conspiracy",
+    "type": "topic",
+    "name": "Confederate Conspiracy Theories",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "yellow-journalism",
+    "type": "topic",
+    "name": "Yellow Journalism",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "music-industry",
+    "type": "topic",
+    "name": "Music Industry Conspiracies",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "east-coast-west-coast-rivalry",
+    "type": "topic",
+    "name": "East Coast vs West Coast Rap Rivalry",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "electronic-music-industry",
+    "type": "topic",
+    "name": "Electronic Music Industry",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "central-banking",
+    "type": "topic",
+    "name": "Central Banking Conspiracies",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "gold-standard",
+    "type": "topic",
+    "name": "Gold Standard / Hard Money",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "petrodollar",
+    "type": "topic",
+    "name": "Petrodollar System",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "subprime-mortgage",
+    "type": "topic",
+    "name": "Subprime Mortgage Crisis",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "crypto-industry",
+    "type": "topic",
+    "name": "Cryptocurrency Industry",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "effective-altruism",
+    "type": "topic",
+    "name": "Effective Altruism",
+    "aliases": [
+      "EA"
+    ],
+    "quarantined": false
+  },
+  {
+    "id": "surveillance-state",
+    "type": "topic",
+    "name": "Surveillance State",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "data-harvesting",
+    "type": "topic",
+    "name": "Mass Data Harvesting",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "social-media",
+    "type": "topic",
+    "name": "Social Media Manipulation",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "infrastructure-fragility",
+    "type": "topic",
+    "name": "Infrastructure Fragility",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "single-point-of-failure",
+    "type": "topic",
+    "name": "Single Point of Failure",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "medical-experimentation",
+    "type": "topic",
+    "name": "Medical Experimentation on Humans",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "informed-consent-violation",
+    "type": "topic",
+    "name": "Informed Consent Violation",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "vaccine-injury",
+    "type": "topic",
+    "name": "Vaccine Injury",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "pharma-suppression",
+    "type": "topic",
+    "name": "Pharma Suppression",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "hiv-virus",
+    "type": "topic",
+    "name": "HIV / AIDS Origin Theories",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "oxycontin",
+    "type": "topic",
+    "name": "OxyContin",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "gain-of-function-research",
+    "type": "topic",
+    "name": "Gain-of-Function Research",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "oil-industry",
+    "type": "topic",
+    "name": "Oil Industry Cover-ups",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "corexit",
+    "type": "topic",
+    "name": "Corexit (oil dispersant)",
+    "aliases": [],
+    "quarantined": false
+  },
+  {
+    "id": "unsolved-mystery",
+    "type": "topic",
+    "name": "Unsolved Historical Mystery",
+    "aliases": [],
+    "quarantined": false
   }
 ]

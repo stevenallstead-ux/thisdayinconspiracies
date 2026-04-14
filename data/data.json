@@ -1,5 +1,5 @@
 {
-  "last_ingest_at": "2026-04-14T10:05:47Z",
+  "last_ingest_at": "2026-04-14T21:11:03Z",
   "events": [
     {
       "id": "1961-eisenhower-warns-of-the-military-industrial-complex",
@@ -2107,6 +2107,830 @@
         "great-plains",
         "ghost-dance",
         "cover-up"
+      ]
+    },
+    {
+      "id": "1307-friday-the-13th-knights-templar-arrested-across-france",
+      "date": "10-13",
+      "year": 1307,
+      "title": "Friday the 13th: Knights Templar Arrested Across France",
+      "category": "Political",
+      "summary": "King Philip IV of France arrested every Knight Templar in his realm in a coordinated dawn raid. The order was tortured into confession, suppressed by Pope Clement V, and its fortune vanished — fueling 700 years of secret-society lore.",
+      "theories": [
+        "The Templar treasure was secreted to Scotland and seeded the Freemasons",
+        "Surviving Templars founded the Bavarian Illuminati centuries later",
+        "Friday the 13th's bad-luck association traces directly to this date"
+      ],
+      "entities": [
+        "knights-templar",
+        "philip-iv-of-france",
+        "pope-clement-v",
+        "medieval-secret-society",
+        "friday-the-13th",
+        "bavarian-illuminati",
+        "occultism",
+        "shadow-government"
+      ]
+    },
+    {
+      "id": "1791-mozart-dies-mysteriously-at-35",
+      "date": "12-05",
+      "year": 1791,
+      "title": "Mozart Dies Mysteriously at 35",
+      "category": "Celebrity",
+      "summary": "Wolfgang Amadeus Mozart died after weeks of a wasting illness at age 35, weeks after completing The Magic Flute — an opera packed with explicit Masonic symbolism. He believed he was being poisoned. The cause of death is officially uncertain.",
+      "theories": [
+        "Antonio Salieri poisoned him out of jealousy",
+        "The Freemasons silenced him for revealing initiation rites in The Magic Flute",
+        "Mercury poisoning from syphilis treatment, not murder"
+      ],
+      "entities": [
+        "wolfgang-amadeus-mozart",
+        "antonio-salieri",
+        "freemasons",
+        "the-magic-flute",
+        "vienna",
+        "occultism",
+        "celebrity-death",
+        "political-assassination"
+      ]
+    },
+    {
+      "id": "1865-lincoln-assassinated-at-ford-s-theatre",
+      "date": "04-14",
+      "year": 1865,
+      "title": "Lincoln Assassinated at Ford's Theatre",
+      "category": "Political",
+      "summary": "President Abraham Lincoln was shot by John Wilkes Booth during a performance of 'Our American Cousin' at Ford's Theatre. The conspiracy involved coordinated attacks on multiple administration officials the same night, suggesting a wider plot than was publicly admitted.",
+      "theories": [
+        "Confederate intelligence services orchestrated the plot",
+        "Edwin Stanton (Secretary of War) had advance knowledge",
+        "Booth escaped and a body double was killed in the barn"
+      ],
+      "entities": [
+        "abraham-lincoln",
+        "john-wilkes-booth",
+        "ford-s-theatre",
+        "washington-dc",
+        "confederate-conspiracy",
+        "political-assassination",
+        "second-shooter",
+        "body-double",
+        "cover-up"
+      ]
+    },
+    {
+      "id": "1881-president-garfield-shot-at-train-station",
+      "date": "07-02",
+      "year": 1881,
+      "title": "President Garfield Shot at Train Station",
+      "category": "Political",
+      "summary": "James A. Garfield was shot by Charles Guiteau at a Washington train station and lingered for 79 days. Modern analysis suggests his physicians' bloodletting and unsterilized probing killed him more surely than the bullet itself.",
+      "theories": [
+        "The Stalwart faction within his own party arranged the shooting",
+        "Bloodletting medicine was the actual cause of death, not the bullet",
+        "Vice President Chester Arthur's Stalwart allies coordinated with Guiteau"
+      ],
+      "entities": [
+        "james-a-garfield",
+        "charles-guiteau",
+        "washington-dc",
+        "bloodletting",
+        "political-assassination",
+        "cover-up"
+      ]
+    },
+    {
+      "id": "1888-first-jack-the-ripper-murder-in-whitechapel",
+      "date": "08-31",
+      "year": 1888,
+      "title": "First Jack the Ripper Murder in Whitechapel",
+      "category": "Unexplained",
+      "summary": "Mary Ann Nichols was found murdered in Whitechapel, the first canonical victim of Jack the Ripper. Despite a massive manhunt and decades of investigation, the killer was never identified. Suspects ranged from royal physicians to a member of the royal family.",
+      "theories": [
+        "Royal physician Sir William Gull committed the murders to protect the Crown",
+        "Prince Albert Victor (Queen Victoria's grandson) was the Ripper",
+        "The Freemasons covered up the killer's identity to protect a high-ranking member"
+      ],
+      "entities": [
+        "jack-the-ripper",
+        "whitechapel",
+        "mary-ann-nichols",
+        "victorian-london",
+        "unsolved-mystery",
+        "royal-family-uk",
+        "freemasons",
+        "mi6",
+        "occultism",
+        "cover-up"
+      ]
+    },
+    {
+      "id": "1898-uss-maine-explodes-in-havana-harbor",
+      "date": "02-15",
+      "year": 1898,
+      "title": "USS Maine Explodes in Havana Harbor",
+      "category": "Government",
+      "summary": "The U.S. battleship Maine exploded and sank in Havana Harbor, killing 266 sailors. William Randolph Hearst's newspapers immediately blamed Spain ('Remember the Maine!'), driving public demand for the Spanish-American War. A 1976 Navy study concluded the cause was likely an internal coal-bunker fire.",
+      "theories": [
+        "U.S. agents sank the Maine to manufacture pretext for war",
+        "Hearst's papers manufactured the war for circulation profits",
+        "Internal coal-bunker fire (modern consensus)"
+      ],
+      "entities": [
+        "uss-maine",
+        "havana",
+        "cuba",
+        "william-randolph-hearst",
+        "yellow-journalism",
+        "spanish-american-war",
+        "false-flag",
+        "us-military",
+        "us-navy",
+        "sabotage"
+      ]
+    },
+    {
+      "id": "1923-president-warren-harding-dies-suddenly-in-san-francisco",
+      "date": "08-02",
+      "year": 1923,
+      "title": "President Warren Harding Dies Suddenly in San Francisco",
+      "category": "Political",
+      "summary": "Warren G. Harding died at age 57 in a San Francisco hotel under disputed circumstances during a cross-country tour. His widow Florence refused an autopsy. Within months, the Teapot Dome scandal broke, revealing massive corruption in his administration.",
+      "theories": [
+        "Florence Harding poisoned him to end the impending scandal",
+        "Teapot Dome conspirators silenced him before he could testify",
+        "Cerebral hemorrhage following Bohemian Grove encounter (fringe)"
+      ],
+      "entities": [
+        "warren-g-harding",
+        "florence-harding",
+        "teapot-dome-scandal",
+        "san-francisco",
+        "political-assassination",
+        "cover-up"
+      ]
+    },
+    {
+      "id": "1959-the-day-the-music-died-buddy-holly-plane-crash",
+      "date": "02-03",
+      "year": 1959,
+      "title": "The Day the Music Died — Buddy Holly Plane Crash",
+      "category": "Celebrity",
+      "summary": "Buddy Holly, Ritchie Valens, and J.P. 'Big Bopper' Richardson died when their chartered Beechcraft crashed in an Iowa cornfield. Waylon Jennings gave up his seat hours before the flight; the seat went to the Big Bopper instead. Decades of speculation about pilot error, weather, and possible foul play.",
+      "theories": [
+        "Holly's manager arranged the crash over royalty disputes",
+        "The pilot was inexperienced in instrument flying — established",
+        "Cover-up of pilot's drug use to protect the charter company"
+      ],
+      "entities": [
+        "buddy-holly",
+        "ritchie-valens",
+        "big-bopper",
+        "iowa",
+        "aviation-disaster",
+        "celebrity-death",
+        "music-industry",
+        "sabotage",
+        "cover-up"
+      ]
+    },
+    {
+      "id": "1969-brian-jones-found-dead-in-his-swimming-pool",
+      "date": "07-03",
+      "year": 1969,
+      "title": "Brian Jones Found Dead in His Swimming Pool",
+      "category": "Celebrity",
+      "summary": "Rolling Stones founder Brian Jones was found dead in his swimming pool weeks after being fired from the band. The official ruling was 'death by misadventure.' His builder Frank Thorogood made a deathbed confession to murder in 1993.",
+      "theories": [
+        "Frank Thorogood drowned him over an unpaid bill (his deathbed confession)",
+        "Drug overdose covered up to protect the band's image",
+        "The Rolling Stones management arranged it to clear the way for Mick Taylor"
+      ],
+      "entities": [
+        "brian-jones",
+        "rolling-stones",
+        "27-club",
+        "music-industry",
+        "celebrity-death",
+        "faked-death",
+        "mafia"
+      ]
+    },
+    {
+      "id": "1971-jim-morrison-dies-in-a-paris-bathtub",
+      "date": "07-03",
+      "year": 1971,
+      "title": "Jim Morrison Dies in a Paris Bathtub",
+      "category": "Celebrity",
+      "summary": "The Doors frontman Jim Morrison was found dead in a Paris apartment bathtub at age 27, exactly two years to the day after Brian Jones. No autopsy was performed. Only a handful of people viewed the body before the sealed casket burial. Sightings have continued for decades.",
+      "theories": [
+        "Heroin overdose at the Rock 'n' Roll Circus, body moved to apartment",
+        "He faked his death to escape obscenity charges and live in Africa",
+        "CIA Operation CHAOS targeted him as a counterculture leader"
+      ],
+      "entities": [
+        "jim-morrison",
+        "the-doors",
+        "paris",
+        "27-club",
+        "music-industry",
+        "celebrity-death",
+        "faked-death",
+        "cia"
+      ]
+    },
+    {
+      "id": "1980-john-lennon-assassinated-outside-the-dakota",
+      "date": "12-08",
+      "year": 1980,
+      "title": "John Lennon Assassinated Outside The Dakota",
+      "category": "Celebrity",
+      "summary": "Mark David Chapman shot John Lennon four times outside Lennon's Manhattan apartment building, The Dakota. Chapman remained at the scene reading 'The Catcher in the Rye' until police arrived. His behavior has long been compared to MKUltra-style programmed behavior.",
+      "theories": [
+        "Chapman was an MKUltra-programmed assassin",
+        "FBI files on Lennon (released 2006) prove decade-long surveillance",
+        "Yoko Ono had advance knowledge of the plot"
+      ],
+      "entities": [
+        "john-lennon",
+        "mark-david-chapman",
+        "the-dakota",
+        "the-beatles",
+        "yoko-ono",
+        "new-york-city",
+        "political-assassination",
+        "mind-control",
+        "music-industry",
+        "mkultra",
+        "fbi"
+      ]
+    },
+    {
+      "id": "1994-kurt-cobain-found-dead-in-seattle-greenhouse",
+      "date": "04-08",
+      "year": 1994,
+      "title": "Kurt Cobain Found Dead in Seattle Greenhouse",
+      "category": "Celebrity",
+      "summary": "Nirvana frontman Kurt Cobain was found dead of a shotgun wound at his Seattle home. Officially ruled suicide despite a heroin level three times the lethal dose (which would have rendered him unable to operate the gun). Private investigator Tom Grant has spent 30 years arguing for a homicide reinvestigation.",
+      "theories": [
+        "Courtney Love arranged the murder — Tom Grant's documented theory",
+        "He faked his death and is living in South America",
+        "Heroin overdose covered up to look like suicide for insurance reasons"
+      ],
+      "entities": [
+        "kurt-cobain",
+        "nirvana",
+        "courtney-love",
+        "seattle",
+        "tom-grant",
+        "27-club",
+        "music-industry",
+        "celebrity-death",
+        "suicide-ruled",
+        "faked-death"
+      ]
+    },
+    {
+      "id": "1997-notorious-b-i-g-killed-in-los-angeles-drive-by",
+      "date": "03-09",
+      "year": 1997,
+      "title": "Notorious B.I.G. Killed in Los Angeles Drive-By",
+      "category": "Celebrity",
+      "summary": "Christopher Wallace (The Notorious B.I.G.) was shot dead in a drive-by shooting after leaving a Vibe magazine party in Los Angeles, six months after Tupac Shakur was killed in Las Vegas. The case officially remains unsolved.",
+      "theories": [
+        "Suge Knight ordered both the Tupac and Biggie killings",
+        "LAPD officer David Mack was directly involved",
+        "FBI / LAPD cover-up of corrupt officer involvement (proven by lawsuits)"
+      ],
+      "entities": [
+        "notorious-big",
+        "christopher-wallace",
+        "bad-boy-records",
+        "east-coast-west-coast-rivalry",
+        "los-angeles",
+        "mafia",
+        "music-industry",
+        "celebrity-death",
+        "drive-by-shooting",
+        "suge-knight",
+        "fbi",
+        "cover-up"
+      ]
+    },
+    {
+      "id": "2018-avicii-dies-in-oman",
+      "date": "04-20",
+      "year": 2018,
+      "title": "Avicii Dies in Oman",
+      "category": "Celebrity",
+      "summary": "Swedish DJ Tim Bergling (Avicii) was found dead in Muscat, Oman at age 28. Officially ruled suicide following self-inflicted injuries with a broken wine bottle — a method that has struck many as implausible. He had been making a documentary about the dark side of the music industry.",
+      "theories": [
+        "Music industry executives silenced him over his exposé documentary",
+        "He uncovered EDM industry money laundering tied to crypto",
+        "Self-inflicted death following years of forced touring (official)"
+      ],
+      "entities": [
+        "tim-bergling",
+        "avicii",
+        "oman",
+        "electronic-music-industry",
+        "music-industry",
+        "celebrity-death",
+        "suicide-ruled",
+        "faked-death",
+        "crypto-industry"
+      ]
+    },
+    {
+      "id": "1910-jekyll-island-secret-banker-meeting-drafts-the-federal-reserve",
+      "date": "11-22",
+      "year": 1910,
+      "title": "Jekyll Island Secret Banker Meeting Drafts the Federal Reserve",
+      "category": "Government",
+      "summary": "Senator Nelson Aldrich and Wall Street representatives including Paul Warburg met in absolute secrecy at the Jekyll Island Club, Georgia, to draft what became the Federal Reserve Act of 1913. Participants traveled under aliases. The meeting was denied for decades before being confirmed.",
+      "theories": [
+        "The Fed is a private banking cartel disguised as government",
+        "J.P. Morgan engineered the 1907 panic to manufacture Fed support",
+        "International banking interests captured U.S. monetary sovereignty"
+      ],
+      "entities": [
+        "jekyll-island",
+        "nelson-aldrich",
+        "federal-reserve",
+        "paul-warburg",
+        "central-banking",
+        "j-p-morgan",
+        "shadow-government",
+        "cover-up"
+      ]
+    },
+    {
+      "id": "1929-black-tuesday-wall-street-crash",
+      "date": "10-29",
+      "year": 1929,
+      "title": "Black Tuesday Wall Street Crash",
+      "category": "Government",
+      "summary": "The Wall Street Crash erased $14 billion in a single day, triggering the Great Depression. Andrew Mellon and other 'banker pool' figures had reportedly sold heavily in the months prior. Some historians argue the crash was deliberately engineered to consolidate banking power.",
+      "theories": [
+        "The Federal Reserve deliberately tightened credit to crash markets",
+        "Insider banker pool short-sold while pumping public confidence",
+        "Foreign banking interests profited by buying assets at pennies on the dollar"
+      ],
+      "entities": [
+        "wall-street",
+        "black-tuesday",
+        "andrew-mellon",
+        "federal-reserve",
+        "central-banking",
+        "j-p-morgan",
+        "shadow-government",
+        "cover-up"
+      ]
+    },
+    {
+      "id": "1944-bretton-woods-conference-establishes-dollar-hegemony",
+      "date": "07-22",
+      "year": 1944,
+      "title": "Bretton Woods Conference Establishes Dollar Hegemony",
+      "category": "Government",
+      "summary": "Delegates from 44 Allied nations met at Bretton Woods, New Hampshire to design the post-war monetary system. The dollar became the world's reserve currency, pegged to gold. American delegate Harry Dexter White, who shaped the conference, was later identified as a Soviet intelligence asset.",
+      "theories": [
+        "Soviet spy Harry Dexter White shaped the IMF to weaken U.S. position",
+        "Keynes's superior 'bancor' currency was rejected to entrench dollar power",
+        "The conference was rigged to ensure American banking dominance"
+      ],
+      "entities": [
+        "bretton-woods",
+        "john-maynard-keynes",
+        "harry-dexter-white",
+        "imf",
+        "world-bank",
+        "central-banking",
+        "soviet-union",
+        "spy-ring",
+        "cover-up"
+      ]
+    },
+    {
+      "id": "1971-nixon-closes-the-gold-window-the-nixon-shock",
+      "date": "08-15",
+      "year": 1971,
+      "title": "Nixon Closes the Gold Window (The Nixon Shock)",
+      "category": "Government",
+      "summary": "President Nixon ended dollar convertibility to gold, unilaterally collapsing the Bretton Woods system. Within years the petrodollar arrangement with Saudi Arabia replaced gold as the dollar's anchor. The decision was made over a secret weekend at Camp David.",
+      "theories": [
+        "Move designed to enable unlimited Vietnam War financing",
+        "Petrodollar deal locked OPEC into dollar dependency by force",
+        "Secret weekend group included unelected banking advisors"
+      ],
+      "entities": [
+        "nixon-shock",
+        "gold-standard",
+        "petrodollar",
+        "richard-nixon",
+        "federal-reserve",
+        "central-banking",
+        "shadow-government",
+        "camp-david"
+      ]
+    },
+    {
+      "id": "2001-rumsfeld-announces-2-3-trillion-pentagon-loss",
+      "date": "09-10",
+      "year": 2001,
+      "title": "Rumsfeld Announces $2.3 Trillion Pentagon Loss",
+      "category": "Government",
+      "summary": "Defense Secretary Donald Rumsfeld held a press conference acknowledging the Pentagon could not account for $2.3 trillion in transactions. The story disappeared from headlines the next morning when 9/11 struck. The accounting office that was investigating the discrepancy was destroyed in the Pentagon attack.",
+      "theories": [
+        "The 9/11 attacks were timed to bury the accounting investigation",
+        "The missing trillions funded black-budget shadow operations",
+        "Rumsfeld's speech was deliberate political cover-out before a known event"
+      ],
+      "entities": [
+        "donald-rumsfeld",
+        "pentagon-accounting-scandal",
+        "pentagon",
+        "advance-knowledge",
+        "cover-up",
+        "shadow-government",
+        "world-trade-center"
+      ]
+    },
+    {
+      "id": "2008-lehman-brothers-files-for-bankruptcy",
+      "date": "09-15",
+      "year": 2008,
+      "title": "Lehman Brothers Files for Bankruptcy",
+      "category": "Government",
+      "summary": "Lehman Brothers filed for the largest bankruptcy in U.S. history, triggering a global financial cascade. CEO Dick Fuld blamed Treasury Secretary Henry Paulson (formerly of Goldman Sachs, Lehman's chief rival) for engineering the failure while saving Goldman, AIG, and Bear Stearns.",
+      "theories": [
+        "Paulson deliberately let Lehman fail to benefit Goldman Sachs",
+        "The crisis enabled the largest wealth transfer in modern history",
+        "Subprime mortgage losses were known and concealed for years"
+      ],
+      "entities": [
+        "lehman-brothers",
+        "dick-fuld",
+        "2008-financial-crisis",
+        "henry-paulson",
+        "subprime-mortgage",
+        "federal-reserve",
+        "central-banking",
+        "wall-street",
+        "cover-up"
+      ]
+    },
+    {
+      "id": "2022-ftx-collapses-sam-bankman-fried-arrested",
+      "date": "11-11",
+      "year": 2022,
+      "title": "FTX Collapses — Sam Bankman-Fried Arrested",
+      "category": "Political",
+      "summary": "Crypto exchange FTX filed for bankruptcy after a $32 billion valuation collapse. CEO Sam Bankman-Fried, the second-largest Democratic donor in 2022, was charged with massive fraud. FTX customer funds had been routed to his hedge fund Alameda Research and reportedly to political donations.",
+      "theories": [
+        "FTX was a money-laundering pipeline for Ukraine aid kickbacks",
+        "Effective Altruism movement provided cover for political capture",
+        "Parents (both Stanford law professors) helped structure the fraud"
+      ],
+      "entities": [
+        "ftx",
+        "sam-bankman-fried",
+        "alameda-research",
+        "crypto-industry",
+        "effective-altruism",
+        "dnc",
+        "cover-up",
+        "central-banking"
+      ]
+    },
+    {
+      "id": "1976-apple-computer-founded-on-april-fool-s-day",
+      "date": "04-01",
+      "year": 1976,
+      "title": "Apple Computer Founded on April Fool's Day",
+      "category": "Unexplained",
+      "summary": "Steve Jobs, Steve Wozniak, and Ronald Wayne founded Apple Computer in a Cupertino garage on April 1, 1976. The original Apple I sold for $666.66. Jobs's later interest in calligraphy, Eastern mysticism, and reality distortion fueled decades of occult-symbolism claims about the company's branding.",
+      "theories": [
+        "The $666.66 price was deliberate occult signaling by Wozniak's pricing",
+        "Apple's founding was timed by astrological calculation",
+        "Jobs's countercultural pose concealed deep ties to military DARPA contracts"
+      ],
+      "entities": [
+        "apple-inc",
+        "steve-jobs",
+        "steve-wozniak",
+        "cupertino",
+        "silicon-valley",
+        "occultism",
+        "classified-aerospace"
+      ]
+    },
+    {
+      "id": "1984-apple-airs-the-1984-macintosh-super-bowl-ad",
+      "date": "01-22",
+      "year": 1984,
+      "title": "Apple Airs the '1984' Macintosh Super Bowl Ad",
+      "category": "Unexplained",
+      "summary": "Apple's '1984' Super Bowl ad, directed by Ridley Scott, depicted a woman destroying Big Brother's screen — positioning Macintosh as liberation from IBM's Orwellian control. Forty years on, critics note Apple itself became the surveillance dystopia the ad warned against.",
+      "theories": [
+        "The ad was pre-emptive misdirection — Apple's true goal was the surveillance role",
+        "Steve Jobs personally chose Orwell's date for occult-mathematical reasons",
+        "Ridley Scott's Blade Runner / 1984 / Alien trilogy is a coordinated programming arc"
+      ],
+      "entities": [
+        "macintosh",
+        "george-orwell",
+        "1984-novel",
+        "ridley-scott",
+        "apple-inc",
+        "steve-jobs",
+        "silicon-valley",
+        "mind-control",
+        "surveillance-state"
+      ]
+    },
+    {
+      "id": "2010-deepwater-horizon-explodes-in-the-gulf-of-mexico",
+      "date": "04-20",
+      "year": 2010,
+      "title": "Deepwater Horizon Explodes in the Gulf of Mexico",
+      "category": "Government",
+      "summary": "BP's Deepwater Horizon oil rig exploded, killing 11 workers and unleashing the largest marine oil spill in U.S. history. The chemical dispersant Corexit, applied at unprecedented scale, was later linked to severe long-term health effects. BP's safety violations were systematic and known.",
+      "theories": [
+        "Corexit was used to hide oil volume from public satellite imaging",
+        "The blowout was caused by deliberate sabotage to spike oil prices",
+        "BP knew of the equipment failure for weeks before the explosion"
+      ],
+      "entities": [
+        "deepwater-horizon",
+        "bp-oil",
+        "gulf-of-mexico",
+        "corexit",
+        "oil-industry",
+        "sabotage",
+        "cover-up",
+        "classified-aerospace"
+      ]
+    },
+    {
+      "id": "2013-edward-snowden-nsa-leaks-begin",
+      "date": "06-06",
+      "year": 2013,
+      "title": "Edward Snowden NSA Leaks Begin",
+      "category": "Government",
+      "summary": "The Guardian and Washington Post published the first Snowden leaks revealing PRISM and the NSA's mass collection of American phone metadata. Snowden, an NSA contractor, fled to Hong Kong and ultimately to Russia. The leaks fundamentally changed public understanding of the surveillance state.",
+      "theories": [
+        "Snowden was a Russian intelligence asset all along",
+        "The leaks were a controlled limited hangout — worse programs remain hidden",
+        "Glenn Greenwald and Laura Poitras were vetted to filter what got published"
+      ],
+      "entities": [
+        "edward-snowden",
+        "nsa",
+        "prism-program",
+        "glenn-greenwald",
+        "surveillance-state",
+        "hong-kong",
+        "whistleblower",
+        "cia",
+        "shadow-government"
+      ]
+    },
+    {
+      "id": "2018-cambridge-analytica-whistleblower-goes-public",
+      "date": "03-17",
+      "year": 2018,
+      "title": "Cambridge Analytica Whistleblower Goes Public",
+      "category": "Political",
+      "summary": "Christopher Wylie revealed how Cambridge Analytica had harvested data from 87 million Facebook users to micro-target political ads in the 2016 Trump campaign and Brexit referendum. The story exposed the extent of social-media-driven psychological manipulation in democratic processes.",
+      "theories": [
+        "The exposé itself was a controlled limited hangout to protect bigger players",
+        "Facebook knew and approved the data exfiltration in advance",
+        "Cambridge Analytica's parent SCL had decades of military psyop contracts"
+      ],
+      "entities": [
+        "cambridge-analytica",
+        "christopher-wylie",
+        "facebook",
+        "meta-platforms",
+        "data-harvesting",
+        "mark-zuckerberg",
+        "surveillance-state",
+        "mind-control",
+        "whistleblower",
+        "social-media"
+      ]
+    },
+    {
+      "id": "2022-elon-musk-closes-the-twitter-acquisition-for-44-billion",
+      "date": "10-27",
+      "year": 2022,
+      "title": "Elon Musk Closes the Twitter Acquisition for $44 Billion",
+      "category": "Political",
+      "summary": "Elon Musk completed his acquisition of Twitter and immediately fired top executives. The subsequent 'Twitter Files' release of internal communications revealed extensive coordination between the platform, the FBI, and intelligence agencies on content moderation decisions.",
+      "theories": [
+        "Musk was permitted to buy Twitter to launder intelligence-community equities",
+        "The Twitter Files release was a controlled leak protecting the deeper apparatus",
+        "Jack Dorsey deliberately sold to Musk to expose the FBI relationship"
+      ],
+      "entities": [
+        "elon-musk",
+        "twitter-files",
+        "jack-dorsey",
+        "social-media",
+        "fbi",
+        "cia",
+        "surveillance-state",
+        "shadow-government",
+        "cover-up"
+      ]
+    },
+    {
+      "id": "2024-crowdstrike-update-causes-global-it-outage",
+      "date": "07-19",
+      "year": 2024,
+      "title": "CrowdStrike Update Causes Global IT Outage",
+      "category": "Unexplained",
+      "summary": "A faulty CrowdStrike security update crashed an estimated 8.5 million Windows machines worldwide in hours, grounding airlines, paralyzing hospitals and banks. The single bad update demonstrated how fragile global infrastructure had become to single-point-of-failure cybersecurity vendors.",
+      "theories": [
+        "The 'accident' was a stress test of nation-state cyberattack response",
+        "CrowdStrike's deep ties to U.S. intelligence enabled the deployment privilege",
+        "A coordinated Microsoft-CrowdStrike consolidation was the actual goal"
+      ],
+      "entities": [
+        "crowdstrike",
+        "microsoft-windows",
+        "infrastructure-fragility",
+        "single-point-of-failure",
+        "sabotage",
+        "cover-up",
+        "nsa"
+      ]
+    },
+    {
+      "id": "1932-tuskegee-syphilis-study-begins",
+      "date": "10-01",
+      "year": 1932,
+      "title": "Tuskegee Syphilis Study Begins",
+      "category": "Government",
+      "summary": "The U.S. Public Health Service began a 40-year study of untreated syphilis in 399 Black men in Tuskegee, Alabama. The men were never told they had syphilis and were denied penicillin even after it became standard treatment in 1947. The study only ended in 1972 after a press exposé.",
+      "theories": [
+        "Tuskegee was one of many — most experiments remain classified",
+        "MKUltra and Tuskegee shared personnel and methodology",
+        "The CDC actively shielded the program from internal whistleblowers"
+      ],
+      "entities": [
+        "tuskegee-syphilis-study",
+        "us-public-health-service",
+        "tuskegee-alabama",
+        "medical-experimentation",
+        "informed-consent-violation",
+        "mkultra",
+        "cia",
+        "cdc",
+        "cover-up",
+        "radiation"
+      ]
+    },
+    {
+      "id": "1976-swine-flu-vaccine-panic-begins",
+      "date": "10-01",
+      "year": 1976,
+      "title": "Swine Flu Vaccine Panic Begins",
+      "category": "Government",
+      "summary": "After a single soldier died of swine flu at Fort Dix, President Ford launched a $137 million crash vaccination program for every American. The pandemic never materialized. Hundreds of vaccine recipients developed Guillain-Barré syndrome. The CDC paid $93 million in damages.",
+      "theories": [
+        "The program was a pharmaceutical-industry trial run for future emergencies",
+        "Vaccine injury data was systematically hidden for decades",
+        "A test of population-scale rapid-deployment biological response"
+      ],
+      "entities": [
+        "swine-flu-1976",
+        "gerald-ford",
+        "cdc",
+        "vaccine-injury",
+        "pharma-suppression",
+        "us-government",
+        "cover-up"
+      ]
+    },
+    {
+      "id": "1981-first-aids-cases-reported-in-cdc-s-mmwr",
+      "date": "06-05",
+      "year": 1981,
+      "title": "First AIDS Cases Reported in CDC's MMWR",
+      "category": "Unexplained",
+      "summary": "The CDC's Morbidity and Mortality Weekly Report described five cases of pneumonia in previously healthy gay men in Los Angeles — the first official AIDS report. The Reagan administration ignored the epidemic for years. ACT UP eventually forced action; conspiracy theories about HIV's origin persist.",
+      "theories": [
+        "HIV was engineered as a biological weapon at Fort Detrick",
+        "The slow government response was deliberate, targeting marginalized communities",
+        "The MMWR delay between first cases and announcement hid earlier deaths"
+      ],
+      "entities": [
+        "aids-epidemic",
+        "hiv-virus",
+        "mmwr",
+        "larry-kramer",
+        "act-up",
+        "cdc",
+        "pharma-suppression",
+        "cia",
+        "cover-up",
+        "fort-detrick",
+        "los-angeles"
+      ]
+    },
+    {
+      "id": "2004-vioxx-withdrawn-after-heart-attack-cover-up",
+      "date": "09-30",
+      "year": 2004,
+      "title": "Vioxx Withdrawn After Heart Attack Cover-Up",
+      "category": "Government",
+      "summary": "Merck pulled Vioxx from the market after FDA whistleblower Dr. David Graham testified that the drug had caused an estimated 88,000 to 139,000 heart attacks. Internal Merck documents showed executives had known of the cardiac risk for years before withdrawal.",
+      "theories": [
+        "FDA leadership actively suppressed Graham's findings under industry pressure",
+        "Merck calculated that the lawsuits would cost less than continued sales",
+        "Hundreds of thousands more deaths than officially acknowledged"
+      ],
+      "entities": [
+        "vioxx",
+        "merck",
+        "pharma-suppression",
+        "david-graham",
+        "fda",
+        "whistleblower",
+        "cover-up"
+      ]
+    },
+    {
+      "id": "2017-trump-declares-opioid-crisis-a-public-health-emergency",
+      "date": "10-26",
+      "year": 2017,
+      "title": "Trump Declares Opioid Crisis a Public Health Emergency",
+      "category": "Political",
+      "summary": "President Trump declared the opioid epidemic a public health emergency, formally acknowledging a crisis that by then had killed hundreds of thousands. The Sackler family and Purdue Pharma had spent two decades aggressively marketing OxyContin while concealing addiction risks documented in their own internal data.",
+      "theories": [
+        "DEA was deliberately defanged to allow Purdue's distribution scale",
+        "Sackler family extracted billions before the inevitable settlement",
+        "FDA approval was secured through systemic regulatory capture"
+      ],
+      "entities": [
+        "opioid-crisis",
+        "purdue-pharma",
+        "sackler-family",
+        "oxycontin",
+        "fda",
+        "donald-trump",
+        "pharma-suppression",
+        "cover-up"
+      ]
+    },
+    {
+      "id": "2019-china-confirms-wuhan-pneumonia-cluster",
+      "date": "12-31",
+      "year": 2019,
+      "title": "China Confirms Wuhan Pneumonia Cluster",
+      "category": "Government",
+      "summary": "Chinese officials notified the WHO of a pneumonia cluster in Wuhan, where the Wuhan Institute of Virology had been conducting coronavirus gain-of-function research with U.S. NIH funding routed through EcoHealth Alliance. The pandemic and its origin became one of the most contested events of the 21st century.",
+      "theories": [
+        "SARS-CoV-2 leaked from the WIV's gain-of-function research program",
+        "EcoHealth Alliance was the cutout enabling banned U.S. funding",
+        "Fauci and NIH leadership coordinated the 'natural origin' narrative early"
+      ],
+      "entities": [
+        "covid-19",
+        "wuhan",
+        "wuhan-institute-of-virology",
+        "gain-of-function-research",
+        "eco-health-alliance",
+        "anthony-fauci",
+        "cdc",
+        "pharma-suppression",
+        "cover-up",
+        "fort-detrick"
+      ]
+    },
+    {
+      "id": "1947-the-cia-is-created-via-the-national-security-act",
+      "date": "09-18",
+      "year": 1947,
+      "title": "The CIA Is Created via the National Security Act",
+      "category": "Government",
+      "summary": "President Truman signed the National Security Act, creating the Central Intelligence Agency, the National Security Council, and the U.S. Air Force as a separate service. The act also unified the military under a Secretary of Defense. Truman later wrote that the CIA had grown into something he never intended.",
+      "theories": [
+        "The CIA's original 'Office of Policy Coordination' had no statutory authority",
+        "Truman was misled about the scope of covert action authority",
+        "The NSC structure was designed to bypass congressional oversight"
+      ],
+      "entities": [
+        "national-security-act-1947",
+        "harry-truman",
+        "national-security-council",
+        "cia",
+        "fbi",
+        "us-air-force",
+        "shadow-government"
       ]
     }
   ]
