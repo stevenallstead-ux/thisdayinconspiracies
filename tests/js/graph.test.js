@@ -171,6 +171,137 @@ describe('neighbors — top-N by weight', () => {
   });
 });
 
+describe('shortestPaths — K-shortest path enumeration', () => {
+  it('returns optimal-only when no alternates are within tolerance', () => {
+    // A→B→C is the only path (cost 2); no other route exists.
+    const g = createGraph({
+      A: [edge('B', 1)],
+      B: [edge('A', 1), edge('C', 1)],
+      C: [edge('B', 1)],
+    });
+    const result = g.shortestPaths('A', 'C');
+    expect(result.paths).toHaveLength(1);
+    expect(result.paths[0].events).toEqual(['A', 'B', 'C']);
+    expect(result.optimalCost).toBe(2);
+  });
+
+  it('returns multiple paths when costs tie (within tolerance)', () => {
+    const g = createGraph({
+      A: [edge('M', 1), edge('N', 1)],
+      M: [edge('A', 1), edge('Z', 1)],
+      N: [edge('A', 1), edge('Z', 1)],
+      Z: [edge('M', 1), edge('N', 1)],
+    });
+    const result = g.shortestPaths('A', 'Z');
+    expect(result.paths.length).toBeGreaterThanOrEqual(2);
+    const eventStrings = result.paths.map((p) => p.events.join('|'));
+    expect(eventStrings).toContain('A|M|Z');
+    expect(eventStrings).toContain('A|N|Z');
+  });
+
+  it('respects maxPaths cap', () => {
+    const adj = {
+      A: [edge('B', 1), edge('C', 1), edge('D', 1), edge('E', 1)],
+      B: [edge('A', 1), edge('Z', 1)],
+      C: [edge('A', 1), edge('Z', 1)],
+      D: [edge('A', 1), edge('Z', 1)],
+      E: [edge('A', 1), edge('Z', 1)],
+      Z: [edge('B', 1), edge('C', 1), edge('D', 1), edge('E', 1)],
+    };
+    const g = createGraph(adj);
+    const result = g.shortestPaths('A', 'Z', { maxPaths: 2 });
+    expect(result.paths).toHaveLength(2);
+  });
+
+  it('respects tolerance for sub-optimal paths', () => {
+    // A→Z direct (cost 10). A→B→Z (cost 11). Tolerance 0.15 accepts both.
+    // Tolerance 0.05 rejects the longer route.
+    const g = createGraph({
+      A: [edge('B', 1), edge('Z', 10)],
+      B: [edge('A', 1), edge('Z', 10)],
+      Z: [edge('B', 10), edge('A', 10)],
+    });
+    const wide = g.shortestPaths('A', 'Z', { tolerance: 0.15 });
+    expect(wide.paths.length).toBeGreaterThanOrEqual(2);
+    const tight = g.shortestPaths('A', 'Z', { tolerance: 0.05 });
+    expect(tight.paths).toHaveLength(1);
+  });
+
+  it('returns null for disconnected endpoints', () => {
+    const g = createGraph({ A: [edge('B', 1)], B: [edge('A', 1)], X: [] });
+    expect(g.shortestPaths('A', 'X')).toBeNull();
+  });
+
+  it('handles self-loop as single 0-cost path', () => {
+    const g = createGraph({ A: [edge('B', 1)], B: [] });
+    const result = g.shortestPaths('A', 'A');
+    expect(result.paths).toHaveLength(1);
+    expect(result.paths[0]).toEqual({ events: ['A'], edges: [], cost: 0 });
+    expect(result.optimalCost).toBe(0);
+  });
+});
+
+describe('pickPath — deterministic seed selection', () => {
+  it('returns paths[0] for seed=0 (default)', () => {
+    const g = createGraph({
+      A: [edge('M', 1), edge('N', 1)],
+      M: [edge('A', 1), edge('Z', 1)],
+      N: [edge('A', 1), edge('Z', 1)],
+      Z: [edge('M', 1), edge('N', 1)],
+    });
+    const { paths } = g.shortestPaths('A', 'Z');
+    expect(g.pickPath(paths)).toBe(paths[0]);
+    expect(g.pickPath(paths, 0)).toBe(paths[0]);
+  });
+
+  it('different seeds pick different paths when alternates exist', () => {
+    const g = createGraph({
+      A: [edge('M', 1), edge('N', 1)],
+      M: [edge('A', 1), edge('Z', 1)],
+      N: [edge('A', 1), edge('Z', 1)],
+      Z: [edge('M', 1), edge('N', 1)],
+    });
+    const { paths } = g.shortestPaths('A', 'Z');
+    expect(paths.length).toBeGreaterThanOrEqual(2);
+    const a = g.pickPath(paths, 0);
+    const b = g.pickPath(paths, 1);
+    expect(a).not.toBe(b);
+    expect(a.events).not.toEqual(b.events);
+  });
+
+  it('seed wraps modulo paths.length (deterministic)', () => {
+    const g = createGraph({
+      A: [edge('M', 1), edge('N', 1)],
+      M: [edge('A', 1), edge('Z', 1)],
+      N: [edge('A', 1), edge('Z', 1)],
+      Z: [edge('M', 1), edge('N', 1)],
+    });
+    const { paths } = g.shortestPaths('A', 'Z');
+    expect(g.pickPath(paths, paths.length)).toBe(paths[0]);
+    expect(g.pickPath(paths, 99)).toBe(paths[99 % paths.length]);
+    expect(g.pickPath(paths, -1)).toBe(paths[paths.length - 1]);
+  });
+
+  it('returns null for empty paths list', () => {
+    const g = createGraph({ A: [] });
+    expect(g.pickPath([], 0)).toBeNull();
+    expect(g.pickPath(null, 0)).toBeNull();
+  });
+});
+
+describe('shortestPath backward compatibility', () => {
+  it('shortestPath returns the same path as shortestPaths(...).paths[0]', () => {
+    const g = createGraph({
+      A: [edge('B', 2, ['x'])],
+      B: [edge('A', 2, ['x']), edge('C', 3, ['y'])],
+      C: [edge('B', 3, ['y'])],
+    });
+    const single = g.shortestPath('A', 'C');
+    const multi = g.shortestPaths('A', 'C');
+    expect(single).toEqual(multi.paths[0]);
+  });
+});
+
 describe('addVirtualNode / removeVirtualNode (entity-level Connect prep)', () => {
   it('routes through virtual source to any target via zero-cost edge', () => {
     const g = createGraph({

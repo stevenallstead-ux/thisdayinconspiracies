@@ -43,6 +43,11 @@ const state = {
   selectedTo: null,   // { id, kind }
   loading: true,
   searching: false,
+  // K-shortest paths state (Phase 1 expansion).
+  // currentPaths holds the latest enumerated alternatives so the
+  // re-roll button can pick a different one without re-running Dijkstra.
+  currentPaths: [],
+  seed: 0,
 };
 
 function setLoadingUi(loading) {
@@ -104,9 +109,14 @@ function renderViaDivider(entityIds) {
 }
 
 function renderEndOfChainRow() {
+  const altCount = Math.max(0, state.currentPaths.length - 1);
+  const altButton = altCount > 0
+    ? `<a href="#" class="alt-path-button" id="alt-path-button">TRACE A DIFFERENT PATH (${altCount} ${altCount === 1 ? 'alternative' : 'alternatives'}) &rarr;</a>`
+    : '';
   return `
     <div class="chain-footer-row">
       <a href="#" class="trace-another" id="trace-another">TRACE ANOTHER &rarr;</a>
+      ${altButton}
       <span class="declassify-hint" aria-hidden="true">[DECLASSIFY THIS THREAD]</span>
     </div>
   `;
@@ -141,6 +151,21 @@ function renderChain(pathResult) {
     });
   }
 
+  const altPathButton = document.getElementById('alt-path-button');
+  if (altPathButton) {
+    altPathButton.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (state.currentPaths.length <= 1) return;
+      state.seed = (state.seed + 1) % state.currentPaths.length;
+      const next = state.currentPaths[state.seed];
+      renderChain({ events: next.events, edges: next.edges });
+      // Update share URL with the new seed (omit seed=0 to keep URLs clean).
+      if (state.selectedFrom && state.selectedTo) {
+        updateShareUrl(state.selectedFrom, state.selectedTo);
+      }
+    });
+  }
+
   resultRegion.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
@@ -165,6 +190,8 @@ function renderSelfLoopChain(evtId) {
 function resetSearch() {
   state.selectedFrom = null;
   state.selectedTo = null;
+  state.currentPaths = [];
+  state.seed = 0;
   fromInput.value = '';
   toInput.value = '';
   closeDropdown(fromDropdown);
@@ -328,24 +355,34 @@ function findAndRenderChain(fromSel, toSel) {
       return;
     }
 
-    const result = state.graph.shortestPath(startId, endId);
-    if (!result) {
+    const multi = state.graph.shortestPaths(startId, endId);
+    if (!multi || multi.paths.length === 0) {
       renderError('NO KNOWN CONNECTION.', 'THE FILE ENDS HERE.');
       return;
     }
 
-    // Strip virtual nodes from the events list + edges.
-    const strippedEvents = result.events.filter((id) => !id.startsWith(VIRTUAL_PREFIX));
-    const strippedEdges = result.edges.filter(
-      (e) => !e.from.startsWith(VIRTUAL_PREFIX) && !e.to.startsWith(VIRTUAL_PREFIX),
-    );
+    // Strip virtual nodes from each enumerated path.
+    const stripped = multi.paths.map((path) => ({
+      events: path.events.filter((id) => !id.startsWith(VIRTUAL_PREFIX)),
+      edges: path.edges.filter(
+        (e) => !e.from.startsWith(VIRTUAL_PREFIX) && !e.to.startsWith(VIRTUAL_PREFIX),
+      ),
+      cost: path.cost,
+    })).filter((p) => p.events.length > 0);
 
-    if (strippedEvents.length === 0) {
+    if (stripped.length === 0) {
       renderError('NO KNOWN CONNECTION.', 'THE FILE ENDS HERE.');
       return;
     }
 
-    renderChain({ events: strippedEvents, edges: enrichViaWithEntityNames(strippedEdges) });
+    state.currentPaths = stripped;
+    // Seed already set from URL on boot; clamp to valid range.
+    if (state.seed < 0 || state.seed >= stripped.length) {
+      state.seed = ((state.seed % stripped.length) + stripped.length) % stripped.length;
+    }
+    const chosen = stripped[state.seed];
+
+    renderChain({ events: chosen.events, edges: enrichViaWithEntityNames(chosen.edges) });
     updateShareUrl(fromSel, toSel);
   } finally {
     if (virtualFromId) state.graph.removeVirtualNode(virtualFromId);
@@ -359,6 +396,8 @@ function updateShareUrl(fromSel, toSel) {
     from: `${fromSel.kind}:${fromSel.id}`,
     to: `${toSel.kind}:${toSel.id}`,
   });
+  // Omit seed=0 to keep the default URL clean (backward compatible).
+  if (state.seed > 0) qs.set('seed', String(state.seed));
   history.replaceState({}, '', `?${qs.toString()}`);
 }
 
@@ -374,6 +413,13 @@ function applyShareUrl() {
   const params = new URLSearchParams(window.location.search);
   const fromRaw = params.get('from');
   const toRaw = params.get('to');
+  // Seed param is read for ALL nav (even no from/to) so reset paths
+  // back to default behave correctly.
+  const seedRaw = params.get('seed');
+  if (seedRaw !== null) {
+    const parsed = parseInt(seedRaw, 10);
+    state.seed = Number.isFinite(parsed) ? parsed : 0;
+  }
   if (!fromRaw && !toRaw) return;
 
   const from = parseNamespacedId(fromRaw);
@@ -490,6 +536,8 @@ async function boot() {
         toInput.focus();
         return;
       }
+      // Fresh user click → start at optimal path. Re-rolls advance seed.
+      state.seed = 0;
       findAndRenderChain(state.selectedFrom, state.selectedTo);
     });
 
