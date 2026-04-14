@@ -6,15 +6,37 @@ items must appear with kind="withheld" and tag="WITHHELD" so connect.js
 can short-circuit chain rendering when one is selected.
 """
 import json
+import subprocess
+import sys
 from pathlib import Path
+
+import pytest
 
 ROOT = Path(__file__).resolve().parent.parent.parent
 DIST = ROOT / "dist" / "autocomplete.json"
 WITHHELD_SRC = ROOT / "data" / "withheld_entities.json"
 
 
+@pytest.fixture(scope="module", autouse=True)
+def build_autocomplete():
+    """Ensure dist/autocomplete.json exists before any test runs.
+    Run the build script once per test module — order-independent so the
+    test passes whether CI runs `python -m pytest` before or after the
+    workflow's explicit build step."""
+    result = subprocess.run(
+        [sys.executable, str(ROOT / "scripts" / "build_autocomplete.py")],
+        cwd=str(ROOT),
+        capture_output=True,
+        text=True,
+    )
+    assert result.returncode == 0, (
+        f"build_autocomplete.py failed: {result.stderr}\n{result.stdout}"
+    )
+    assert DIST.exists(), "build did not produce dist/autocomplete.json"
+
+
 def test_dist_autocomplete_exists():
-    assert DIST.exists(), "Run `python scripts/build_autocomplete.py` first"
+    assert DIST.exists()
 
 
 def test_withheld_items_present_with_correct_shape():
