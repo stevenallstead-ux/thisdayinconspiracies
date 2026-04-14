@@ -216,7 +216,11 @@ function renderDropdownRow(item) {
   const meta = item.kind === 'event'
     ? `<span class="ac-meta">${escapeHtml(String(item.year))} &middot; ${escapeHtml(item.category)}</span>`
     : '';
-  const tagClass = item.kind === 'event' ? 'ac-tag-file' : 'ac-tag-entity';
+  const tagClass = item.kind === 'event'
+    ? 'ac-tag-file'
+    : item.kind === 'withheld'
+      ? 'ac-tag-withheld'
+      : 'ac-tag-entity';
   return `
     <div class="ac-row" role="option" data-id="${escapeHtml(item.id)}" data-kind="${escapeHtml(item.kind)}">
       <div class="ac-row-main">
@@ -278,6 +282,90 @@ function attachInputHandlers(input, dropdown, onSelect) {
   });
 }
 
+// ── WITHHELD Easter egg ─────────────────────────────────────────────
+// Pick one Operator quote based on a deterministic hash of the two ids,
+// so the same URL renders the same flavor text every visit (consistent
+// with seed determinism elsewhere).
+const OPERATOR_QUOTES = [
+  'We pulled both files. They are not in the same room. They are not in the same building. They are not in the same archive.',
+  'The cabinet was empty when we opened it. It has always been empty.',
+  'This file was destroyed in the 1971 server room fire that did not occur.',
+  'The chain of custody breaks here. It has always broken here.',
+  'There is a folder. There is a label on the folder. The folder contains the label.',
+];
+
+function pickOperatorQuote(seedString) {
+  let h = 0;
+  for (let i = 0; i < seedString.length; i++) {
+    h = ((h << 5) - h + seedString.charCodeAt(i)) | 0;
+  }
+  const idx = ((h % OPERATOR_QUOTES.length) + OPERATOR_QUOTES.length) % OPERATOR_QUOTES.length;
+  return OPERATOR_QUOTES[idx];
+}
+
+function withheldLabel(sel) {
+  if (sel.kind === 'withheld') {
+    const item = state.autocomplete.find((i) => i.id === sel.id && i.kind === 'withheld');
+    return item ? item.label : sel.id;
+  }
+  if (sel.kind === 'event') {
+    const ev = state.eventById.get(sel.id);
+    return ev ? ev.title : sel.id;
+  }
+  if (sel.kind === 'entity') {
+    const ent = state.entityById.get(sel.id);
+    return ent ? ent.name : sel.id;
+  }
+  return sel.id;
+}
+
+function renderWithheldDocument(fromSel, toSel) {
+  const fromLabel = withheldLabel(fromSel);
+  const toLabel = withheldLabel(toSel);
+  const bothWithheld = fromSel.kind === 'withheld' && toSel.kind === 'withheld';
+  const fileNo = (Math.abs((fromSel.id + toSel.id).split('').reduce(
+    (h, c) => ((h << 5) - h + c.charCodeAt(0)) | 0, 0,
+  )) % 900000 + 100000).toString();
+  const today = new Date().toISOString().slice(0, 10).replace(/-/g, ' ');
+  const exemption = bothWithheld
+    ? '<strong>BOTH FILES WITHHELD.</strong> The requested cross-reference does not exist in any classification. Both subjects fall under exemption (b)(1) of the Freedom of Information Act, 5 U.S.C. § 552.'
+    : '<strong>FILE WITHHELD UNDER EXEMPTION (b)(1).</strong> No corroborating record exists in the archive linking these subjects. Either no link was ever recorded — or the link itself was redacted before this archive was assembled.';
+  const quote = pickOperatorQuote(fromSel.id + '|' + toSel.id);
+
+  resultRegion.innerHTML = `
+    <div class="withheld-document">
+      <span class="classified-stamp-large">CLASSIFIED</span>
+      <div class="subject-bar">
+        <span class="subject-line">SUBJECT: ${escapeHtml(fromLabel)}</span>
+        <span class="subject-line">&rarr; ${escapeHtml(toLabel)}</span>
+      </div>
+      <div class="file-meta">
+        <span>FILED: ${escapeHtml(today.toUpperCase())}</span>
+        <span>FILE NO: ${escapeHtml(fileNo)}</span>
+        <span>STATUS: WITHHELD</span>
+      </div>
+      <p class="exemption-text">${exemption}</p>
+      <p class="exemption-text">DECLASSIFICATION REQUEST: <strong>DENIED</strong>.</p>
+      <span class="denial-stamp">DECLASSIFICATION DENIED</span>
+      <p class="operator-quote">&mdash; ${escapeHtml(quote)}</p>
+    </div>
+    ${renderEndOfChainRow()}
+  `;
+
+  // Re-attach the TRACE ANOTHER button (re-roll button is hidden because
+  // currentPaths is empty — no paths to alternate through).
+  const traceAnother = document.getElementById('trace-another');
+  if (traceAnother) {
+    traceAnother.addEventListener('click', (e) => {
+      e.preventDefault();
+      resetSearch();
+      fromInput.focus();
+    });
+  }
+
+  resultRegion.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
 // ── Search + chain ──────────────────────────────────────────────────
 function eventIdsForEntity(entityId) {
   return state.data.events
@@ -292,6 +380,17 @@ function enrichViaWithEntityNames(edges) {
 
 function findAndRenderChain(fromSel, toSel) {
   if (!fromSel || !toSel) {
+    return;
+  }
+
+  // WITHHELD Easter egg: if either endpoint is a decoy, short-circuit
+  // the graph entirely and render the FOIA mock document. currentPaths
+  // is cleared so the re-roll button doesn't appear.
+  if (fromSel.kind === 'withheld' || toSel.kind === 'withheld') {
+    state.currentPaths = [];
+    state.seed = 0;
+    renderWithheldDocument(fromSel, toSel);
+    updateShareUrl(fromSel, toSel);
     return;
   }
 
@@ -404,7 +503,7 @@ function updateShareUrl(fromSel, toSel) {
 // ── URL share hook ──────────────────────────────────────────────────
 function parseNamespacedId(raw) {
   if (!raw || typeof raw !== 'string') return null;
-  const m = raw.match(/^(event|entity):(.+)$/);
+  const m = raw.match(/^(event|entity|withheld):(.+)$/);
   if (!m) return null;
   return { kind: m[1], id: m[2] };
 }

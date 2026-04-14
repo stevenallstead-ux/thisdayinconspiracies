@@ -466,6 +466,12 @@ main {
 }
 .ac-tag-file { color: var(--gold); }
 .ac-tag-entity { color: var(--accent); }
+.ac-tag-withheld {
+  color: var(--bg);
+  background: var(--accent);
+  padding: 0.1rem 0.5rem;
+  border-radius: 2px;
+}
 
 .ac-empty {
   color: var(--ink-muted);
@@ -651,6 +657,110 @@ main {
 .back-to-connect:hover {
   filter: brightness(1.2);
   border-bottom-style: solid;
+}
+
+/* ---------- WITHHELD Easter egg (FOIA-mimicry) ---------- */
+.withheld-document {
+  position: relative;
+  background: var(--paper);
+  border: 1px solid var(--border);
+  padding: 3rem 2.5rem 2.5rem;
+  margin: 1.5rem 0;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+  overflow: hidden;
+}
+
+.withheld-document .classified-stamp-large {
+  position: absolute;
+  top: 1.5rem;
+  left: 1.5rem;
+  display: inline-block;
+  font-family: 'Special Elite', monospace;
+  color: var(--accent);
+  border: 3px solid var(--accent);
+  padding: 0.4rem 1.25rem;
+  font-size: 1rem;
+  letter-spacing: 0.3em;
+  transform: rotate(-12deg);
+  opacity: 0.9;
+  text-transform: uppercase;
+}
+
+.withheld-document .subject-bar {
+  background: var(--redact);
+  color: var(--paper);
+  margin: 4rem -2.5rem 1.5rem;
+  padding: 1rem 2.5rem;
+  font-family: 'Special Elite', monospace;
+  font-size: 0.95rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+.withheld-document .subject-bar .subject-line {
+  display: block;
+  margin-bottom: 0.4rem;
+}
+.withheld-document .subject-bar .subject-line:last-child {
+  margin-bottom: 0;
+}
+
+.withheld-document .file-meta {
+  font-family: 'Special Elite', monospace;
+  font-size: 0.85rem;
+  letter-spacing: 0.15em;
+  color: var(--ink-muted);
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+.withheld-document .file-meta span {
+  margin-right: 1.5rem;
+}
+
+.withheld-document .exemption-text {
+  font-family: 'Special Elite', monospace;
+  color: var(--ink);
+  font-size: 1rem;
+  letter-spacing: 0.05em;
+  margin-bottom: 1.25rem;
+  line-height: 1.6;
+}
+.withheld-document .exemption-text strong {
+  color: var(--accent);
+  font-weight: normal;
+}
+
+.withheld-document .denial-stamp {
+  display: inline-block;
+  font-family: 'Special Elite', monospace;
+  color: var(--accent);
+  border: 3px solid var(--accent);
+  padding: 0.4rem 1rem;
+  font-size: 0.95rem;
+  letter-spacing: 0.3em;
+  transform: rotate(-4deg);
+  margin-top: 1rem;
+  text-transform: uppercase;
+}
+
+.withheld-document .operator-quote {
+  margin-top: 2rem;
+  padding-top: 1.25rem;
+  border-top: 1px dashed var(--border);
+  font-family: 'IM Fell English', serif;
+  font-style: italic;
+  color: var(--ink-muted);
+  font-size: 0.95rem;
+}
+
+@media (max-width: 520px) {
+  .withheld-document {
+    padding: 2.5rem 1.25rem 1.5rem;
+  }
+  .withheld-document .subject-bar {
+    margin: 4rem -1.25rem 1.25rem;
+    padding: 0.85rem 1.25rem;
+    font-size: 0.85rem;
+  }
 }
 
 /* ---------- Responsive ---------- */

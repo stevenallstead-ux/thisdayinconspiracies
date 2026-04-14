@@ -30,6 +30,7 @@ HERE = Path(__file__).resolve().parent
 ROOT = HERE.parent
 DATA_PATH = ROOT / "data" / "data.json"
 ENTITIES_PATH = ROOT / "data" / "entities.json"
+WITHHELD_PATH = ROOT / "data" / "withheld_entities.json"
 DIST_DIR = ROOT / "dist"
 AUTOCOMPLETE_PATH = DIST_DIR / "autocomplete.json"
 INDEX_PATH = DIST_DIR / "autocomplete-index.json"
@@ -76,13 +77,29 @@ def main() -> int:
             "tag": type_tag.get(e["type"], "ENTITY"),
         })
 
+    # WITHHELD decoys: surface in autocomplete with a distinct tag, but
+    # never enter data/entities.json or dist/edges.json. Picking one
+    # triggers the FOIA Easter egg in connect.js.
+    if WITHHELD_PATH.exists():
+        withheld = load_json(WITHHELD_PATH)
+        for w in withheld:  # type: ignore[union-attr]
+            items.append({
+                "id": w["id"],
+                "label": w["name"],
+                "kind": "withheld",
+                "aliases": w.get("aliases", []),
+                "category": w.get("category", "Unexplained"),
+                "tag": "WITHHELD",
+            })
+
     DIST_DIR.mkdir(parents=True, exist_ok=True)
     with AUTOCOMPLETE_PATH.open("w", encoding="utf-8") as f:
         json.dump(items, f, indent=2, ensure_ascii=False)
         f.write("\n")
 
     print(f"[+] {len(items)} autocomplete items ({sum(1 for i in items if i['kind']=='event')} events, "
-          f"{sum(1 for i in items if i['kind']=='entity')} entities) -> {AUTOCOMPLETE_PATH}")
+          f"{sum(1 for i in items if i['kind']=='entity')} entities, "
+          f"{sum(1 for i in items if i['kind']=='withheld')} withheld) -> {AUTOCOMPLETE_PATH}")
 
     # Build Fuse index via node. Shell out so we share the exact fuse
     # version that will be loaded at runtime from js/vendor/fuse.min.mjs.
