@@ -1,0 +1,12 @@
+[
+  {"id": "mj-12-documents", "name": "MJ-12 Documents", "aliases": ["Majestic 12", "MJ12"], "category": "Government"},
+  {"id": "operation-northwoods-original-plan", "name": "Operation Northwoods (Original Plan)", "aliases": ["Northwoods sealed copy"], "category": "Government"},
+  {"id": "jfk-tape-reel-7", "name": "JFK Assassination Tape, Reel 7", "aliases": ["Dictabelt Reel 7"], "category": "Political"},
+  {"id": "gulf-of-tonkin-true-cable", "name": "Gulf of Tonkin (True Cable)", "aliases": ["Tonkin original cable"], "category": "Government"},
+  {"id": "roswell-debris-inventory", "name": "Roswell Debris Inventory", "aliases": ["1947 retrieval manifest"], "category": "UFO"},
+  {"id": "cia-acoustic-kitty-prototype", "name": "CIA Acoustic Kitty Prototype", "aliases": ["Acoustic Kitty"], "category": "Government"},
+  {"id": "bilderberg-2026-attendee-list", "name": "Bilderberg 2026 Attendee List", "aliases": ["Bilderberg 2026"], "category": "Political"},
+  {"id": "epstein-flight-logs-volume-2", "name": "Epstein Flight Logs, Volume 2", "aliases": ["Lolita Express manifest"], "category": "Political"},
+  {"id": "recipe-for-coca-cola", "name": "Recipe for Coca-Cola", "aliases": ["Coca-Cola formula"], "category": "Unexplained"},
+  {"id": "bigfoot-dental-records", "name": "Bigfoot's Dental Records", "aliases": ["Sasquatch dentition"], "category": "Cryptid"}
+]
