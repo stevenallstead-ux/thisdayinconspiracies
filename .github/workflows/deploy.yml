@@ -1,0 +1,116 @@
+name: CI + Deploy
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  deployments: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+
+      - name: Install Python deps
+        run: pip install -r requirements.txt pytest pytest-mock
+
+      - name: Install Node deps
+        run: npm ci
+
+      - name: Python tests
+        run: |
+          if ls tests/python/test_*.py 2>/dev/null | head -1 > /dev/null; then
+            python -m pytest tests/python -v
+          else
+            echo "No Python tests yet, skipping."
+          fi
+
+      - name: JS unit tests
+        run: |
+          if [ -f vitest.config.js ] || [ -f vitest.config.ts ]; then
+            npm run test -- --run
+          else
+            echo "No JS test config yet, skipping."
+          fi
+
+      - name: Build entity graph + autocomplete
+        run: |
+          if [ -f scripts/derive_edges.py ]; then
+            python scripts/derive_edges.py
+          fi
+          if [ -f scripts/build_autocomplete.py ]; then
+            python scripts/build_autocomplete.py
+          fi
+
+      - name: Stage static site
+        run: |
+          mkdir -p _site
+          # Core static assets (always present after Stage 1)
+          cp index.html _site/ 2>/dev/null || true
+          cp styles.css _site/ 2>/dev/null || true
+          [ -d js ] && cp -r js _site/ || true
+          [ -d data ] && cp -r data _site/ || true
+          [ -d dist ] && cp -r dist _site/ || true
+          [ -d today ] && cp -r today _site/ || true
+          [ -d thread ] && cp -r thread _site/ || true
+          [ -d calendar ] && cp -r calendar _site/ || true
+          echo "Built _site contents:"
+          ls -la _site
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: site
+          path: _site
+          retention-days: 7
+
+  # ──────────────────────────────────────────────────────────────
+  # DEPLOY — activate by adding two GHA secrets then uncommenting
+  # the `if` override below:
+  #   CLOUDFLARE_API_TOKEN   (CF dashboard → My Profile → API Tokens
+  #                           → create "Cloudflare Pages — Edit" scope)
+  #   CLOUDFLARE_ACCOUNT_ID  (CF dashboard → right-hand sidebar of any
+  #                           CF page, under "Account ID")
+  # Also create the CF Pages project: dash.cloudflare.com → Workers &
+  # Pages → Create → Pages → "Connect to Git" (auth GH) → select
+  # stevenallstead-ux/thisdayinconspiracies → project name
+  # "thisdayinconspiracies" → framework preset "None" →
+  # build command (blank) → output directory "_site".
+  # ──────────────────────────────────────────────────────────────
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    if: false  # flip to `github.ref == 'refs/heads/main'` once secrets are set
+    steps:
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: site
+          path: _site
+
+      - name: Publish to Cloudflare Pages
+        uses: cloudflare/pages-action@v1
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          projectName: thisdayinconspiracies
+          directory: _site
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}

@@ -25,9 +25,12 @@ Thumbs.db
 site-screenshot.png
 *.log
 
-# Test coverage
+# Test coverage + Playwright artifacts
 coverage/
 .nyc_output/
+test-results/
+playwright-report/
+playwright/.cache/
 
 # Generated entity audit trail (committed only when explicitly reviewed)
 new_entities.log
