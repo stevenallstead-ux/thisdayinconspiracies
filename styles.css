@@ -1135,11 +1135,14 @@ main.connect-main {
   @keyframes drawString { to { stroke-dashoffset: 0; } }
 }
 
-/* VIA tag layer */
+/* VIA tag layer — below the evidence-grid (z-index 3) so expanded cards
+   paint above overlapping tags. Normal cards sit in grid cells and tags
+   sit in the gaps, so no visual conflict at rest; this only matters
+   when a card scales up. */
 #via-tag-layer {
   position: absolute; inset: 0;
   pointer-events: none;
-  z-index: 5;
+  z-index: 2;
 }
 .via-tag {
   position: absolute;
