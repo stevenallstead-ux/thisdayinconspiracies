@@ -440,6 +440,7 @@ function renderChain(pathResult) {
       bridgeEntities: bridge,
       delay,
       gridStyle,
+      col,
       entityLookup: (id) => state.entityById.get(id) || null,
     });
   }).join('');
