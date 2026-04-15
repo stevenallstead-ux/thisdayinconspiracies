@@ -25,7 +25,7 @@ test('Selecting a withheld decoy renders the FOIA document', async ({ page }) =>
   await expect(doc).toContainText('The Roswell Incident');
   await expect(doc).toContainText('FILE WITHHELD UNDER EXEMPTION (b)(1)');
   // No event cards, no chain dividers, no re-roll button.
-  await expect(page.locator('.event-card')).toHaveCount(0);
+  await expect(page.locator('.pin-card')).toHaveCount(0);
   await expect(page.locator('#alt-path-button')).toHaveCount(0);
 });
 

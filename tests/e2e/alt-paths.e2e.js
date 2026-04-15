@@ -11,7 +11,7 @@ test('Alt-paths: TRACE A DIFFERENT PATH button shows + advances seed in URL', as
   await page.goto('/?from=event:1963-jfk-assassinated-in-dallas&to=event:1997-the-phoenix-lights');
 
   // Wait for chain to render
-  await expect(page.locator('.event-card').first()).toBeVisible({ timeout: 10_000 });
+  await expect(page.locator('.pin-card').first()).toBeVisible({ timeout: 10_000 });
 
   // Alt-paths button should be visible (corpus expansion guarantees ≥1 alt for this pair)
   const altButton = page.locator('#alt-path-button');
@@ -19,7 +19,7 @@ test('Alt-paths: TRACE A DIFFERENT PATH button shows + advances seed in URL', as
   await expect(altButton).toContainText(/TRACE A DIFFERENT PATH/);
 
   // Snapshot current chain titles for diff comparison
-  const initialTitles = await page.locator('.event-title').allTextContents();
+  const initialTitles = await page.locator('.pin-card h3').allTextContents();
   expect(initialTitles.length).toBeGreaterThan(1);
 
   // Click re-roll
@@ -30,32 +30,32 @@ test('Alt-paths: TRACE A DIFFERENT PATH button shows + advances seed in URL', as
   expect(url.searchParams.get('seed')).toBe('1');
 
   // Chain content should differ — at minimum the events list changed
-  const newTitles = await page.locator('.event-title').allTextContents();
+  const newTitles = await page.locator('.pin-card h3').allTextContents();
   expect(newTitles).not.toEqual(initialTitles);
 });
 
 test('Seeded URL is deterministic across reloads', async ({ page, context }) => {
   await page.goto('/?from=event:1963-jfk-assassinated-in-dallas&to=event:1997-the-phoenix-lights&seed=2');
-  await expect(page.locator('.event-card').first()).toBeVisible({ timeout: 10_000 });
-  const titlesA = await page.locator('.event-title').allTextContents();
+  await expect(page.locator('.pin-card').first()).toBeVisible({ timeout: 10_000 });
+  const titlesA = await page.locator('.pin-card h3').allTextContents();
 
   // Open same URL in a fresh page
   const page2 = await context.newPage();
   await page2.goto('/?from=event:1963-jfk-assassinated-in-dallas&to=event:1997-the-phoenix-lights&seed=2');
-  await expect(page2.locator('.event-card').first()).toBeVisible({ timeout: 10_000 });
-  const titlesB = await page2.locator('.event-title').allTextContents();
+  await expect(page2.locator('.pin-card').first()).toBeVisible({ timeout: 10_000 });
+  const titlesB = await page2.locator('.pin-card h3').allTextContents();
 
   expect(titlesA).toEqual(titlesB);
 });
 
 test('Default URL (no seed) shows seed=0 path; seed param renders alternative', async ({ page }) => {
   await page.goto('/?from=event:1963-jfk-assassinated-in-dallas&to=event:1997-the-phoenix-lights');
-  await expect(page.locator('.event-card').first()).toBeVisible({ timeout: 10_000 });
-  const default_ = await page.locator('.event-title').allTextContents();
+  await expect(page.locator('.pin-card').first()).toBeVisible({ timeout: 10_000 });
+  const default_ = await page.locator('.pin-card h3').allTextContents();
 
   await page.goto('/?from=event:1963-jfk-assassinated-in-dallas&to=event:1997-the-phoenix-lights&seed=1');
-  await expect(page.locator('.event-card').first()).toBeVisible({ timeout: 10_000 });
-  const seeded = await page.locator('.event-title').allTextContents();
+  await expect(page.locator('.pin-card').first()).toBeVisible({ timeout: 10_000 });
+  const seeded = await page.locator('.pin-card h3').allTextContents();
 
   expect(seeded).not.toEqual(default_);
 });

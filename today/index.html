@@ -4,46 +4,94 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>This Day in Conspiracies — Today's File</title>
-<meta name="description" content="Today's declassified conspiracy file. Unexplained events, UFO sightings, political cover-ups, cryptid encounters — rotated by calendar date.">
+<meta name="description" content="The declassified record. Unexplained events, UFO sightings, political cover-ups, cryptid encounters — sorted by the calendar.">
 <link rel="stylesheet" href="/styles.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=IM+Fell+English:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..900,0..100;1,9..144,300..900,0..100&family=JetBrains+Mono:wght@400;500;700&family=Caveat:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 </head>
 <body>
 
-<header class="site-header">
-  <a href="/" class="back-to-connect">&larr; Connect Two Files</a>
-  <div class="classified-stamp">DECLASSIFIED</div>
-  <h1 class="site-title">This Day in Conspiracies</h1>
-  <p class="site-subtitle">Unexplained events · UFO sightings · Political cover-ups · Cryptid encounters</p>
-  <div class="date-banner">
-    <span class="date-label">FILE DATE:</span>
-    <span id="current-date"></span>
+<div class="perforation" aria-hidden="true"></div>
+
+<div class="tape-bar">
+  <div><span class="dot"></span>Transmission Active · Signal Integrity 0.94</div>
+  <nav>
+    <a href="#today">Today's File</a>
+    <a href="#month">The Month</a>
+    <a href="#about">Archive</a>
+    <a href="/" class="back-to-connect">Connect Two Files →</a>
+  </nav>
+</div>
+
+<header class="masthead">
+  <div class="masthead-top">
+    <span id="ref-line">Ref · TDIC-VOL-IV-<span id="ref-date"></span></span>
+    <span class="mid"><strong>The Archive of the Unresolved</strong><span>Curated · Public · Educational</span></span>
+    <span>Classification · Open Source Intelligence</span>
+  </div>
+
+  <h1 class="title">
+    This&nbsp;Day<br />
+    <em>in&nbsp;</em>Conspiracies.
+  </h1>
+
+  <p class="tagline">Unexplained events, UFO sightings, political cover-ups, cryptid encounters — sorted by the calendar, kept by the long memory of the internet.</p>
+
+  <div class="stamp" aria-label="Declassified Stamp">
+    DECLASSIFIED
+    <small id="stamp-date"></small>
   </div>
 </header>
 
-<main>
-  <section id="today-section">
-    <h2 class="section-heading">On This Day</h2>
-    <div id="today-events" class="events-grid"></div>
+<div class="file-banner">
+  <div class="big-date" id="banner-big-date"></div>
+  <div class="meta-row">
+    <span>File Date</span>
+    <strong id="banner-file-date"></strong>
+  </div>
+  <div class="meta-row">
+    <span>Last Ingest</span>
+    <strong id="banner-ingest"></strong>
+  </div>
+  <div class="meta-row" style="text-align:right;">
+    <span><span class="pulse" style="margin-right:8px;"></span>LIVE</span>
+    <strong>Vol. IV · <span id="banner-issue"></span></strong>
+  </div>
+</div>
+
+<main class="today-main">
+  <section class="today-section" id="today">
+    <div class="section-head">
+      <h2>On <em>this</em> day.</h2>
+      <span class="count" id="today-count">— · — FILES OPENED</span>
+    </div>
+    <div id="today-events"></div>
   </section>
 
-  <section id="month-section">
-    <h2 class="section-heading">This Month In Conspiracies</h2>
-    <div id="month-events" class="events-list"></div>
-  </section>
+  <aside class="month-col" id="month-section">
+    <h2>The Month <em>in full.</em></h2>
+    <div class="subhead" id="month-subhead">Volume IV</div>
+    <ol class="timeline" id="month-events"></ol>
+  </aside>
 
-  <section class="about-section">
-    <h2 class="section-heading">About The Archive</h2>
-    <p>A daily-updated record of humanity's strangest unresolved incidents &mdash; drawn from declassified documents, eyewitness accounts, and the long memory of the internet.</p>
-    <p class="muted">Entries are curated for historical and educational interest. Theories are presented as theories, not facts.</p>
+  <section class="about" id="about">
+    <h2>The Archive <em>is not</em> a claim.</h2>
+    <div>
+      <p>A daily-updated record of humanity's strangest unresolved incidents — drawn from declassified documents, eyewitness accounts, court testimony, and the long memory of the internet. Entries are sorted by the calendar: whatever happened on this date, in any year, appears here.</p>
+      <p>We do not tell you what to believe. We give you the file.</p>
+      <p class="disclaimer">Entries curated for historical &amp; educational interest. Theories are presented as theories, not facts. Ref: TDIC-Editorial-Charter-v4.2</p>
+    </div>
   </section>
 </main>
 
 <footer class="site-footer">
-  <p>&copy; <span id="year"></span> This Day in Conspiracies &middot; The files are never fully closed.</p>
+  <span>© <span id="year"></span> · This Day in Conspiracies · Vol. IV</span>
+  <span class="quote">— The files are never fully closed.</span>
+  <span id="footer-end"></span>
 </footer>
+
+<div class="perforation bottom" aria-hidden="true"></div>
 
 <script type="module" src="/js/today.js"></script>
 </body>
