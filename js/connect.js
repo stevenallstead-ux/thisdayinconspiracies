@@ -404,12 +404,18 @@ function renderAssemblyHead(hopCount) {
   `;
 }
 
-function buildBridgeEntities(edges) {
-  // Set of entity ids that appear in any edge's via_entity_ids — these get
-  // .bridge styling on the chips inside pin-cards.
-  const set = new Set();
-  edges.forEach((e) => (e.via_entity_ids || []).forEach((id) => set.add(id)));
-  return set;
+function buildBridgesPerEdge(edges) {
+  // One entry per edge — the same sliced set of via entities we show on the
+  // VIA tape. Keeping tape + chip source identical means the tape can never
+  // name an entity that isn't highlighted on the adjacent cards, and a
+  // highlighted chip can never refer to a relation the tape doesn't display.
+  return edges.map((e) => {
+    const ids = (e.via_entity_ids || []).slice(0, 2);
+    const names = ids
+      .map((id) => state.entityById.get(id)?.name || id)
+      .filter(Boolean);
+    return { ids, names };
+  });
 }
 
 function renderChain(pathResult) {
@@ -417,7 +423,7 @@ function renderChain(pathResult) {
   const hopCount = Math.max(0, events.length - 1);
   showQueryState(state.selectedFrom, state.selectedTo, hopCount);
 
-  const bridge = buildBridgeEntities(edges);
+  const perEdge = buildBridgesPerEdge(edges);
 
   // Build ambient cork decorations (pinholes + coffee rings, deterministic per-chain).
   const decor = renderCorkDecor(events.length);
@@ -432,12 +438,21 @@ function renderChain(pathResult) {
     const col = (i % 2) + 1;
     const row = i + 1;
     const gridStyle = `grid-column: ${col}; grid-row: ${row};`;
+    // Per-card bridge set — only the entities on THIS card's adjacent
+    // VIA tapes get highlighted. Prevents the "red chip that has no
+    // relation on the tape" false positives from the old global union.
+    const incoming = i > 0 ? perEdge[i - 1] : null;
+    const outgoing = i < events.length - 1 ? perEdge[i] : null;
+    const bridgeIds = new Set([
+      ...(incoming ? incoming.ids : []),
+      ...(outgoing ? outgoing.ids : []),
+    ]);
     return renderPinCard({
       evt,
       nodeIndex: i + 1,
       termTape,
       rotation: rot,
-      bridgeEntities: bridge,
+      bridgeEntities: bridgeIds,
       delay,
       gridStyle,
       col,
@@ -445,13 +460,10 @@ function renderChain(pathResult) {
     });
   }).join('');
 
-  // VIA labels for SVG string overlay.
-  const viaLabels = edges.map((e) => {
-    const names = (e.via_entity_ids || [])
-      .map((id) => state.entityById.get(id)?.name || id)
-      .filter(Boolean)
-      .slice(0, 2);
-    const text = names.length ? names.join(' + ') : '[REDACTED]';
+  // VIA labels for SVG string overlay — derived from the same perEdge
+  // source as the chip highlights so they can't drift.
+  const viaLabels = perEdge.map((pe) => {
+    const text = pe.names.length ? pe.names.join(' + ') : '[REDACTED]';
     const rot = (Math.random() * 7 - 3.5).toFixed(1);
     return { label: text.toUpperCase(), rot };
   });
@@ -506,7 +518,11 @@ function renderCorkDecor(eventCount) {
 }
 
 // ── SVG string routing ──────────────────────────────────────────────
-function drawStrings(viaLabels) {
+// `animate: true` runs the 2.4s draw-in animation (initial render).
+// `animate: false` paints paths instantly (resize redraw — otherwise
+// every URL-bar collapse on mobile would re-trigger the animation
+// and the strings would visibly disappear and grow back).
+function drawStrings(viaLabels, { animate = true } = {}) {
   const wall = resultRegion.querySelector('.evidence-wall');
   const svg = resultRegion.querySelector('.string-layer');
   const tagLayer = resultRegion.querySelector('#via-tag-layer');
@@ -567,10 +583,14 @@ function drawStrings(viaLabels) {
     svg.appendChild(path);
 
     const length = path.getTotalLength();
-    path.style.strokeDasharray = String(length);
-    path.style.strokeDashoffset = String(length);
-    path.style.animationDelay = `${0.4 + i * 0.35}s`;
-    requestAnimationFrame(() => path.classList.add('animated'));
+    if (animate) {
+      path.style.strokeDasharray = String(length);
+      path.style.strokeDashoffset = String(length);
+      path.style.animationDelay = `${0.4 + i * 0.35}s`;
+      requestAnimationFrame(() => path.classList.add('animated'));
+    }
+    // If !animate, leave dashoffset at 0 (default) so the path paints
+    // instantly. No re-trigger of the draw animation on resize.
 
     // VIA tag at the geometric midpoint of the path. With midpoint-
     // anchored control points the path is symmetric, so t=0.5 is also
@@ -585,7 +605,13 @@ function drawStrings(viaLabels) {
         // Tag centered ON the string midpoint — see .via-tag transform in CSS.
         tag.style.top = `${midPt.y}px`;
         tag.style.setProperty('--rot', `${labelData.rot}deg`);
-        tag.style.animationDelay = `${1.4 + i * 0.35}s`;
+        if (animate) {
+          tag.style.animationDelay = `${1.4 + i * 0.35}s`;
+        } else {
+          // Skip the fade animation on resize redraw — show instantly.
+          tag.style.animation = 'none';
+          tag.style.opacity = '1';
+        }
         tag.innerHTML = `<span class="via-label">VIA</span>${escapeHtml(labelData.label)}`;
         tagLayer.appendChild(tag);
       }
@@ -597,7 +623,7 @@ let resizeTimer = null;
 window.addEventListener('resize', () => {
   if (!state.lastDrawn) return;
   clearTimeout(resizeTimer);
-  resizeTimer = setTimeout(() => drawStrings(state.lastDrawn.viaLabels), 120);
+  resizeTimer = setTimeout(() => drawStrings(state.lastDrawn.viaLabels, { animate: false }), 120);
 });
 
 // ── Self-loop ───────────────────────────────────────────────────────
