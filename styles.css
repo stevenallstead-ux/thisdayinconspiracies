@@ -1105,8 +1105,10 @@ main.connect-main {
     inset 0 1px 0 rgba(255,255,255,0.5);
   white-space: nowrap;
   pointer-events: none;
-  transform: translate(-50%, 0) rotate(var(--rot, -3deg));
-  transform-origin: 50% 0;
+  /* Center the tag on its positioned point (midpoint of the string) so
+     it sits ON the string, not hanging below it. */
+  transform: translate(-50%, -50%) rotate(var(--rot, -3deg));
+  transform-origin: 50% 50%;
   opacity: 1;
 }
 @media (prefers-reduced-motion: no-preference) {
@@ -1116,17 +1118,9 @@ main.connect-main {
     animation-delay: var(--delay, 0s);
   }
   @keyframes tagFade {
-    from { opacity: 0; transform: translate(-50%, -6px) rotate(var(--rot, -3deg)); }
-    to   { opacity: 1; transform: translate(-50%, 0) rotate(var(--rot, -3deg)); }
+    from { opacity: 0; transform: translate(-50%, calc(-50% - 6px)) rotate(var(--rot, -3deg)); }
+    to   { opacity: 1; transform: translate(-50%, -50%) rotate(var(--rot, -3deg)); }
   }
-}
-.via-tag::before {
-  content: "";
-  position: absolute;
-  top: -10px; left: 50%;
-  width: 2px; height: 10px;
-  background: var(--string);
-  transform: translateX(-50%);
 }
 .via-tag .via-label {
   font-family: 'JetBrains Mono', monospace;
@@ -1145,8 +1139,8 @@ main.connect-main {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-auto-rows: auto;
-  gap: 90px 24px;
-  padding: 20px 30px;
+  gap: 140px 24px;
+  padding: 40px 30px;
 }
 
 .pin-card {
