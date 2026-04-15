@@ -1546,8 +1546,7 @@ main.connect-main {
   line-height: 1.4;
 }
 
-/* ── Today's File / Connect navigation links (reused in tape-bar) ── */
-.todays-file-link, .back-to-connect { display: none; }
+/* .todays-file-link / .back-to-connect inherit tape-bar nav link styling. */
 
 /* ─────────────────────────────────────────────
    RESPONSIVE

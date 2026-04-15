@@ -8,6 +8,6 @@ test('Self-loop: same event for FROM and TO renders THE FILE REFERS TO ITSELF', 
   await expect(page.locator('.self-loop-note')).toHaveText('THE FILE REFERS TO ITSELF.', {
     timeout: 10_000,
   });
-  // Single event card renders.
-  await expect(page.locator('.event-card')).toHaveCount(1);
+  // Single pin card renders.
+  await expect(page.locator('.pin-card')).toHaveCount(1);
 });

@@ -20,16 +20,16 @@ test('Connect-Any-Two: JFK → Phoenix Lights renders a chain', async ({ page })
 
   await page.click('#find-button');
 
-  // Chain rendered: ≥2 event cards + ≥1 VIA divider. Don't assert exact
-  // hop count — the corpus expansion can change which path is optimal,
-  // and that's intentional. The contract being tested is "a chain renders
-  // with at least the two endpoints + at least one connecting hop."
-  const cards = page.locator('.event-card');
+  // Chain rendered: ≥2 pin cards + ≥1 VIA tag on the string layer. Don't
+  // assert exact hop count — corpus expansion can change which path is
+  // optimal, and that's intentional. The contract: "a chain renders with
+  // at least the two endpoints + at least one connecting hop."
+  const cards = page.locator('.pin-card');
   await expect(cards.first()).toBeVisible();
   const cardCount = await cards.count();
   expect(cardCount).toBeGreaterThanOrEqual(2);
-  const dividers = page.locator('.chain-divider');
-  await expect(dividers.first()).toContainText('VIA');
+  const viaTags = page.locator('.via-tag');
+  await expect(viaTags.first()).toContainText('VIA');
 
   // Share URL updated with namespace prefix per OV-14.
   const url = new URL(page.url());
