@@ -1728,6 +1728,16 @@ main.connect-main {
     padding: 6px 12px 4px;
     line-height: 1.15;
   }
+  /* Expanded card on mobile: the card is already viewport-fit
+     (max-width: calc(100vw - 48px)), so there's no room to scale 1.6x
+     like desktop does. Keep the scale at 1.0 and the origin centered,
+     just unrotate and let the content (summary, line-clamp) expand in
+     place. No overflow, still clearly "opened". */
+  .pin-card.expanded,
+  .pin-card.expanded:hover {
+    transform: rotate(0deg) scale(1) !important;
+    transform-origin: 50% 50% !important;
+  }
   .withheld-document { padding: 60px 28px 32px; margin: 32px 16px; }
   .withheld-document .subject-bar { margin: 56px -28px 20px; padding: 14px 28px; font-size: 12px; }
 }
