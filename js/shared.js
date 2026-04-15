@@ -153,6 +153,7 @@ export function renderPinCard({
   rotation = '0deg',
   bridgeEntities = new Set(),
   delay = 0,
+  gridStyle = '',
 }) {
   const caseNo = deriveCaseNo(evt);
   const stamp = deriveTimestamp(evt);
@@ -177,7 +178,7 @@ export function renderPinCard({
   const truncated = (evt.summary || '').length > 280 ? '…' : '';
 
   return `
-    <article class="pin-card" style="--rot: ${rotation}; --delay: ${delay}s;">
+    <article class="pin-card" style="--rot: ${rotation}; --delay: ${delay}s; ${gridStyle}">
       <span class="thumbtack" aria-hidden="true"></span>
       <span class="thumbtack bottom" aria-hidden="true"></span>
       <span class="tape tl" aria-hidden="true"></span>
