@@ -585,7 +585,50 @@ section.today-section { min-width: 0; }
   border-top: 1px solid var(--ink);
   border-left: 1px solid var(--ink);
 }
-.chip:hover .chip-blurb { display: block; }
+/* In-chip blurb stays in the DOM as the HTML source for the overlay —
+   we never render it in place because the card's rotate-transform traps
+   position:fixed inside the card's box and clips the tooltip. */
+.chip-blurb { display: none !important; }
+
+/* Global overlay tooltip — mounted at <body>, escaping any transform
+   ancestor. Populated from the hovered chip's stashed blurb HTML. */
+#chip-tooltip-overlay {
+  position: fixed;
+  display: none;
+  /* Position is set by JS (positionOverlay) — near the hovered chip,
+     clamped to viewport margins. Fall back to center if JS is off. */
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 340px;
+  max-width: calc(100vw - 24px);
+  padding: 14px 16px;
+  background: var(--paper);
+  border: 1px solid var(--ink);
+  box-shadow: 0 18px 40px rgba(20,10,4,0.5);
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 1.45;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--ink);
+  z-index: 9999;
+  pointer-events: none;
+}
+#chip-tooltip-overlay.active { display: block; }
+#chip-tooltip-overlay strong {
+  font-family: 'JetBrains Mono', monospace;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--stamp);
+  display: block;
+  margin-bottom: 6px;
+}
 
 /* ── Month aside (timeline) ── */
 aside.month-col {
@@ -1673,6 +1716,17 @@ main.connect-main {
     grid-column: 1 !important;
     grid-row: auto !important;
     max-width: calc(100vw - 48px);
+  }
+  /* Long VIA labels ("POLITICAL ASSASSINATION + SECOND SHOOTER THEORY")
+     overflow a 390px viewport when forced to one line. Allow wrapping,
+     clamp the width, and center the text block on the string midpoint. */
+  .via-tag {
+    white-space: normal;
+    text-align: center;
+    max-width: calc(100vw - 32px);
+    font-size: 16px;
+    padding: 6px 12px 4px;
+    line-height: 1.15;
   }
   .withheld-document { padding: 60px 28px 32px; margin: 32px 16px; }
   .withheld-document .subject-bar { margin: 56px -28px 20px; padding: 14px 28px; font-size: 12px; }
