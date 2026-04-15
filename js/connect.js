@@ -408,6 +408,10 @@ function renderChain(pathResult) {
     const termTape = i === 0 ? 'origin' : (i === events.length - 1 ? 'terminus' : null);
     const rot = ROTATIONS[i % ROTATIONS.length] + 'deg';
     const delay = 0.10 + i * 0.40;
+    // One card per row, alternating columns → zig-zag (matches reference stagger).
+    const col = (i % 2) + 1;
+    const row = i + 1;
+    const gridStyle = `grid-column: ${col}; grid-row: ${row};`;
     return renderPinCard({
       evt,
       nodeIndex: i + 1,
@@ -415,6 +419,7 @@ function renderChain(pathResult) {
       rotation: rot,
       bridgeEntities: bridge,
       delay,
+      gridStyle,
     });
   }).join('');
 
@@ -518,16 +523,20 @@ function drawStrings(viaLabels) {
     const enter = tackCenter(cards[i + 1], 'top');
     if (!exit || !enter) continue;
 
-    // Bezier control points: drop the string into a slack curve below the
-    // midpoint. Slack scales with horizontal distance so adjacent-column
-    // hops droop more, opposite-column hops hang naturally between.
+    // Bezier control points: pull both handles toward the MIDPOINT
+    // between the two thumbtacks (plus slack downward). This keeps the
+    // whole curve within the vertical band between exit.y and enter.y,
+    // so the rope-sag never dips below the destination card.
     const dx = enter.x - exit.x;
     const dy = enter.y - exit.y;
-    const slack = Math.max(60, Math.abs(dy) * 0.35 + Math.abs(dx) * 0.18);
+    const midY = (exit.y + enter.y) / 2;
+    // Modest slack — just enough to read as rope, not so much that the
+    // curve sags into the lower card. ~18% of vertical gap max.
+    const slack = Math.min(Math.abs(dy) * 0.18, Math.max(30, Math.abs(dx) * 0.10));
     const c1x = exit.x + dx * 0.25;
-    const c1y = exit.y + slack;
+    const c1y = midY + slack;
     const c2x = exit.x + dx * 0.75;
-    const c2y = enter.y + slack;
+    const c2y = midY + slack;
     const d = `M ${exit.x} ${exit.y} C ${c1x} ${c1y}, ${c2x} ${c2y}, ${enter.x} ${enter.y}`;
 
     const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
@@ -541,20 +550,18 @@ function drawStrings(viaLabels) {
     path.style.animationDelay = `${0.4 + i * 0.35}s`;
     requestAnimationFrame(() => path.classList.add('animated'));
 
-    // VIA tag at the deepest sag point of this Bezier.
+    // VIA tag at the geometric midpoint of the path. With midpoint-
+    // anchored control points the path is symmetric, so t=0.5 is also
+    // the deepest sag — and guaranteed to sit between the two cards.
     const labelData = viaLabels[i];
     if (labelData) {
-      let maxY = -Infinity;
-      let maxPt = null;
-      for (let t = 0.30; t <= 0.70; t += 0.05) {
-        const pt = path.getPointAtLength(length * t);
-        if (pt.y > maxY) { maxY = pt.y; maxPt = pt; }
-      }
-      if (maxPt) {
+      const midPt = path.getPointAtLength(length * 0.5);
+      if (midPt) {
         const tag = document.createElement('div');
         tag.className = 'via-tag';
-        tag.style.left = `${maxPt.x}px`;
-        tag.style.top = `${maxPt.y + 6}px`;
+        tag.style.left = `${midPt.x}px`;
+        // Tag centered ON the string midpoint — see .via-tag transform in CSS.
+        tag.style.top = `${midPt.y}px`;
         tag.style.setProperty('--rot', `${labelData.rot}deg`);
         tag.style.animationDelay = `${1.4 + i * 0.35}s`;
         tag.innerHTML = `<span class="via-label">VIA</span>${escapeHtml(labelData.label)}`;
