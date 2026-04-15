@@ -931,6 +931,61 @@ async function boot() {
       card.classList.toggle('expanded');
     });
 
+    // Chip tooltip overlay — the pin-card has `transform: rotate()`, which
+    // traps any descendant `position: fixed` into the card's box. On mobile
+    // that shrinks the tooltip to card width and clips it. So we mount a
+    // single overlay at <body> level and populate it from the hovered
+    // chip's stashed blurb HTML. Escapes the transform trap.
+    const chipOverlay = document.createElement('div');
+    chipOverlay.id = 'chip-tooltip-overlay';
+    document.body.appendChild(chipOverlay);
+    let lastChip = null;
+    const positionOverlay = (chip) => {
+      // Use the chip's actual (post-transform) viewport rect so the tooltip
+      // sits under the chip visually, even though it lives at <body>.
+      const r = chip.getBoundingClientRect();
+      const vw = window.innerWidth;
+      const vh = window.innerHeight;
+      const w = chipOverlay.offsetWidth || 340;
+      const h = chipOverlay.offsetHeight || 80;
+      const margin = 12;
+      // Prefer below the chip; if it'd overflow the bottom, place above.
+      const spaceBelow = vh - r.bottom;
+      const placeAbove = spaceBelow < h + 14 && r.top > h + 14;
+      const top = placeAbove ? r.top - h - 10 : r.bottom + 10;
+      let left = r.left + r.width / 2 - w / 2;
+      left = Math.max(margin, Math.min(left, vw - w - margin));
+      chipOverlay.style.left = `${left}px`;
+      chipOverlay.style.top = `${Math.max(margin, top)}px`;
+      chipOverlay.style.transform = 'none';
+    };
+    resultRegion.addEventListener('pointerover', (e) => {
+      const chip = e.target && e.target.closest ? e.target.closest('.chip') : null;
+      if (!chip || chip === lastChip) return;
+      const blurb = chip.querySelector('.chip-blurb');
+      if (!blurb) return;
+      chipOverlay.innerHTML = blurb.innerHTML;
+      chipOverlay.classList.add('active');
+      positionOverlay(chip);
+      lastChip = chip;
+    });
+    resultRegion.addEventListener('pointerout', (e) => {
+      const chip = e.target && e.target.closest ? e.target.closest('.chip') : null;
+      if (!chip) return;
+      // Only clear when leaving to a non-chip target.
+      const to = e.relatedTarget && e.relatedTarget.closest ? e.relatedTarget.closest('.chip') : null;
+      if (to === chip) return;
+      chipOverlay.classList.remove('active');
+      lastChip = null;
+    });
+    // Tap-outside on mobile dismisses the overlay.
+    document.addEventListener('pointerdown', (e) => {
+      if (!chipOverlay.classList.contains('active')) return;
+      if (e.target && e.target.closest && e.target.closest('.chip')) return;
+      chipOverlay.classList.remove('active');
+      lastChip = null;
+    });
+
     applyShareUrl();
   } catch (err) {
     console.error('[connect] archive load failed:', err);
