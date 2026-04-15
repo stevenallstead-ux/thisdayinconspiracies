@@ -48,6 +48,24 @@ export function parseRedactions(text) {
   });
 }
 
+// Find the first sentence in `summary` that mentions the entity's name
+// or any alias. Returns null if no mention found. Used to explain why
+// an entity is tagged on a given event — cheap, derived, no curation.
+export function extractEntityRole(summary, entity) {
+  if (!summary || !entity) return null;
+  const plain = String(summary).replace(/\{\{redact:([^}]+)\}\}/g, '$1');
+  const sentences = plain.split(/(?<=[.!?])\s+/);
+  const names = [entity.name, ...(entity.aliases || [])].filter(Boolean);
+  for (const sentence of sentences) {
+    for (const name of names) {
+      const escaped = name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      const re = new RegExp(`\\b${escaped}\\b`, 'i');
+      if (re.test(sentence)) return sentence.trim();
+    }
+  }
+  return null;
+}
+
 // ── Procedural metadata derivation (no data.json edits needed) ──
 
 // case_no example: "CON-1865-0414-FORD" — derived from year + date + slug head.
@@ -154,6 +172,7 @@ export function renderPinCard({
   bridgeEntities = new Set(),
   delay = 0,
   gridStyle = '',
+  entityLookup = null,
 }) {
   const caseNo = deriveCaseNo(evt);
   const stamp = deriveTimestamp(evt);
@@ -161,11 +180,17 @@ export function renderPinCard({
   const cat = categoryClass(evt.category);
   const yearMarkup = renderYearAccent(evt.year);
 
+  const fullSummary = evt.summary || '';
   const entitiesHtml = (evt.entities || []).slice(0, 6)
     .map((id) => {
       const display = entityDisplay(id);
       const isBridge = bridgeEntities.has(id);
-      return `<span class="chip${isBridge ? ' bridge' : ''}">${escapeHtml(display)}</span>`;
+      const entity = entityLookup ? entityLookup(id) : null;
+      const role = entity ? extractEntityRole(fullSummary, entity) : null;
+      const blurb = role
+        ? `<strong>${escapeHtml(display)}</strong> ${escapeHtml(role)}`
+        : `<strong>${escapeHtml(display)}</strong> Tagged on this file; role not detailed in the visible summary.`;
+      return `<span class="chip${isBridge ? ' bridge' : ''}"><span class="chip-label">${escapeHtml(display)}</span><span class="chip-blurb">${blurb}</span></span>`;
     }).join('');
 
   const tapeHtml = termTape === 'origin'
@@ -173,9 +198,6 @@ export function renderPinCard({
     : termTape === 'terminus'
       ? '<span class="term-tape end">To</span>'
       : '';
-
-  const summaryShort = (evt.summary || '').slice(0, 280);
-  const truncated = (evt.summary || '').length > 280 ? '…' : '';
 
   return `
     <article class="pin-card" style="--rot: ${rotation}; --delay: ${delay}s; ${gridStyle}">
@@ -199,7 +221,7 @@ export function renderPinCard({
 
       <h3>${parseAccent(evt.title)}</h3>
 
-      <p class="summary">${parseRedactions(summaryShort)}${truncated}</p>
+      <p class="summary">${parseRedactions(fullSummary)}</p>
 
       ${entitiesHtml ? `<div class="entities">${entitiesHtml}</div>` : ''}
     </article>

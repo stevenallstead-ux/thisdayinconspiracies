@@ -162,6 +162,24 @@ function renderQueryLabel(text) {
   return `${words.join(' ')} <em>${last}</em>`;
 }
 
+function humanEntityTypeLabel(entityType) {
+  const t = String(entityType || '').toLowerCase();
+  return ({
+    person: 'PERSON OF INTEREST',
+    org: 'KNOWN ORGANIZATION',
+    organization: 'KNOWN ORGANIZATION',
+    agency: 'AGENCY',
+    place: 'LOCATION OF INTEREST',
+    location: 'LOCATION OF INTEREST',
+    topic: 'SUBJECT OF INTEREST',
+    concept: 'KEY CONCEPT',
+    event: 'LINKED EVENT',
+    program: 'CLASSIFIED PROGRAM',
+    object: 'ARTIFACT',
+    group: 'GROUP',
+  })[t] || 'TAGGED ENTITY';
+}
+
 function renderQuerySub(sel) {
   if (!sel) return '';
   if (sel.kind === 'event') {
@@ -172,7 +190,8 @@ function renderQuerySub(sel) {
   if (sel.kind === 'entity') {
     const ent = state.entityById.get(sel.id);
     const type = (ent && ent.type) ? ent.type.toUpperCase() : 'ENTITY';
-    return `ENTITY &middot; ${escapeHtml(type)} &middot; <span class="type-chip entity">PERSON OF INTEREST</span>`;
+    const label = humanEntityTypeLabel(ent && ent.type);
+    return `ENTITY &middot; ${escapeHtml(type)} &middot; <span class="type-chip entity">${escapeHtml(label)}</span>`;
   }
   if (sel.kind === 'withheld') {
     return `<span class="type-chip" style="background:var(--redact);">WITHHELD</span>`;
@@ -377,8 +396,9 @@ function renderAssemblyHead(hopCount) {
     <div class="assembly-head">
       <h2>${escapeHtml(numWord)} ${escapeHtml(hopWord)}. <em>One</em> thread.</h2>
       <div class="legend">
-        <span class="line">STRING &middot; NAMED EDGE</span>
-        <span class="hops">DASH &middot; FILE BOUNDARY</span>
+        <span class="line">STRING &middot; SHARED ENTITY</span>
+        <span class="hover">HOVER &middot; READ ROLE</span>
+        <span class="click">CLICK &middot; EXPAND FILE</span>
       </div>
     </div>
   `;
@@ -420,6 +440,7 @@ function renderChain(pathResult) {
       bridgeEntities: bridge,
       delay,
       gridStyle,
+      entityLookup: (id) => state.entityById.get(id) || null,
     });
   }).join('');
 
@@ -593,7 +614,7 @@ function renderSelfLoopChain(evtId) {
     </div>
     <div class="evidence-wall" aria-label="Evidence wall">
       <div class="evidence-grid">
-        ${renderPinCard({ evt, nodeIndex: 1, termTape: null, rotation: '-1.2deg', bridgeEntities: new Set(), delay: 0.1 })}
+        ${renderPinCard({ evt, nodeIndex: 1, termTape: null, rotation: '-1.2deg', bridgeEntities: new Set(), delay: 0.1, entityLookup: (id) => state.entityById.get(id) || null })}
       </div>
     </div>
     ${renderChainFooter()}
@@ -869,6 +890,19 @@ async function boot() {
         fromInput.focus();
       });
     }
+
+    // Click-to-expand: one card at a time. Clicks on chips / thumbtacks
+    // pass through so tooltips and string anchors keep working.
+    resultRegion.addEventListener('click', (e) => {
+      const card = e.target.closest('.pin-card');
+      if (!card) return;
+      if (e.target.closest('.chip')) return;
+      if (e.target.closest('.thumbtack')) return;
+      resultRegion.querySelectorAll('.pin-card.expanded').forEach((c) => {
+        if (c !== card) c.classList.remove('expanded');
+      });
+      card.classList.toggle('expanded');
+    });
 
     applyShareUrl();
   } catch (err) {

@@ -513,6 +513,7 @@ section.today-section { min-width: 0; }
   border-top: 1px dashed var(--rule);
 }
 .entities .chip {
+  position: relative;
   font-family: 'JetBrains Mono', monospace;
   font-size: 10.5px;
   letter-spacing: 0.16em;
@@ -521,16 +522,65 @@ section.today-section { min-width: 0; }
   color: var(--ink-soft);
   background: var(--paper-deep);
   border: 1px solid var(--rule);
-  transition: all .25s;
-  cursor: default;
+  transition: background .25s, color .25s, border-color .25s;
+  cursor: help;
 }
-.entities .chip:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.entities .chip:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); z-index: 20; }
 .entities .chip.bridge {
   background: var(--stamp);
   color: var(--paper);
   border-color: var(--stamp-wet);
   font-weight: 700;
 }
+
+/* Chip role-explanation tooltip: paper card with a tiny arrow above. */
+.chip-label { display: inline; }
+.chip-blurb {
+  display: none;
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 300px;
+  max-width: 80vw;
+  padding: 12px 14px;
+  background: var(--paper);
+  border: 1px solid var(--ink);
+  box-shadow: 0 10px 26px rgba(20,10,4,0.38);
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 14.5px;
+  line-height: 1.45;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--ink);
+  z-index: 40;
+  pointer-events: none;
+  white-space: normal;
+}
+.chip-blurb strong {
+  font-family: 'JetBrains Mono', monospace;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--stamp);
+  display: block;
+  margin-bottom: 4px;
+}
+.chip-blurb::before {
+  content: "";
+  position: absolute;
+  top: -7px; left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  width: 12px; height: 12px;
+  background: var(--paper);
+  border-top: 1px solid var(--ink);
+  border-left: 1px solid var(--ink);
+}
+.chip:hover .chip-blurb { display: block; }
 
 /* ── Month aside (timeline) ── */
 aside.month-col {
@@ -1157,6 +1207,7 @@ main.connect-main {
   max-width: 520px;
   justify-self: center;
 }
+.pin-card { cursor: zoom-in; }
 .pin-card:hover {
   transform: rotate(0deg) scale(1.02);
   z-index: 10;
@@ -1164,6 +1215,19 @@ main.connect-main {
     0 2px 0 rgba(255,255,255,0.5) inset,
     0 30px 50px -10px rgba(20,10,4,0.6),
     0 4px 10px rgba(20,10,4,0.4);
+}
+.pin-card.expanded,
+.pin-card.expanded:hover {
+  animation: none;
+  opacity: 1;
+  transform: rotate(0deg) scale(1.15);
+  z-index: 50;
+  cursor: zoom-out;
+}
+.pin-card.expanded .summary {
+  -webkit-line-clamp: unset;
+  display: block;
+  overflow: visible;
 }
 @media (prefers-reduced-motion: no-preference) {
   .pin-card {
@@ -1275,6 +1339,10 @@ main.connect-main {
   font-size: 15px;
   line-height: 1.55;
   color: var(--ink-soft);
+  display: -webkit-box;
+  -webkit-line-clamp: 6;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 .pin-card .summary::first-letter { float: none; font-size: inherit; margin: 0; color: inherit; }
 .pin-card .entities {
