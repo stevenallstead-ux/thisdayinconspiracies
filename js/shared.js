@@ -196,14 +196,30 @@ export function renderPinCard({
   const cat = categoryClass(evt.category);
   const yearMarkup = renderYearAccent(evt.year);
 
-  const entitiesHtml = (evt.entities || []).slice(0, 6)
+  const ownEntities = evt.entities || [];
+  const bridgeIds = bridgeEntities instanceof Set ? bridgeEntities : new Set();
+  // Promote any bridge entity that the event doesn't already list, so the
+  // VIA tape's named entity always has a corresponding chip on this card.
+  // Otherwise the user sees "POLITICAL ASSASSINATION" on the tape but no
+  // matching highlighted chip on either adjacent card.
+  const displayIds = [...ownEntities];
+  for (const id of bridgeIds) {
+    if (!displayIds.includes(id)) displayIds.push(id);
+  }
+  const entitiesHtml = displayIds.slice(0, 10)
     .map((id) => {
-      const display = entityDisplay(id);
-      const isBridge = bridgeEntities.has(id);
+      const isBridge = bridgeIds.has(id);
+      const isImplicit = !ownEntities.includes(id);
       const entity = entityLookup ? entityLookup(id) : null;
+      // Prefer the canonical entity.name from data so chip text matches the
+      // VIA tape exactly. Slug-titlecase fallback handles entities the
+      // lookup doesn't return (e.g., today-page, no entityLookup passed).
+      const display = (entity && entity.name) ? entity.name : entityDisplay(id);
       const role = entity ? extractEntityRole(evt, entity) : null;
       let blurb;
-      if (!role) {
+      if (isImplicit) {
+        blurb = `<strong>${escapeHtml(display)}</strong> Connecting tag — named on the VIA tape between this file and its neighbor.`;
+      } else if (!role) {
         blurb = `<strong>${escapeHtml(display)}</strong> Tagged on this file — see archive for full context.`;
       } else if (role.source === 'title') {
         blurb = `<strong>${escapeHtml(display)}</strong> Named in the file title: "${escapeHtml(role.text)}"`;
@@ -212,7 +228,10 @@ export function renderPinCard({
       } else {
         blurb = `<strong>${escapeHtml(display)}</strong> ${escapeHtml(role.text)}`;
       }
-      return `<span class="chip${isBridge ? ' bridge' : ''}"><span class="chip-label">${escapeHtml(display)}</span><span class="chip-blurb">${blurb}</span></span>`;
+      const classes = ['chip'];
+      if (isBridge) classes.push('bridge');
+      if (isImplicit) classes.push('implicit');
+      return `<span class="${classes.join(' ')}" data-entity="${escapeHtml(id)}"><span class="chip-label">${escapeHtml(display)}</span><span class="chip-blurb">${blurb}</span></span>`;
     }).join('');
 
   const tapeHtml = termTape === 'origin'

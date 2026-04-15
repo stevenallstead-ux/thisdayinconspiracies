@@ -532,6 +532,11 @@ section.today-section { min-width: 0; }
   border-color: var(--stamp-wet);
   font-weight: 700;
 }
+/* Implicit bridge — promoted from the VIA tape because the event itself
+   doesn't list this entity. Dashed border signals "borrowed context". */
+.entities .chip.implicit {
+  border-style: dashed;
+}
 
 /* Chip role-explanation tooltip: paper card with a tiny arrow above. */
 .chip-label { display: inline; }
@@ -1135,14 +1140,15 @@ main.connect-main {
   @keyframes drawString { to { stroke-dashoffset: 0; } }
 }
 
-/* VIA tag layer — below the evidence-grid (z-index 3) so expanded cards
-   paint above overlapping tags. Normal cards sit in grid cells and tags
-   sit in the gaps, so no visual conflict at rest; this only matters
-   when a card scales up. */
+/* VIA tag layer — sits ABOVE normal pin-cards so the tape always reads on
+   top (pin-cards have no explicit z-index, so they stack in root by DOM
+   order). Expanded pin-cards at z-index:50 still paint above this layer,
+   which is intentional — when a card scales up the user is reading the
+   card, not the tape. */
 #via-tag-layer {
   position: absolute; inset: 0;
   pointer-events: none;
-  z-index: 2;
+  z-index: 4;
 }
 .via-tag {
   position: absolute;
@@ -1188,11 +1194,12 @@ main.connect-main {
 /* ── Pinned cards (chain nodes) ── */
 .evidence-grid {
   position: relative;
-  z-index: 3;
+  /* No z-index — we need .pin-card.expanded (z:50) to escape to root
+     stacking context so it paints above the VIA tag layer (z:4). */
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-auto-rows: auto;
-  gap: 140px 24px;
+  gap: 180px 24px;
   padding: 40px 30px;
 }
 
@@ -1657,10 +1664,16 @@ main.connect-main {
   h1.title { font-size: 56px !important; }
   .connect-form { grid-template-columns: 1fr; gap: 28px; }
   .connect-input { font-size: 22px; }
-  .evidence-grid { grid-template-columns: 1fr; gap: 60px 0; }
-  .pin-card:nth-of-type(n) { grid-column: 1; }
-  .string-layer { display: none; }
-  #via-tag-layer { display: none; }
+  .evidence-grid { grid-template-columns: 1fr; gap: 90px 0; }
+  /* JS inline-assigns `grid-column: 2` on alternating cards for the desktop
+     zig-zag. On mobile we collapse to a single column, so we have to beat
+     those inline styles with !important — otherwise the grid grows an
+     implicit 2nd track and half the cards land off-screen. */
+  .evidence-grid > .pin-card {
+    grid-column: 1 !important;
+    grid-row: auto !important;
+    max-width: calc(100vw - 48px);
+  }
   .withheld-document { padding: 60px 28px 32px; margin: 32px 16px; }
   .withheld-document .subject-bar { margin: 56px -28px 20px; padding: 14px 28px; font-size: 12px; }
 }
