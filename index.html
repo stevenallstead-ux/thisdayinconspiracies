@@ -8,29 +8,47 @@
 <link rel="stylesheet" href="/styles.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=IM+Fell+English:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..900,0..100;1,9..144,300..900,0..100&family=JetBrains+Mono:wght@400;500;700&family=Caveat:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 </head>
 <body class="connect-page">
 
-<header class="site-header">
-  <a href="/today/" class="todays-file-link" aria-label="Today's daily entry">Today's File &rarr;</a>
-  <div class="classified-stamp">DECLASSIFIED</div>
-  <h1 class="site-title">This Day in Conspiracies</h1>
-  <p class="site-subtitle">Unexplained events · UFO sightings · Political cover-ups · Cryptid encounters</p>
-  <div class="date-banner">
-    <span class="date-label">FILE DATE:</span>
-    <span id="current-date"></span>
+<div class="perforation" aria-hidden="true"></div>
+
+<div class="tape-bar">
+  <div><span class="dot"></span><span id="tape-status">Transmission Active · Awaiting Query</span></div>
+  <nav>
+    <a href="#query">The Query</a>
+    <a href="#chain">The Chain</a>
+    <a href="/today/">Today's File &rarr;</a>
+  </nav>
+</div>
+
+<header class="masthead">
+  <div class="masthead-top">
+    <span id="ref-line">Ref · TDIC-TRACE-<span id="ref-date"></span></span>
+    <span class="mid"><strong>The Archive of the Unresolved</strong><span>Chain Assembly · Level 4</span></span>
+    <span id="archive-updated">ARCHIVE LAST UPDATED &mdash;</span>
   </div>
-  <p class="archive-updated" id="archive-updated">ARCHIVE LAST UPDATED &mdash;</p>
+
+  <h1 class="title">Connect<br/><em>the</em> Files.</h1>
+
+  <p class="tagline">Every file connects to others. Name two. We assemble the chain from the shortest path through the archive — one edge at a time, one entity at a time.</p>
+
+  <div class="stamp" id="masthead-stamp" aria-label="Chain Assembled Stamp" hidden>
+    CHAIN&nbsp;ASSEMBLED
+    <small id="stamp-meta">— · HOPS</small>
+  </div>
 </header>
 
-<main>
-  <section class="connect-tool">
-    <h2 class="section-heading">Connect the Files</h2>
+<!-- EMPTY STATE: form for FROM + TO inputs -->
+<section class="connect-form-section" id="connect-form-section">
+  <div style="max-width: 1180px; margin: 0 auto; padding: 0 48px;">
+    <h2>Name <em>two</em> subjects.</h2>
+    <p class="subhead">An event, a person, an organization, a cover-up. We will pull the thread between them.</p>
 
     <div class="connect-form">
-      <label class="connect-label" for="from-input">FROM</label>
       <div class="connect-field">
+        <label class="connect-label" for="from-input">FROM &middot; Origin File</label>
         <input
           id="from-input"
           type="text"
@@ -43,8 +61,8 @@
         <div id="from-dropdown" class="ac-dropdown" aria-hidden="true" role="listbox"></div>
       </div>
 
-      <label class="connect-label" for="to-input">TO</label>
       <div class="connect-field">
+        <label class="connect-label" for="to-input">TO &middot; Terminus</label>
         <input
           id="to-input"
           type="text"
@@ -56,33 +74,50 @@
         >
         <div id="to-dropdown" class="ac-dropdown" aria-hidden="true" role="listbox"></div>
       </div>
+    </div>
 
+    <div class="connect-cta-row">
       <button id="find-button" class="connect-cta" type="button" disabled>
         <span class="cta-label">INITIALIZING...</span>
       </button>
+      <span class="connect-cta-hint">Or share a chain: <code>?from=event:1947-the-roswell-incident&amp;to=entity:cia</code></span>
     </div>
+  </div>
+</section>
 
-    <div id="result-region" class="result-region">
-      <div class="empty-state">
-        <p>TYPE TWO SUBJECTS.</p>
-        <p>WE WILL ASSEMBLE THE FILE.</p>
-      </div>
-    </div>
+<!-- QUERY STATE: resolved query bar (hidden until chain is rendered) -->
+<section class="query-bar" id="query-bar" hidden>
+  <div class="query-field">
+    <span class="label">FROM &middot; Origin File</span>
+    <span class="value" id="query-from-value"></span>
+    <span class="sublabel" id="query-from-sub"></span>
+  </div>
+  <div class="query-field">
+    <span class="label">TO &middot; Terminus</span>
+    <span class="value" id="query-to-value"></span>
+    <span class="sublabel" id="query-to-sub"></span>
+  </div>
+  <div class="query-cta">
+    <span class="status"><span class="dot"></span><span id="query-status">Chain Complete</span></span>
+    <button type="button" id="trace-another-top">Trace Another &rarr;</button>
+  </div>
+</section>
+
+<main>
+  <!-- ASSEMBLY + EVIDENCE WALL render here -->
+  <section class="assembly" id="chain">
+    <div id="result-region"></div>
   </section>
 </main>
 
 <footer class="site-footer">
-  <p>&copy; <span id="year"></span> This Day in Conspiracies &middot; The files are never fully closed.</p>
+  <span>&copy; <span id="year"></span> &middot; This Day in Conspiracies &middot; Vol. IV</span>
+  <span class="quote">— The files are never fully closed.</span>
+  <span id="footer-end"></span>
 </footer>
 
+<div class="perforation bottom" aria-hidden="true"></div>
+
 <script type="module" src="/js/connect.js"></script>
-<script>
-  (function () {
-    var d = new Date();
-    var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-    document.getElementById('current-date').textContent = (months[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear()).toUpperCase();
-    document.getElementById('year').textContent = d.getFullYear();
-  })();
-</script>
 </body>
 </html>

@@ -1,12 +1,13 @@
 // js/connect.js — Connect-Any-Two homepage client.
 //
-// Loads the prebuilt data layer (data.json, entities.json, dist/edges.json,
-// dist/autocomplete.json, dist/autocomplete-index.json + vendored fuse.js),
-// wires up two autocomplete inputs, handles the chain render, and covers
-// every design-locked error state.
+// Two view modes:
+//  1. Empty state — connect-form (FROM + TO + CTA). Default for `/`.
+//  2. Query state — query-bar + assembly + evidence-wall (cork board with
+//     pin-cards and red string between thumbtacks). Triggered by URL params
+//     ?from=event:X&to=entity:Y or by clicking FIND THE CONNECTION.
 //
-// Share URLs: /?from=event:1963-jfk-assassinated-in-dallas&to=entity:cia
-//   Both `event:` and `entity:` prefixes are mandatory.
+// Preserves: K-shortest paths re-roll, WITHHELD Easter egg short-circuit,
+// self-loop / no-path / archive-unavailable error states.
 
 import Fuse from './vendor/fuse.min.mjs';
 
@@ -14,7 +15,9 @@ import {
   escapeHtml,
   loadData,
   loadJSON,
-  renderEventCard,
+  renderPinCard,
+  MONTHS_SHORT,
+  pad,
 } from './shared.js';
 
 const TODAY_PATH = '/today/';
@@ -29,6 +32,18 @@ const findButton = document.getElementById('find-button');
 const resultRegion = document.getElementById('result-region');
 const archiveUpdated = document.getElementById('archive-updated');
 
+const formSection = document.getElementById('connect-form-section');
+const queryBar = document.getElementById('query-bar');
+const queryFromValue = document.getElementById('query-from-value');
+const queryFromSub = document.getElementById('query-from-sub');
+const queryToValue = document.getElementById('query-to-value');
+const queryToSub = document.getElementById('query-to-sub');
+const queryStatus = document.getElementById('query-status');
+const traceAnotherTop = document.getElementById('trace-another-top');
+const tapeStatus = document.getElementById('tape-status');
+const mastheadStamp = document.getElementById('masthead-stamp');
+const stampMeta = document.getElementById('stamp-meta');
+
 // ── State ───────────────────────────────────────────────────────────
 const state = {
   data: null,
@@ -37,18 +52,29 @@ const state = {
   eventById: new Map(),
   adjacency: null,
   graph: null,
-  autocomplete: null, // array of items
+  autocomplete: null,
   fuse: null,
-  selectedFrom: null, // { id, kind }
-  selectedTo: null,   // { id, kind }
+  selectedFrom: null,
+  selectedTo: null,
   loading: true,
   searching: false,
-  // K-shortest paths state (Phase 1 expansion).
-  // currentPaths holds the latest enumerated alternatives so the
-  // re-roll button can pick a different one without re-running Dijkstra.
   currentPaths: [],
   seed: 0,
+  // Last successfully drawn chain — needed for resize redraws.
+  lastDrawn: null,
 };
+
+// ── Header chrome ───────────────────────────────────────────────────
+function setHeaderChrome() {
+  const today = new Date();
+  const refDate = `${pad(today.getMonth() + 1)}${pad(today.getDate())}`;
+  const refLineDate = document.getElementById('ref-date');
+  if (refLineDate) refLineDate.textContent = `${refDate}-00${(today.getDate() * 13 % 1000).toString().padStart(3, '0')}`;
+  const yearEl = document.getElementById('year');
+  if (yearEl) yearEl.textContent = today.getFullYear();
+  const footerEnd = document.getElementById('footer-end');
+  if (footerEnd) footerEnd.textContent = `${refDate} / END OF TRANSMISSION`;
+}
 
 function setLoadingUi(loading) {
   state.loading = loading;
@@ -74,7 +100,87 @@ function setSearchingUi(searching) {
     : 'FIND THE CONNECTION';
 }
 
-// ── Rendering helpers ───────────────────────────────────────────────
+// ── View toggle ─────────────────────────────────────────────────────
+function showEmptyState() {
+  formSection.hidden = false;
+  queryBar.hidden = true;
+  mastheadStamp.hidden = true;
+  if (tapeStatus) tapeStatus.textContent = 'Transmission Active · Awaiting Query';
+  resultRegion.innerHTML = '';
+}
+
+function showQueryState(fromSel, toSel, hopCount) {
+  formSection.hidden = true;
+  queryBar.hidden = false;
+  mastheadStamp.hidden = false;
+
+  const fromLabel = labelFor(fromSel);
+  const toLabel = labelFor(toSel);
+  queryFromValue.innerHTML = renderQueryLabel(fromLabel);
+  queryToValue.innerHTML = renderQueryLabel(toLabel);
+  queryFromSub.innerHTML = renderQuerySub(fromSel);
+  queryToSub.innerHTML = renderQuerySub(toSel);
+
+  if (typeof hopCount === 'number' && hopCount >= 0) {
+    queryStatus.textContent = `Chain Complete · ${hopCount} HOP${hopCount === 1 ? '' : 'S'}`;
+    if (tapeStatus) tapeStatus.textContent = `Transmission Active · Chain Resolved · ${hopCount} HOP${hopCount === 1 ? '' : 'S'}`;
+    if (stampMeta) {
+      const today = new Date();
+      stampMeta.textContent = `${hopCount} · HOPS · ${pad(today.getMonth() + 1)}·${pad(today.getDate())}·${today.getFullYear()}`;
+    }
+  } else {
+    queryStatus.textContent = 'Query Resolved';
+    if (tapeStatus) tapeStatus.textContent = 'Transmission Active · Query Resolved';
+    if (stampMeta) stampMeta.textContent = 'FILE WITHHELD';
+  }
+}
+
+function labelFor(sel) {
+  if (!sel) return '';
+  if (sel.kind === 'event') {
+    const ev = state.eventById.get(sel.id);
+    return ev ? ev.title : sel.id;
+  }
+  if (sel.kind === 'entity') {
+    const ent = state.entityById.get(sel.id);
+    return ent ? ent.name : sel.id;
+  }
+  if (sel.kind === 'withheld') {
+    const item = state.autocomplete.find((i) => i.id === sel.id && i.kind === 'withheld');
+    return item ? item.label : sel.id;
+  }
+  return sel.id;
+}
+
+// Italicize the LAST whole word for visual rhythm (mirrors the reference
+// `Suge *Knight*` pattern). Skip if too short.
+function renderQueryLabel(text) {
+  const safe = escapeHtml(text);
+  const words = safe.split(/\s+/);
+  if (words.length < 2) return safe;
+  const last = words.pop();
+  return `${words.join(' ')} <em>${last}</em>`;
+}
+
+function renderQuerySub(sel) {
+  if (!sel) return '';
+  if (sel.kind === 'event') {
+    const ev = state.eventById.get(sel.id);
+    if (!ev) return 'EVENT';
+    return `EVENT &middot; ${escapeHtml(String(ev.year))} &middot; <span class="type-chip">${escapeHtml(ev.category || 'UNEXPLAINED')}</span>`;
+  }
+  if (sel.kind === 'entity') {
+    const ent = state.entityById.get(sel.id);
+    const type = (ent && ent.type) ? ent.type.toUpperCase() : 'ENTITY';
+    return `ENTITY &middot; ${escapeHtml(type)} &middot; <span class="type-chip entity">PERSON OF INTEREST</span>`;
+  }
+  if (sel.kind === 'withheld') {
+    return `<span class="type-chip" style="background:var(--redact);">WITHHELD</span>`;
+  }
+  return '';
+}
+
+// ── Error rendering ─────────────────────────────────────────────────
 function renderError(title, body, { includeTodayLink = false, includeHomeLink = false } = {}) {
   const extra = includeTodayLink
     ? `<p class="error-link"><a href="${TODAY_PATH}">Today's File &rarr;</a></p>`
@@ -82,122 +188,15 @@ function renderError(title, body, { includeTodayLink = false, includeHomeLink = 
       ? `<p class="error-link"><a href="${HOME_PATH}">Return to archive home</a></p>`
       : '';
   resultRegion.innerHTML = `
-    <div class="empty-state error-state">
-      <p class="error-title">${escapeHtml(title)}</p>
+    <div class="error-state">
+      <p class="error-title">${title}</p>
       ${body ? `<p class="error-body">${escapeHtml(body)}</p>` : ''}
       ${extra}
     </div>
   `;
-}
-
-function renderInitialPlaceholder() {
-  resultRegion.innerHTML = `
-    <div class="empty-state">
-      <p>TYPE TWO SUBJECTS.</p>
-      <p>WE WILL ASSEMBLE THE FILE.</p>
-    </div>
-  `;
-}
-
-function renderViaDivider(entityIds) {
-  const names = entityIds
-    .map((id) => state.entityById.get(id)?.name || id)
-    .filter(Boolean)
-    .slice(0, 2); // at most 2 names to keep the divider readable
-  const text = names.length ? `VIA ${names.join(' + ').toUpperCase()}` : 'VIA [REDACTED]';
-  return `<div class="chain-divider section-heading-chain">— ${escapeHtml(text)} —</div>`;
-}
-
-function renderEndOfChainRow() {
-  const altCount = Math.max(0, state.currentPaths.length - 1);
-  const altButton = altCount > 0
-    ? `<a href="#" class="alt-path-button" id="alt-path-button">TRACE A DIFFERENT PATH (${altCount} ${altCount === 1 ? 'alternative' : 'alternatives'}) &rarr;</a>`
-    : '';
-  return `
-    <div class="chain-footer-row">
-      <a href="#" class="trace-another" id="trace-another">TRACE ANOTHER &rarr;</a>
-      ${altButton}
-      <span class="declassify-hint" aria-hidden="true">[DECLASSIFY THIS THREAD]</span>
-    </div>
-  `;
-}
-
-function renderChain(pathResult) {
-  const { events, edges } = pathResult;
-  const parts = [];
-
-  for (let i = 0; i < events.length; i++) {
-    const evt = state.eventById.get(events[i]);
-    if (!evt) {
-      parts.push(`<p class="chain-note">Missing event data for id: ${escapeHtml(events[i])}</p>`);
-      continue;
-    }
-    parts.push(renderEventCard({ evt }));
-
-    if (i < edges.length) {
-      parts.push(renderViaDivider(edges[i].via_entity_ids || []));
-    }
-  }
-
-  parts.push(renderEndOfChainRow());
-  resultRegion.innerHTML = parts.join('');
-
-  const traceAnother = document.getElementById('trace-another');
-  if (traceAnother) {
-    traceAnother.addEventListener('click', (e) => {
-      e.preventDefault();
-      resetSearch();
-      fromInput.focus();
-    });
-  }
-
-  const altPathButton = document.getElementById('alt-path-button');
-  if (altPathButton) {
-    altPathButton.addEventListener('click', (e) => {
-      e.preventDefault();
-      if (state.currentPaths.length <= 1) return;
-      state.seed = (state.seed + 1) % state.currentPaths.length;
-      const next = state.currentPaths[state.seed];
-      renderChain({ events: next.events, edges: next.edges });
-      // Update share URL with the new seed (omit seed=0 to keep URLs clean).
-      if (state.selectedFrom && state.selectedTo) {
-        updateShareUrl(state.selectedFrom, state.selectedTo);
-      }
-    });
-  }
-
-  resultRegion.scrollIntoView({ behavior: 'smooth', block: 'start' });
-}
-
-function renderSelfLoopChain(evtId) {
-  const evt = state.eventById.get(evtId);
-  if (!evt) {
-    renderError(
-      'ARCHIVE ENTRY NOT FOUND: ' + evtId,
-      '',
-      { includeHomeLink: true },
-    );
-    return;
-  }
-  resultRegion.innerHTML = `
-    <div class="chain-note self-loop-note">THE FILE REFERS TO ITSELF.</div>
-    ${renderEventCard({ evt })}
-    ${renderEndOfChainRow()}
-  `;
-  resultRegion.scrollIntoView({ behavior: 'smooth', block: 'start' });
-}
-
-function resetSearch() {
-  state.selectedFrom = null;
-  state.selectedTo = null;
-  state.currentPaths = [];
-  state.seed = 0;
-  fromInput.value = '';
-  toInput.value = '';
-  closeDropdown(fromDropdown);
-  closeDropdown(toDropdown);
-  history.replaceState({}, '', HOME_PATH);
-  renderInitialPlaceholder();
+  // Always show form again on error so user can retry.
+  formSection.hidden = false;
+  queryBar.hidden = true;
 }
 
 // ── Autocomplete ────────────────────────────────────────────────────
@@ -205,7 +204,6 @@ function openDropdown(el) {
   el.classList.add('open');
   el.setAttribute('aria-hidden', 'false');
 }
-
 function closeDropdown(el) {
   el.classList.remove('open');
   el.setAttribute('aria-hidden', 'true');
@@ -214,7 +212,7 @@ function closeDropdown(el) {
 
 function renderDropdownRow(item) {
   const meta = item.kind === 'event'
-    ? `<span class="ac-meta">${escapeHtml(String(item.year))} &middot; ${escapeHtml(item.category)}</span>`
+    ? `<span class="ac-meta">${escapeHtml(String(item.year || ''))} &middot; ${escapeHtml(item.category || '')}</span>`
     : '';
   const tagClass = item.kind === 'event'
     ? 'ac-tag-file'
@@ -256,19 +254,13 @@ function attachInputHandlers(input, dropdown, onSelect) {
     if (state.loading) return;
     updateDropdown(e.target.value, dropdown);
   });
-
   input.addEventListener('focus', (e) => {
     if (state.loading) return;
-    if (e.target.value.length >= 1) {
-      updateDropdown(e.target.value, dropdown);
-    }
+    if (e.target.value.length >= 1) updateDropdown(e.target.value, dropdown);
   });
-
   input.addEventListener('blur', () => {
-    // Delay so click events on dropdown rows register first.
     setTimeout(() => closeDropdown(dropdown), 150);
   });
-
   dropdown.addEventListener('mousedown', (e) => {
     const row = e.target.closest('.ac-row[data-id]');
     if (!row) return;
@@ -283,9 +275,6 @@ function attachInputHandlers(input, dropdown, onSelect) {
 }
 
 // ── WITHHELD Easter egg ─────────────────────────────────────────────
-// Pick one Operator quote based on a deterministic hash of the two ids,
-// so the same URL renders the same flavor text every visit (consistent
-// with seed determinism elsewhere).
 const OPERATOR_QUOTES = [
   'We pulled both files. They are not in the same room. They are not in the same building. They are not in the same archive.',
   'The cabinet was empty when we opened it. It has always been empty.',
@@ -303,25 +292,9 @@ function pickOperatorQuote(seedString) {
   return OPERATOR_QUOTES[idx];
 }
 
-function withheldLabel(sel) {
-  if (sel.kind === 'withheld') {
-    const item = state.autocomplete.find((i) => i.id === sel.id && i.kind === 'withheld');
-    return item ? item.label : sel.id;
-  }
-  if (sel.kind === 'event') {
-    const ev = state.eventById.get(sel.id);
-    return ev ? ev.title : sel.id;
-  }
-  if (sel.kind === 'entity') {
-    const ent = state.entityById.get(sel.id);
-    return ent ? ent.name : sel.id;
-  }
-  return sel.id;
-}
-
 function renderWithheldDocument(fromSel, toSel) {
-  const fromLabel = withheldLabel(fromSel);
-  const toLabel = withheldLabel(toSel);
+  const fromLabel = labelFor(fromSel);
+  const toLabel = labelFor(toSel);
   const bothWithheld = fromSel.kind === 'withheld' && toSel.kind === 'withheld';
   const fileNo = (Math.abs((fromSel.id + toSel.id).split('').reduce(
     (h, c) => ((h << 5) - h + c.charCodeAt(0)) | 0, 0,
@@ -332,6 +305,7 @@ function renderWithheldDocument(fromSel, toSel) {
     : '<strong>FILE WITHHELD UNDER EXEMPTION (b)(1).</strong> No corroborating record exists in the archive linking these subjects. Either no link was ever recorded — or the link itself was redacted before this archive was assembled.';
   const quote = pickOperatorQuote(fromSel.id + '|' + toSel.id);
 
+  showQueryState(fromSel, toSel, null);
   resultRegion.innerHTML = `
     <div class="withheld-document">
       <span class="classified-stamp-large">CLASSIFIED</span>
@@ -349,11 +323,30 @@ function renderWithheldDocument(fromSel, toSel) {
       <span class="denial-stamp">DECLASSIFICATION DENIED</span>
       <p class="operator-quote">&mdash; ${escapeHtml(quote)}</p>
     </div>
-    ${renderEndOfChainRow()}
+    ${renderChainFooter()}
   `;
+  attachFooterHandlers();
+  scrollToResult();
+}
 
-  // Re-attach the TRACE ANOTHER button (re-roll button is hidden because
-  // currentPaths is empty — no paths to alternate through).
+// ── Chain rendering ─────────────────────────────────────────────────
+const ROTATIONS = [-2.5, 1.8, -1.4, 2.2, -2.0, 1.2, -1.7, 2.6, -2.2, 1.5];
+
+function renderChainFooter() {
+  const altCount = Math.max(0, state.currentPaths.length - 1);
+  const altButton = altCount > 0
+    ? `<a href="#" class="alt-path-button" id="alt-path-button">TRACE A DIFFERENT PATH (${altCount} ${altCount === 1 ? 'alternative' : 'alternatives'}) &rarr;</a>`
+    : '';
+  return `
+    <div class="chain-footer">
+      <a href="#" class="trace-another" id="trace-another">TRACE ANOTHER &rarr;</a>
+      ${altButton}
+      <span class="declassify-hint" aria-hidden="true">[DECLASSIFY THIS THREAD]</span>
+    </div>
+  `;
+}
+
+function attachFooterHandlers() {
   const traceAnother = document.getElementById('trace-another');
   if (traceAnother) {
     traceAnother.addEventListener('click', (e) => {
@@ -362,8 +355,265 @@ function renderWithheldDocument(fromSel, toSel) {
       fromInput.focus();
     });
   }
+  const altPathButton = document.getElementById('alt-path-button');
+  if (altPathButton) {
+    altPathButton.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (state.currentPaths.length <= 1) return;
+      state.seed = (state.seed + 1) % state.currentPaths.length;
+      const next = state.currentPaths[state.seed];
+      renderChain({ events: next.events, edges: next.edges });
+      if (state.selectedFrom && state.selectedTo) {
+        updateShareUrl(state.selectedFrom, state.selectedTo);
+      }
+    });
+  }
+}
 
-  resultRegion.scrollIntoView({ behavior: 'smooth', block: 'start' });
+function renderAssemblyHead(hopCount) {
+  const hopWord = hopCount === 1 ? 'hop' : 'hops';
+  const numWord = ['Zero', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten'][hopCount] || String(hopCount);
+  return `
+    <div class="assembly-head">
+      <h2>${escapeHtml(numWord)} ${escapeHtml(hopWord)}. <em>One</em> thread.</h2>
+      <div class="legend">
+        <span class="line">STRING &middot; NAMED EDGE</span>
+        <span class="hops">DASH &middot; FILE BOUNDARY</span>
+      </div>
+    </div>
+  `;
+}
+
+function buildBridgeEntities(edges) {
+  // Set of entity ids that appear in any edge's via_entity_ids — these get
+  // .bridge styling on the chips inside pin-cards.
+  const set = new Set();
+  edges.forEach((e) => (e.via_entity_ids || []).forEach((id) => set.add(id)));
+  return set;
+}
+
+function renderChain(pathResult) {
+  const { events, edges } = pathResult;
+  const hopCount = Math.max(0, events.length - 1);
+  showQueryState(state.selectedFrom, state.selectedTo, hopCount);
+
+  const bridge = buildBridgeEntities(edges);
+
+  // Build ambient cork decorations (pinholes + coffee rings, deterministic per-chain).
+  const decor = renderCorkDecor(events.length);
+
+  const cards = events.map((evtId, i) => {
+    const evt = state.eventById.get(evtId);
+    if (!evt) return `<article class="pin-card"><p>Missing: ${escapeHtml(evtId)}</p></article>`;
+    const termTape = i === 0 ? 'origin' : (i === events.length - 1 ? 'terminus' : null);
+    const rot = ROTATIONS[i % ROTATIONS.length] + 'deg';
+    const delay = 0.10 + i * 0.40;
+    return renderPinCard({
+      evt,
+      nodeIndex: i + 1,
+      termTape,
+      rotation: rot,
+      bridgeEntities: bridge,
+      delay,
+    });
+  }).join('');
+
+  // VIA labels for SVG string overlay.
+  const viaLabels = edges.map((e) => {
+    const names = (e.via_entity_ids || [])
+      .map((id) => state.entityById.get(id)?.name || id)
+      .filter(Boolean)
+      .slice(0, 2);
+    const text = names.length ? names.join(' + ') : '[REDACTED]';
+    const rot = (Math.random() * 7 - 3.5).toFixed(1);
+    return { label: text.toUpperCase(), rot };
+  });
+
+  resultRegion.innerHTML = `
+    ${renderAssemblyHead(hopCount)}
+    <div class="evidence-wall" aria-label="Evidence wall">
+      <svg class="string-layer" xmlns="http://www.w3.org/2000/svg" id="string-layer">
+        <defs>
+          <filter id="stringShadow" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur in="SourceAlpha" stdDeviation="1.2" />
+            <feOffset dx="1" dy="3" result="off" />
+            <feComponentTransfer><feFuncA type="linear" slope="0.55"/></feComponentTransfer>
+            <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+      </svg>
+      <div id="via-tag-layer"></div>
+      ${decor}
+      <div class="evidence-grid">
+        ${cards}
+      </div>
+    </div>
+    ${renderChainFooter()}
+  `;
+
+  attachFooterHandlers();
+  state.lastDrawn = { viaLabels };
+
+  // Wait for fonts to settle before measuring thumbtack positions.
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(() => requestAnimationFrame(() => drawStrings(viaLabels)));
+  } else {
+    requestAnimationFrame(() => drawStrings(viaLabels));
+  }
+
+  scrollToResult();
+}
+
+function renderCorkDecor(eventCount) {
+  // Deterministic positions seeded from event count so re-rolls stay stable.
+  return `
+    <span class="pinhole" style="top: 64px; left: 12%;"></span>
+    <span class="pinhole" style="top: 26%; right: 7%;"></span>
+    <span class="pinhole" style="top: 48%; left: 4%;"></span>
+    <span class="pinhole" style="top: 62%; right: 12%;"></span>
+    <span class="pinhole" style="top: 78%; left: 15%;"></span>
+    <span class="pinhole" style="top: 88%; right: 6%;"></span>
+    <span class="coffee-ring" style="top: 38%; right: 16%; --rot: -12deg;"></span>
+    <span class="coffee-ring" style="top: 72%; left: 8%; --rot: 8deg; width: 80px; height: 80px;"></span>
+  `;
+}
+
+// ── SVG string routing ──────────────────────────────────────────────
+function drawStrings(viaLabels) {
+  const wall = resultRegion.querySelector('.evidence-wall');
+  const svg = resultRegion.querySelector('.string-layer');
+  const tagLayer = resultRegion.querySelector('#via-tag-layer');
+  if (!wall || !svg || !tagLayer) return;
+
+  const cards = Array.from(resultRegion.querySelectorAll('.pin-card'));
+  if (cards.length < 2) return;
+
+  // Set SVG width/height attributes (NOT CSS) — without these, SVGs with
+  // only width:100% CSS collapse to ~300x150 intrinsic and the strings
+  // render in the wrong coordinate space.
+  const w = wall.clientWidth;
+  const h = wall.clientHeight;
+  svg.setAttribute('width', String(w));
+  svg.setAttribute('height', String(h));
+  svg.setAttribute('viewBox', `0 0 ${w} ${h}`);
+
+  // Wipe old paths + tags but preserve <defs>.
+  Array.from(svg.querySelectorAll('path.string')).forEach((p) => p.remove());
+  tagLayer.innerHTML = '';
+
+  const wallRect = wall.getBoundingClientRect();
+
+  function tackCenter(card, which) {
+    const tack = card.querySelector(which === 'top' ? '.thumbtack:not(.bottom)' : '.thumbtack.bottom');
+    if (!tack) return null;
+    const r = tack.getBoundingClientRect();
+    return {
+      x: r.left + r.width / 2 - wallRect.left,
+      y: r.top + r.height / 2 - wallRect.top,
+    };
+  }
+
+  for (let i = 0; i < cards.length - 1; i++) {
+    const exit = tackCenter(cards[i], 'bottom');
+    const enter = tackCenter(cards[i + 1], 'top');
+    if (!exit || !enter) continue;
+
+    // Bezier control points: drop the string into a slack curve below the
+    // midpoint. Slack scales with horizontal distance so adjacent-column
+    // hops droop more, opposite-column hops hang naturally between.
+    const dx = enter.x - exit.x;
+    const dy = enter.y - exit.y;
+    const slack = Math.max(60, Math.abs(dy) * 0.35 + Math.abs(dx) * 0.18);
+    const c1x = exit.x + dx * 0.25;
+    const c1y = exit.y + slack;
+    const c2x = exit.x + dx * 0.75;
+    const c2y = enter.y + slack;
+    const d = `M ${exit.x} ${exit.y} C ${c1x} ${c1y}, ${c2x} ${c2y}, ${enter.x} ${enter.y}`;
+
+    const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    path.setAttribute('class', 'string');
+    path.setAttribute('d', d);
+    svg.appendChild(path);
+
+    const length = path.getTotalLength();
+    path.style.strokeDasharray = String(length);
+    path.style.strokeDashoffset = String(length);
+    path.style.animationDelay = `${0.4 + i * 0.35}s`;
+    requestAnimationFrame(() => path.classList.add('animated'));
+
+    // VIA tag at the deepest sag point of this Bezier.
+    const labelData = viaLabels[i];
+    if (labelData) {
+      let maxY = -Infinity;
+      let maxPt = null;
+      for (let t = 0.30; t <= 0.70; t += 0.05) {
+        const pt = path.getPointAtLength(length * t);
+        if (pt.y > maxY) { maxY = pt.y; maxPt = pt; }
+      }
+      if (maxPt) {
+        const tag = document.createElement('div');
+        tag.className = 'via-tag';
+        tag.style.left = `${maxPt.x}px`;
+        tag.style.top = `${maxPt.y + 6}px`;
+        tag.style.setProperty('--rot', `${labelData.rot}deg`);
+        tag.style.animationDelay = `${1.4 + i * 0.35}s`;
+        tag.innerHTML = `<span class="via-label">VIA</span>${escapeHtml(labelData.label)}`;
+        tagLayer.appendChild(tag);
+      }
+    }
+  }
+}
+
+let resizeTimer = null;
+window.addEventListener('resize', () => {
+  if (!state.lastDrawn) return;
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(() => drawStrings(state.lastDrawn.viaLabels), 120);
+});
+
+// ── Self-loop ───────────────────────────────────────────────────────
+function renderSelfLoopChain(evtId) {
+  const evt = state.eventById.get(evtId);
+  if (!evt) {
+    renderError('ARCHIVE ENTRY NOT FOUND: ' + evtId, '', { includeHomeLink: true });
+    return;
+  }
+  showQueryState(state.selectedFrom, state.selectedTo, 0);
+  resultRegion.innerHTML = `
+    ${renderAssemblyHead(0)}
+    <div class="self-loop-note" style="font-family:'EB Garamond',serif;font-style:italic;font-size:18px;color:var(--ink-soft);text-align:center;padding:24px;border-top:1px dashed var(--rule);border-bottom:1px dashed var(--rule);margin:24px 0;">
+      THE FILE REFERS TO ITSELF.
+    </div>
+    <div class="evidence-wall" aria-label="Evidence wall">
+      <div class="evidence-grid">
+        ${renderPinCard({ evt, nodeIndex: 1, termTape: null, rotation: '-1.2deg', bridgeEntities: new Set(), delay: 0.1 })}
+      </div>
+    </div>
+    ${renderChainFooter()}
+  `;
+  attachFooterHandlers();
+  scrollToResult();
+}
+
+function scrollToResult() {
+  const target = document.getElementById('chain') || resultRegion;
+  if (target && target.scrollIntoView) {
+    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+}
+
+function resetSearch() {
+  state.selectedFrom = null;
+  state.selectedTo = null;
+  state.currentPaths = [];
+  state.seed = 0;
+  state.lastDrawn = null;
+  fromInput.value = '';
+  toInput.value = '';
+  closeDropdown(fromDropdown);
+  closeDropdown(toDropdown);
+  history.replaceState({}, '', HOME_PATH);
+  showEmptyState();
 }
 
 // ── Search + chain ──────────────────────────────────────────────────
@@ -373,19 +623,10 @@ function eventIdsForEntity(entityId) {
     .map((ev) => ev.id);
 }
 
-function enrichViaWithEntityNames(edges) {
-  // already resolved by renderViaDivider at draw time. placeholder.
-  return edges;
-}
-
 function findAndRenderChain(fromSel, toSel) {
-  if (!fromSel || !toSel) {
-    return;
-  }
+  if (!fromSel || !toSel) return;
 
-  // WITHHELD Easter egg: if either endpoint is a decoy, short-circuit
-  // the graph entirely and render the FOIA mock document. currentPaths
-  // is cleared so the re-roll button doesn't appear.
+  // WITHHELD short-circuit.
   if (fromSel.kind === 'withheld' || toSel.kind === 'withheld') {
     state.currentPaths = [];
     state.seed = 0;
@@ -394,26 +635,20 @@ function findAndRenderChain(fromSel, toSel) {
     return;
   }
 
-  // Same endpoint (same kind + same id) → THE FILE REFERS TO ITSELF.
+  // Self-loop.
   if (fromSel.id === toSel.id && fromSel.kind === toSel.kind) {
     if (fromSel.kind === 'event') {
       renderSelfLoopChain(fromSel.id);
     } else {
-      // Entity-to-same-entity: pick an arbitrary event tagged with it, or show note.
       const events = eventIdsForEntity(fromSel.id);
-      if (events.length) {
-        renderSelfLoopChain(events[0]);
-      } else {
-        renderError('THE FILE REFERS TO ITSELF.', '', { includeHomeLink: false });
-      }
+      if (events.length) renderSelfLoopChain(events[0]);
+      else renderError('THE FILE REFERS TO ITSELF.', '', { includeHomeLink: false });
     }
     return;
   }
 
   setSearchingUi(true);
 
-  // Entity endpoint: add a virtual super-node connected to every event
-  // tagged with that entity. Run Dijkstra. Strip virtual node from result.
   const VIRTUAL_PREFIX = '__virtual__:';
   const virtualFromId = fromSel.kind === 'entity' ? VIRTUAL_PREFIX + fromSel.id + ':from' : null;
   const virtualToId = toSel.kind === 'entity' ? VIRTUAL_PREFIX + toSel.id + ':to' : null;
@@ -460,7 +695,6 @@ function findAndRenderChain(fromSel, toSel) {
       return;
     }
 
-    // Strip virtual nodes from each enumerated path.
     const stripped = multi.paths.map((path) => ({
       events: path.events.filter((id) => !id.startsWith(VIRTUAL_PREFIX)),
       edges: path.edges.filter(
@@ -475,13 +709,12 @@ function findAndRenderChain(fromSel, toSel) {
     }
 
     state.currentPaths = stripped;
-    // Seed already set from URL on boot; clamp to valid range.
     if (state.seed < 0 || state.seed >= stripped.length) {
       state.seed = ((state.seed % stripped.length) + stripped.length) % stripped.length;
     }
     const chosen = stripped[state.seed];
 
-    renderChain({ events: chosen.events, edges: enrichViaWithEntityNames(chosen.edges) });
+    renderChain({ events: chosen.events, edges: chosen.edges });
     updateShareUrl(fromSel, toSel);
   } finally {
     if (virtualFromId) state.graph.removeVirtualNode(virtualFromId);
@@ -495,7 +728,6 @@ function updateShareUrl(fromSel, toSel) {
     from: `${fromSel.kind}:${fromSel.id}`,
     to: `${toSel.kind}:${toSel.id}`,
   });
-  // Omit seed=0 to keep the default URL clean (backward compatible).
   if (state.seed > 0) qs.set('seed', String(state.seed));
   history.replaceState({}, '', `?${qs.toString()}`);
 }
@@ -512,8 +744,6 @@ function applyShareUrl() {
   const params = new URLSearchParams(window.location.search);
   const fromRaw = params.get('from');
   const toRaw = params.get('to');
-  // Seed param is read for ALL nav (even no from/to) so reset paths
-  // back to default behave correctly.
   const seedRaw = params.get('seed');
   if (seedRaw !== null) {
     const parsed = parseInt(seedRaw, 10);
@@ -523,7 +753,6 @@ function applyShareUrl() {
 
   const from = parseNamespacedId(fromRaw);
   const to = parseNamespacedId(toRaw);
-
   if (!from || !to) {
     renderError(
       'ARCHIVE ENTRY NOT FOUND: ' + (fromRaw || toRaw || '?'),
@@ -533,7 +762,6 @@ function applyShareUrl() {
     return;
   }
 
-  // Validate IDs exist.
   const fromItem = state.autocomplete.find((i) => i.id === from.id && i.kind === from.kind);
   const toItem = state.autocomplete.find((i) => i.id === to.id && i.kind === to.kind);
   if (!fromItem) {
@@ -554,6 +782,8 @@ function applyShareUrl() {
 
 // ── Boot ────────────────────────────────────────────────────────────
 async function boot() {
+  setHeaderChrome();
+
   try {
     const [data, entities, adjacency, autocomplete, indexPayload] = await Promise.all([
       loadData('/data/data.json'),
@@ -571,18 +801,12 @@ async function boot() {
     entities.forEach((e) => state.entityById.set(e.id, e));
     data.events.forEach((ev) => state.eventById.set(ev.id, ev));
 
-    // Version-assert the Fuse index. Mismatch → rebuild from raw.
     let fuseIndex = null;
     if (indexPayload && indexPayload.fuse_version === Fuse.version) {
-      try {
-        fuseIndex = Fuse.parseIndex(indexPayload.index);
-      } catch (err) {
-        console.warn('[connect] Fuse.parseIndex failed, rebuilding:', err);
-      }
+      try { fuseIndex = Fuse.parseIndex(indexPayload.index); }
+      catch (err) { console.warn('[connect] Fuse.parseIndex failed, rebuilding:', err); }
     } else {
-      console.warn(
-        `[connect] Fuse version mismatch (build=${indexPayload?.fuse_version}, runtime=${Fuse.version}). Rebuilding index.`,
-      );
+      console.warn(`[connect] Fuse version mismatch (build=${indexPayload?.fuse_version}, runtime=${Fuse.version}). Rebuilding.`);
     }
 
     const keys = (indexPayload && indexPayload.keys) || [
@@ -591,34 +815,23 @@ async function boot() {
       { name: 'id', weight: 0.05 },
     ];
 
-    state.fuse = new Fuse(autocomplete, {
-      keys,
-      threshold: 0.4,
-      includeScore: false,
-    }, fuseIndex);
+    state.fuse = new Fuse(autocomplete, { keys, threshold: 0.4, includeScore: false }, fuseIndex);
 
     const { createGraph } = await import('./graph.js');
     state.graph = createGraph(adjacency);
 
-    // Honest liveness signal from data.json last_ingest_at (OV-5).
     if (archiveUpdated && data.last_ingest_at) {
       archiveUpdated.textContent = `ARCHIVE LAST UPDATED ${formatUpdateTimestamp(data.last_ingest_at)}`;
     }
 
     setLoadingUi(false);
-    renderInitialPlaceholder();
+    showEmptyState();
 
-    attachInputHandlers(fromInput, fromDropdown, (sel) => {
-      state.selectedFrom = sel;
-    });
-    attachInputHandlers(toInput, toDropdown, (sel) => {
-      state.selectedTo = sel;
-    });
+    attachInputHandlers(fromInput, fromDropdown, (sel) => { state.selectedFrom = sel; });
+    attachInputHandlers(toInput, toDropdown, (sel) => { state.selectedTo = sel; });
 
     findButton.addEventListener('click', () => {
       if (state.loading || state.searching) return;
-      // Fallback: if input has text but no explicit selection, use the top
-      // Fuse match so Enter-without-dropdown-click still works.
       if (!state.selectedFrom && fromInput.value.trim()) {
         const top = state.fuse.search(fromInput.value.trim(), { limit: 1 })[0];
         if (top) state.selectedFrom = { id: top.item.id, kind: top.item.kind };
@@ -627,20 +840,12 @@ async function boot() {
         const top = state.fuse.search(toInput.value.trim(), { limit: 1 })[0];
         if (top) state.selectedTo = { id: top.item.id, kind: top.item.kind };
       }
-      if (!state.selectedFrom) {
-        fromInput.focus();
-        return;
-      }
-      if (!state.selectedTo) {
-        toInput.focus();
-        return;
-      }
-      // Fresh user click → start at optimal path. Re-rolls advance seed.
+      if (!state.selectedFrom) { fromInput.focus(); return; }
+      if (!state.selectedTo) { toInput.focus(); return; }
       state.seed = 0;
       findAndRenderChain(state.selectedFrom, state.selectedTo);
     });
 
-    // Enter in inputs submits too.
     [fromInput, toInput].forEach((input) => {
       input.addEventListener('keydown', (e) => {
         if (e.key === 'Enter' && !state.loading && !state.searching) {
@@ -649,6 +854,14 @@ async function boot() {
         }
       });
     });
+
+    if (traceAnotherTop) {
+      traceAnotherTop.addEventListener('click', (e) => {
+        e.preventDefault();
+        resetSearch();
+        fromInput.focus();
+      });
+    }
 
     applyShareUrl();
   } catch (err) {
