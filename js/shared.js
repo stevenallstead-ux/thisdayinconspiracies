@@ -48,21 +48,36 @@ export function parseRedactions(text) {
   });
 }
 
-// Find the first sentence in `summary` that mentions the entity's name
-// or any alias. Returns null if no mention found. Used to explain why
-// an entity is tagged on a given event — cheap, derived, no curation.
-export function extractEntityRole(summary, entity) {
-  if (!summary || !entity) return null;
-  const plain = String(summary).replace(/\{\{redact:([^}]+)\}\}/g, '$1');
-  const sentences = plain.split(/(?<=[.!?])\s+/);
+// Find a sentence that mentions the entity in the event's title,
+// summary, or theories (in that priority order). Returns { source, text }
+// or null. `source` is "title" | "summary" | "theory" so the caller can
+// phrase the tooltip accurately.
+export function extractEntityRole(evt, entity) {
+  if (!evt || !entity) return null;
+  const strip = (s) => String(s || '').replace(/\{\{redact:([^}]+)\}\}/g, '$1');
   const names = [entity.name, ...(entity.aliases || [])].filter(Boolean);
-  for (const sentence of sentences) {
-    for (const name of names) {
-      const escaped = name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-      const re = new RegExp(`\\b${escaped}\\b`, 'i');
-      if (re.test(sentence)) return sentence.trim();
+  if (!names.length) return null;
+  const escapedNames = names.map((n) => n.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
+  const nameRe = new RegExp(`\\b(?:${escapedNames.join('|')})\\b`, 'i');
+
+  const title = strip(evt.title);
+  if (title && nameRe.test(title)) {
+    return { source: 'title', text: title };
+  }
+
+  const summary = strip(evt.summary);
+  if (summary) {
+    const sentences = summary.split(/(?<=[.!?])\s+/);
+    for (const sentence of sentences) {
+      if (nameRe.test(sentence)) return { source: 'summary', text: sentence.trim() };
     }
   }
+
+  for (const theory of (evt.theories || [])) {
+    const t = strip(theory);
+    if (t && nameRe.test(t)) return { source: 'theory', text: t.trim() };
+  }
+
   return null;
 }
 
@@ -173,6 +188,7 @@ export function renderPinCard({
   delay = 0,
   gridStyle = '',
   entityLookup = null,
+  col = null,
 }) {
   const caseNo = deriveCaseNo(evt);
   const stamp = deriveTimestamp(evt);
@@ -180,16 +196,22 @@ export function renderPinCard({
   const cat = categoryClass(evt.category);
   const yearMarkup = renderYearAccent(evt.year);
 
-  const fullSummary = evt.summary || '';
   const entitiesHtml = (evt.entities || []).slice(0, 6)
     .map((id) => {
       const display = entityDisplay(id);
       const isBridge = bridgeEntities.has(id);
       const entity = entityLookup ? entityLookup(id) : null;
-      const role = entity ? extractEntityRole(fullSummary, entity) : null;
-      const blurb = role
-        ? `<strong>${escapeHtml(display)}</strong> ${escapeHtml(role)}`
-        : `<strong>${escapeHtml(display)}</strong> Tagged on this file; role not detailed in the visible summary.`;
+      const role = entity ? extractEntityRole(evt, entity) : null;
+      let blurb;
+      if (!role) {
+        blurb = `<strong>${escapeHtml(display)}</strong> Tagged on this file — see archive for full context.`;
+      } else if (role.source === 'title') {
+        blurb = `<strong>${escapeHtml(display)}</strong> Named in the file title: "${escapeHtml(role.text)}"`;
+      } else if (role.source === 'theory') {
+        blurb = `<strong>${escapeHtml(display)}</strong> From a theory on record: ${escapeHtml(role.text)}`;
+      } else {
+        blurb = `<strong>${escapeHtml(display)}</strong> ${escapeHtml(role.text)}`;
+      }
       return `<span class="chip${isBridge ? ' bridge' : ''}"><span class="chip-label">${escapeHtml(display)}</span><span class="chip-blurb">${blurb}</span></span>`;
     }).join('');
 
@@ -200,7 +222,7 @@ export function renderPinCard({
       : '';
 
   return `
-    <article class="pin-card" style="--rot: ${rotation}; --delay: ${delay}s; ${gridStyle}">
+    <article class="pin-card"${col != null ? ` data-col="${col}"` : ''} style="--rot: ${rotation}; --delay: ${delay}s; ${gridStyle}">
       <span class="thumbtack" aria-hidden="true"></span>
       <span class="thumbtack bottom" aria-hidden="true"></span>
       <span class="tape tl" aria-hidden="true"></span>
@@ -221,7 +243,7 @@ export function renderPinCard({
 
       <h3>${parseAccent(evt.title)}</h3>
 
-      <p class="summary">${parseRedactions(fullSummary)}</p>
+      <p class="summary">${parseRedactions(evt.summary || '')}</p>
 
       ${entitiesHtml ? `<div class="entities">${entitiesHtml}</div>` : ''}
     </article>
